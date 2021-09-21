@@ -15,6 +15,12 @@
 
         <Style TargetType="{x:Type Button}" BasedOn="{StaticResource controlBaseStyle}" />
         <Style TargetType="{x:Type Label}" BasedOn="{StaticResource controlBaseStyle}" />
+        <Style TargetType="{x:Type TextBox}" BasedOn="{StaticResource controlBaseStyle}" />
+
+        <Style TargetType="{x:Type TextBox}" x:Key="cashRegistryDrawer" BasedOn="{StaticResource controlBaseStyle}">
+            <Setter Property="Padding" Value="0,0,20,0" />
+            <Setter Property="MaxLength" Value="5" />
+        </Style>
     </Window.Resources>
     
     <Grid>
@@ -62,84 +68,84 @@
         <WrapPanel Grid.Row="1" Grid.Column="1" HorizontalAlignment="Right">
             <Label>5 eurocent</Label>
             <Image Source="resources/images/coin-cent-5.bmp"></Image>
-            <Label>0</Label>
+            <TextBox Style="{StaticResource cashRegistryDrawer}">0</TextBox>
             <Button>Keer</Button>
         </WrapPanel>
 
         <WrapPanel Grid.Row="3" Grid.Column="1" HorizontalAlignment="Right">
             <Label>10 eurocent</Label>
             <Image Source="resources/images/coin-cent-10.bmp"></Image>
-            <Label>0</Label>
+            <TextBox Style="{StaticResource cashRegistryDrawer}">0</TextBox>
             <Button>Keer</Button>
         </WrapPanel>
 
         <WrapPanel Grid.Row="5" Grid.Column="1" HorizontalAlignment="Right">
             <Label>20 eurocent</Label>
             <Image Source="resources/images/coin-cent-20.bmp"></Image>
-            <Label>0</Label>
+            <TextBox Style="{StaticResource cashRegistryDrawer}">0</TextBox>
             <Button>Keer</Button>
         </WrapPanel>
 
         <WrapPanel Grid.Row="7" Grid.Column="1" HorizontalAlignment="Right">
             <Label>50 eurocent</Label>
             <Image Source="resources/images/coin-cent-50.bmp"></Image>
-            <Label>0</Label>
+            <TextBox Style="{StaticResource cashRegistryDrawer}">0</TextBox>
             <Button>Keer</Button>
         </WrapPanel>
 
         <WrapPanel Grid.Row="9" Grid.Column="1" HorizontalAlignment="Right">
             <Label>1 euro</Label>
             <Image Source="resources/images/coin-euro-1.bmp"></Image>
-            <Label>0</Label>
+            <TextBox Style="{StaticResource cashRegistryDrawer}">0</TextBox>
             <Button>Keer</Button>
         </WrapPanel>
 
         <WrapPanel Grid.Row="11" Grid.Column="1" HorizontalAlignment="Right">
             <Label>2 euro</Label>
             <Image Source="resources/images/coin-euro-2.bmp"></Image>
-            <Label>0</Label>
+            <TextBox Style="{StaticResource cashRegistryDrawer}">0</TextBox>
             <Button>Keer</Button>
         </WrapPanel>
 
         <WrapPanel Grid.Row="11" Grid.Column="1" HorizontalAlignment="Right">
             <Label>5 euro</Label>
             <Image Source="resources/images/note-euro-5.bmp"></Image>
-            <Label>0</Label>
+            <TextBox Style="{StaticResource cashRegistryDrawer}">0</TextBox>
             <Button>Keer</Button>
         </WrapPanel>
 
         <WrapPanel Grid.Row="13" Grid.Column="1" HorizontalAlignment="Right">
             <Label>10 euro</Label>
             <Image Source="resources/images/note-euro-10.bmp"></Image>
-            <Label>0</Label>
+            <TextBox Style="{StaticResource cashRegistryDrawer}">0</TextBox>
             <Button>Keer</Button>
         </WrapPanel>
 
         <WrapPanel Grid.Row="15" Grid.Column="1" HorizontalAlignment="Right">
             <Label>20 euro</Label>
             <Image Source="resources/images/note-euro-20.bmp"></Image>
-            <Label>0</Label>
+            <TextBox Style="{StaticResource cashRegistryDrawer}">0</TextBox>
             <Button>Keer</Button>
         </WrapPanel>
 
         <WrapPanel Grid.Row="17" Grid.Column="1" HorizontalAlignment="Right">
             <Label>50 euro</Label>
             <Image Source="resources/images/note-euro-50.bmp"></Image>
-            <Label>0</Label>
+            <TextBox Style="{StaticResource cashRegistryDrawer}">0</TextBox>
             <Button>Keer</Button>
         </WrapPanel>
 
         <WrapPanel Grid.Row="19" Grid.Column="1" HorizontalAlignment="Right">
             <Label>100 euro</Label>
             <Image Source="resources/images/note-euro-100.bmp"></Image>
-            <Labe   l>0</Labe>
+            <TextBox Style="{StaticResource cashRegistryDrawer}">0</TextBox>
             <Button>Keer</Button>
         </WrapPanel>
 
         <WrapPanel Grid.Row="21" Grid.Column="1" HorizontalAlignment="Right">
             <Label>200 euro</Label>
             <Image Source="resources/images/note-euro-200.bmp"></Image>
-            <Label>0</Label>
+            <TextBox Style="{StaticResource cashRegistryDrawer}">0</TextBox>
             <Button>Keer</Button>
         </WrapPanel>
     </Grid>
