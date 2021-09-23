@@ -1,0 +1,18 @@
+﻿{
+  "ItemsArray" : [
+    {
+      "Names" : [
+        {"Key" :  "en", "Value" :  "Fries"},
+        {"Key" :  "nl", "Value" :  "Friet"}
+      ],
+      "Price" : "1,50"
+    },
+    {
+      "Names" : [
+        {"Key" :  "en", "Value" :  "Sandwich ham-cheese"},
+        {"Key" :  "nl", "Value" :  "Broodje ham-kaas"}
+      ],
+      "Price" : "2,00"
+    }
+]
+}

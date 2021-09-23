@@ -1,0 +1,48 @@
+﻿<ResourceDictionary 
+    xmlns ="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:system="clr-namespace:System;assembly=mscorlib"
+>
+    <system:String x:Key="Euro Cent">euro cent</system:String>
+    <system:String x:Key="5 Euro Cent">5 euro cent</system:String>
+    <system:String x:Key="10 Euro Cent">10 euro cent</system:String>
+    <system:String x:Key="20 Euro Cent">20 euro cent</system:String>
+    <system:String x:Key="50 Euro Cent">50 euro cent</system:String>
+    <system:String x:Key="1 Euro">1 euro</system:String>
+    <system:String x:Key="2 Euro">2 euro</system:String>
+    <system:String x:Key="5 Euro">5 euro</system:String>
+    <system:String x:Key="10 Euro">10 euro</system:String>
+    <system:String x:Key="20 Euro">20 euro</system:String>
+    <system:String x:Key="50 Euro">50 euro</system:String>
+    <system:String x:Key="100 Euro">100 euro</system:String>
+    <system:String x:Key="200 Euro">200 euro</system:String>
+    
+    <system:String x:Key="Buy">Buy:</system:String>
+    <system:String x:Key="Amount">Amount</system:String>
+    <system:String x:Key="PurchaseItem">Purchase item</system:String>
+    <system:String x:Key="ToPay">Amount to pay:</system:String>
+    
+    <system:String x:Key="Pay">Pay:</system:String>
+    <system:String x:Key="ManuallyInsertAmount">Insert amount manually:</system:String>
+    <system:String x:Key="GiveTotalAmount">Give total amount:</system:String>
+    <system:String x:Key="TotalGivenAmount">Total given amount:</system:String>
+    
+    <system:String x:Key="PayOff">Pay off:</system:String>
+    
+    <system:String x:Key="Times 5 Euro Cent">times 5 euro cent</system:String>
+    <system:String x:Key="Times 10 Euro Cent">times 10 euro cent</system:String>
+    <system:String x:Key="Times 20 Euro Cent">times 20 euro cent</system:String>
+    <system:String x:Key="Times 50 Euro Cent">times 50 euro cent</system:String>
+    <system:String x:Key="Times 1 Euro">times 1 euro</system:String>
+    <system:String x:Key="Times 2 Euro">times 2 euro</system:String>
+    <system:String x:Key="Times 5 Euro">times 5 euro</system:String>
+    <system:String x:Key="Times 10 Euro">times 10 euro</system:String>
+    <system:String x:Key="Times 20 Euro">times 20 euro</system:String>
+    <system:String x:Key="Times 50 Euro">times 50 euro</system:String>
+    <system:String x:Key="Times 100 Euro">times 100 euro</system:String>
+    <system:String x:Key="Times 200 Euro">times 200 euro</system:String>
+    
+    <system:String x:Key="NextCustomer">Next costumer</system:String>
+
+    <system:String x:Key="UnitPrice">unitprice</system:String>
+</ResourceDictionary>

@@ -1,0 +1,48 @@
+﻿<ResourceDictionary 
+    xmlns ="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:system="clr-namespace:System;assembly=mscorlib"
+    >
+    <system:String x:Key="Euro Cent">eurocent</system:String>
+    <system:String x:Key="5 Euro Cent">5 eurocent</system:String>
+    <system:String x:Key="10 Euro Cent">10 eurocent</system:String>
+    <system:String x:Key="20 Euro Cent">20 eurocent</system:String>
+    <system:String x:Key="50 Euro Cent">50 eurocent</system:String>
+    <system:String x:Key="1 Euro">1 euro</system:String>
+    <system:String x:Key="2 Euro">2 euro</system:String>
+    <system:String x:Key="5 Euro">5 euro</system:String>
+    <system:String x:Key="10 Euro">10 euro</system:String>
+    <system:String x:Key="20 Euro">20 euro</system:String>
+    <system:String x:Key="50 Euro">50 euro</system:String>
+    <system:String x:Key="100 Euro">100 euro</system:String>
+    <system:String x:Key="200 Euro">200 euro</system:String>
+    
+    <system:String x:Key="Buy">Bestellen:</system:String>
+    <system:String x:Key="Amount">Aantal</system:String>
+    <system:String x:Key="PurchaseItem">Bestel artikel</system:String>
+    <system:String x:Key="ToPay">Te betalen bedrag:</system:String>
+    
+    <system:String x:Key="Pay">Betalen:</system:String>
+    <system:String x:Key="ManuallyInsertAmount">Geef handmatig bedrag in:</system:String>
+    <system:String x:Key="GiveTotalAmount">Geef totaalbedrag</system:String>
+    <system:String x:Key="TotalGivenAmount">Totaal gegeven bedrag:</system:String>
+    
+    <system:String x:Key="PayOff">Afrekenen:</system:String>
+    
+    <system:String x:Key="Times 5 Euro Cent">keer 5 euro cent</system:String>
+    <system:String x:Key="Times 10 Euro Cent">keer 10 euro cent</system:String>
+    <system:String x:Key="Times 20 Euro Cent">keer 20 euro cent</system:String>
+    <system:String x:Key="Times 50 Euro Cent">keer 50 euro cent</system:String>
+    <system:String x:Key="Times 1 Euro">keer 1 euro</system:String>
+    <system:String x:Key="Times 2 Euro">keer 2 euro</system:String>
+    <system:String x:Key="Times 5 Euro">keer 5 euro</system:String>
+    <system:String x:Key="Times 10 Euro">keer 10 euro</system:String>
+    <system:String x:Key="Times 20 Euro">keer 20 euroo</system:String>
+    <system:String x:Key="Times 50 Euro">keer 50 euro</system:String>
+    <system:String x:Key="Times 100 Euro">keer 100 euro</system:String>
+    <system:String x:Key="Times 200 Euro">keer 200 euro</system:String>
+    
+    <system:String x:Key="NextCustomer">Volgende klant:</system:String>
+    
+    <system:String x:Key="UnitPrice">stukprijs</system:String>
+</ResourceDictionary>
