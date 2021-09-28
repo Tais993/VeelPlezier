@@ -4,40 +4,40 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Windows.Controls;
+using JetBrains.Annotations;
 using Newtonsoft.Json;
 using VeelPlezier.objects;
 
 namespace VeelPlezier
 {
-    internal sealed class ItemHandler
+    public class ItemHandler
     {
-        private readonly ComboBox _itemsInStore;
-        private Items items = null;
+        protected readonly ComboBox ItemsInStore;
+        protected Items Items;
 
-        internal ItemHandler(ComboBox itemsInStore)
+        protected internal ItemHandler(ComboBox itemsInStore)
         {
-            _itemsInStore = itemsInStore;
+            ItemsInStore = itemsInStore;
         }
 
-        internal void LoadItemsAsync(CultureInfo cultureInfo)
+        public void LoadItemsAsync([NotNull] CultureInfo cultureInfo)
         {
             string path =
                 Path.Combine(
                     Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) ??
                     throw new InvalidOperationException(), @"resources/items/items.json");
             string json = File.ReadAllText(path);
-            items = JsonConvert.DeserializeObject<Items>(json);
+            Items = JsonConvert.DeserializeObject<Items>(json);
 
-            ReloadItemsInDisplay(cultureInfo);
+            ReloadItemsInDisplay(cultureInfo.Name.Split('-')[0]);
         }
 
-        public void ReloadItemsInDisplay(CultureInfo cultureInfo)
+        public bool ReloadItemsInDisplay(string currentLang)
         {
-            string countryName = cultureInfo.Name.Split('-')[0];
-            
-            _itemsInStore.Items.Clear();
+            int size = ItemsInStore.Items.Count;
+            ItemsInStore.Items.Clear();
 
-            foreach (Item item in items.ItemsArray)
+            foreach (Item item in Items.ItemsArray)
             {
                 StackPanel stackPanel = new StackPanel
                 {
@@ -48,7 +48,7 @@ namespace VeelPlezier
 
                 Label titleLabel = new Label
                 {
-                    Content = item.GetByKey(countryName)
+                    Content = item.GetTranslationByKey(currentLang)
                 };
 
                 Label priceLabel = new Label
@@ -59,16 +59,27 @@ namespace VeelPlezier
                 stackPanelChildren.Add(titleLabel);
                 stackPanelChildren.Add(priceLabel);
 
-                _itemsInStore.Items.Add(stackPanel);
+                ItemsInStore.Items.Add(stackPanel);
             }
+
+            return size == ItemsInStore.Items.Count;
         }
 
-        public Item GetItemByName(string name)
+        [CanBeNull]
+        public Item GetItemByName([NotNull] string name)
         {
-            return (from item in items.ItemsArray 
+            name = name.ToLower().Trim();
+            
+            return (from item in Items.ItemsArray 
                 from itemName in item.Names 
-                where itemName.Value.Equals(name) 
+                where itemName.Value.ToLower().Equals(name.ToLower()) 
                 select item).FirstOrDefault();
+        }
+
+        [CanBeNull]
+        public string TranslateNameToCurrentLang([NotNull] string givenName, [NotNull] string currentLang)
+        {
+            return GetItemByName(givenName)?.GetTranslationByKey(currentLang);
         }
     }
 }

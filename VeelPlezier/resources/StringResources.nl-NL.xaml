@@ -37,7 +37,7 @@
     <system:String x:Key="Times 2 Euro">keer 2 euro</system:String>
     <system:String x:Key="Times 5 Euro">keer 5 euro</system:String>
     <system:String x:Key="Times 10 Euro">keer 10 euro</system:String>
-    <system:String x:Key="Times 20 Euro">keer 20 euroo</system:String>
+    <system:String x:Key="Times 20 Euro">keer 20 euro</system:String>
     <system:String x:Key="Times 50 Euro">keer 50 euro</system:String>
     <system:String x:Key="Times 100 Euro">keer 100 euro</system:String>
     <system:String x:Key="Times 200 Euro">keer 200 euro</system:String>

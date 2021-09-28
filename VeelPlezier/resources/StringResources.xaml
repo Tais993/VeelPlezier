@@ -44,5 +44,5 @@
     
     <system:String x:Key="NextCustomer">Next costumer</system:String>
 
-    <system:String x:Key="UnitPrice">unitprice</system:String>
+    <system:String x:Key="UnitPrice">unit price</system:String>
 </ResourceDictionary>

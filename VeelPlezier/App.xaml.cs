@@ -1,12 +1,10 @@
-﻿using System.Windows;
-
-namespace VeelPlezier
+﻿namespace VeelPlezier
 {
     /// <summary>
     /// Interaction logic for App.xaml
     /// </summary>
     // ReSharper disable once MemberCanBeInternal
-    public sealed partial class App : Application
+    internal sealed partial class App
     {
     }
 }
