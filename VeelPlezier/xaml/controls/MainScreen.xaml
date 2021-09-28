@@ -10,7 +10,7 @@
 
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="styles.xaml" />
+                <ResourceDictionary Source="../styles/MainScreenStyles.xaml" />
 
                 <ResourceDictionary>
                     <Style TargetType="{x:Type TextBox}" x:Key="CashRegistryEventStyle" BasedOn="{StaticResource CashRegistryStyle}">
