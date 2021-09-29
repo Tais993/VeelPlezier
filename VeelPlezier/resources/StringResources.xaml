@@ -45,4 +45,15 @@
     <system:String x:Key="NextCustomer">Next costumer</system:String>
 
     <system:String x:Key="UnitPrice">unit price</system:String>
+    
+    
+    
+    <system:String x:Key="MainScreen">Main-screen</system:String>
+    <system:String x:Key="SettingsScreen">Settings-screen</system:String>
+    
+    
+    <system:String x:Key="GeneralCategory">General</system:String>
+    <system:String x:Key="Language">Language</system:String>
+    
+    <system:String x:Key="ReceiptCategory">Receipt</system:String>
 </ResourceDictionary>

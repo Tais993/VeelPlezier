@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Windows;
+using JetBrains.Annotations;
+using VeelPlezier.enums;
 
 // TODO: settings menu
 
@@ -11,17 +13,22 @@ namespace VeelPlezier
     // ReSharper disable once MemberCanBeInternal
     internal sealed partial class MainWindow
     {
+        private ScreenType _currentScreenType = ScreenType.MainScreen;
+
+        public static MainWindow MainWindowInstance { get; private set; }
+
         public MainWindow()
         {
+            MainWindowInstance = this;
             InitializeComponent();
 
             SetLanguageDictionary("en");
         }
-        
-        private void SetLanguageDictionary(string currentLang)
+
+        internal void SetLanguageDictionary([NotNull] string currentLang)
         {
             ResourceDictionary dict = new ResourceDictionary();
-            switch (currentLang)
+            switch (currentLang.ToLower())
             {
                 case "nl":
                     dict.Source = new Uri("..\\Resources\\StringResources.nl-NL.xaml",  
@@ -35,6 +42,36 @@ namespace VeelPlezier
             
             Resources.MergedDictionaries.Add(dict);
         }
+
+        public void SwitchScreen(ScreenType screenType)
+        {
+            ChangeScreenVisibility(_currentScreenType, Visibility.Collapsed);
+            ChangeScreenVisibility(screenType, Visibility.Visible);
+
+            _currentScreenType = screenType;
+        }
+
+        private void ChangeScreenVisibility(ScreenType screenType, Visibility visibility)
+        {
+            switch (screenType)
+            {
+                case ScreenType.StartScreen:
+                    // TODO: add startscreen
+                    break;
+                
+                case ScreenType.MainScreen:
+                    MainScreen.Visibility = visibility;
+                    break;
+                
+                case ScreenType.SettingsScreen:
+                    SettingsScreen.Visibility = visibility;
+                    break;
+                
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(screenType), screenType, null);
+            }
+        }
+
 
         // private void SettingMenuButton_OnClick(object sender, RoutedEventArgs e)
         // {

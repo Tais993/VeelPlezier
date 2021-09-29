@@ -81,12 +81,13 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="enums\ScreenType.cs" />
     <Compile Include="Util.cs" />
     <Compile Include="xaml\controls\MainScreen.xaml.cs">
       <DependentUpon>MainScreen.xaml</DependentUpon>
     </Compile>
-    <Compile Include="xaml\controls\Menu.xaml.cs">
-      <DependentUpon>Menu.xaml</DependentUpon>
+    <Compile Include="xaml\controls\NavigationBar.xaml.cs">
+      <DependentUpon>NavigationBar.xaml</DependentUpon>
     </Compile>
     <Compile Include="xaml\controls\SettingsScreen.xaml.cs">
       <DependentUpon>SettingsScreen.xaml</DependentUpon>
@@ -107,9 +108,11 @@
     <Page Include="resources\StringResources.nl-NL.xaml" />
     <Page Include="resources\StringResources.xaml" />
     <Page Include="xaml\controls\MainScreen.xaml" />
-    <Page Include="xaml\controls\Menu.xaml" />
+    <Page Include="xaml\controls\NavigationBar.xaml" />
     <Page Include="xaml\controls\SettingsScreen.xaml" />
     <Page Include="xaml\styles\MainScreenStyles.xaml" />
+    <Page Include="xaml\styles\NavigationBarStyles.xaml" />
+    <Page Include="xaml\styles\SettingsScreenStyles.xaml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="objects\Item.cs" />

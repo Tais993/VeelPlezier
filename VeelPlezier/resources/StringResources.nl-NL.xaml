@@ -45,4 +45,14 @@
     <system:String x:Key="NextCustomer">Volgende klant:</system:String>
     
     <system:String x:Key="UnitPrice">stukprijs</system:String>
+    
+    
+    
+    <system:String x:Key="MainScreen">Hoofd-scherm</system:String>
+    <system:String x:Key="SettingsScreen">Settings-scherm</system:String>
+
+    <system:String x:Key="GeneralCategory">Algemeen</system:String>
+    <system:String x:Key="Language">Taal</system:String>
+    
+    <system:String x:Key="ReceiptCategory">Bonnetje</system:String>
 </ResourceDictionary>

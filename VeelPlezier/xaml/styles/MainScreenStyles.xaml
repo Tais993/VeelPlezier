@@ -18,6 +18,8 @@
         <Setter Property="MaxLength" Value="5" />
     </Style>
     
+
+    
     <Style TargetType="{x:Type Button}" BasedOn="{StaticResource ControlBaseStyle}" />
     <Style TargetType="{x:Type Label}" BasedOn="{StaticResource ControlBaseStyle}" />
     <Style TargetType="{x:Type TextBox}" BasedOn="{StaticResource ControlBaseStyle}" />

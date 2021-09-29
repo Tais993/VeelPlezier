@@ -5,17 +5,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:controls="clr-namespace:VeelPlezier.xaml.controls"
         mc:Ignorable="d"
-        Title="MainWindow" Height="600" Width="1100" x:ClassModifier="internal">
-    
-    <Window.Resources>
-        
-    </Window.Resources>
+        Title="MainWindow" x:ClassModifier="internal">
 
     <Grid>
         <Grid>
-           <controls:MainScreen />
+           <controls:MainScreen x:Name="MainScreen" />
         </Grid>
         
-            <Grid x:Name="SettingsScreen" />
+        <Grid>
+            <controls:SettingsScreen x:Name="SettingsScreen" Visibility="Collapsed"/>
+        </Grid>
     </Grid>
 </Window>

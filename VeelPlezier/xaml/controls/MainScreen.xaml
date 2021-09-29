@@ -3,8 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:controls="clr-namespace:VeelPlezier.xaml.controls"
              mc:Ignorable="d"
-             d:DesignHeight="300" d:DesignWidth="300" x:ClassModifier="internal">
+             d:DesignHeight="600" d:DesignWidth="1200" x:ClassModifier="internal">
 
     <UserControl.Resources>
 
@@ -54,6 +55,7 @@
             <ColumnDefinition Width="10*" />
             <ColumnDefinition Width="1*" />
             <ColumnDefinition Width="10*" />
+            <ColumnDefinition Width="1*" />
         </Grid.ColumnDefinitions>
 
         <WrapPanel Grid.Row="1" Grid.Column="0" HorizontalAlignment="Right" Name="EuroCent5">
@@ -294,5 +296,10 @@
             <Button x:Name="SubmitButton" Grid.Row="5" Grid.Column="1" Background="DarkBlue"
                     Click="SubmitButton_OnClick" Content="{DynamicResource NextCustomer}" />
         </Grid>
+        
+        <!-- TODO: calculator button -->
+        <!-- TODO: currency switcher -->
+        
+        <controls:NavigationBar Grid.Row="19" Grid.RowSpan="4" Grid.Column="4" />
     </Grid>
 </UserControl>
