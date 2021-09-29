@@ -3,9 +3,9 @@ using System.Windows.Controls;
 
 namespace VeelPlezier.xaml.controls
 {
-    public sealed partial class SettingsScreen : UserControl
+    internal sealed partial class SettingsScreen : UserControl
     {
-        public SettingsScreen()
+        internal SettingsScreen()
         {
             InitializeComponent();
         }
