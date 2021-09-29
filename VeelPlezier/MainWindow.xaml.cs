@@ -3,8 +3,6 @@ using System.Windows;
 using JetBrains.Annotations;
 using VeelPlezier.enums;
 
-// TODO: settings menu
-
 namespace VeelPlezier
 {
     /// <summary>
