@@ -11,7 +11,7 @@ namespace VeelPlezier
     // ReSharper disable once MemberCanBeInternal
     internal sealed partial class MainWindow
     {
-        private ScreenType _currentScreenType = ScreenType.MainScreen;
+        private ScreenType _currentScreenType = ScreenType.StartScreen;
 
         public static MainWindow MainWindowInstance { get; private set; }
 
@@ -54,7 +54,7 @@ namespace VeelPlezier
             switch (screenType)
             {
                 case ScreenType.StartScreen:
-                    // TODO: add startscreen
+                    StartScreen.Visibility = visibility;
                     break;
                 
                 case ScreenType.MainScreen:

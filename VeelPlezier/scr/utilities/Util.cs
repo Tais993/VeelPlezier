@@ -7,6 +7,18 @@ namespace VeelPlezier
     internal static class Util
     {
         /// <summary>
+        /// Returns the <see cref="Language"/> based on it's name
+        /// </summary>
+        /// <param name="name">The <see cref="Language">Language's</see> name as a <see cref="string">String</see></param>
+        /// <returns>The (nullable) relating <see cref="Language"/></returns>
+        [CanBeNull]
+        internal static Language LanguageValueOf([NotNull] string name)
+        {
+            return (Language) Enum.Parse(typeof(Language), name);
+        }
+
+        
+        /// <summary>
         /// Returns the ScreenType based on it's name
         /// </summary>
         /// <param name="name">The ScreenType's name as a <see cref="string">String</see></param>
@@ -24,17 +36,23 @@ namespace VeelPlezier
         /// <returns>The string parsed to a <see cref="double"/></returns>
         internal static double ParseToDouble(string s)
         {
+            return ParseToDouble(s, exception => { });
+        }
+        
+        internal static double ParseToDouble(string s, [NotNull] Action<Exception> action)
+        {
             try
             {
                 return double.Parse(
                     s.Replace('.', ',')
                 );
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                return 0;
-                // TODO: error handling
+                action.Invoke(e);
             }
+
+            return 0;
         }
     }
 }

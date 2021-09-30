@@ -44,10 +44,7 @@
         <local:NavigationBar Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" />
 
         <Border Grid.Row="2" Grid.Column="1" Grid.RowSpan="2"
-                BorderThickness="1"
-                Padding="4,2"
-                CornerRadius="5"
-                BorderBrush="White">
+                Style="{StaticResource RoundedCornersBorderStyle}">
             <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
                 <Grid>
                     <Grid.Background>
@@ -98,6 +95,10 @@
                     <Label Grid.Row="5" Grid.Column="1"
                            Style="{StaticResource TitleCategoryLabelStyle}"
                            Content="{DynamicResource ReceiptCategory}" />
+                    
+                    <Label Grid.Row="6" Grid.Column="1" Content="Merge items of the same type in the receipt" />
+                    <CheckBox x:Name="MergeItemsSameType" Grid.Row="6" Grid.Column="2" VerticalAlignment="Center" Checked="MergeItemsSameType_OnChange" />
+
                 </Grid>
             </ScrollViewer>
         </Border>

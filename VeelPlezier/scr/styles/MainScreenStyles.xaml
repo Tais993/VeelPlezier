@@ -4,13 +4,24 @@
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="Foreground" Value="#FFF" />
     </Style>
+    
+    <Style TargetType="{x:Type Grid}" x:Key="GridBackground">
+        <Setter Property="Background" Value="#302e2e" />
+    </Style>
         
     <Style TargetType="{x:Type Control}" x:Key="ControlDarkBackground">
-        <Setter Property="Background" Value="#000" />
+        <Setter Property="Background" Value="#302e2e" />
     </Style>
         
     <Style TargetType="{x:Type Panel}" x:Key="PanelDarkBackground">
-        <Setter Property="Background" Value="#000" />
+        <Setter Property="Background" Value="#302e2e" />
+    </Style>
+    
+    <Style TargetType="{x:Type Border}" x:Key="RoundedCornersBorderStyle">
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="BorderBrush" Value="White" />
+        <Setter Property="Padding" Value="4, 2" />
+        <Setter Property="CornerRadius" Value="10" />
     </Style>
 
     <Style TargetType="{x:Type TextBox}" x:Key="CashRegistryStyle" BasedOn="{StaticResource ControlBaseStyle}">

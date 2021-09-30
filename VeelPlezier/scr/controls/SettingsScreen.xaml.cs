@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Windows;
 using System.Windows.Controls;
+using VeelPlezier.scr.settings;
 
 namespace VeelPlezier.xaml.controls
 {
@@ -32,6 +34,11 @@ namespace VeelPlezier.xaml.controls
             }
 
             throw new ApplicationException("?");
+        }
+
+        private void MergeItemsSameType_OnChange(object sender, RoutedEventArgs e)
+        {
+            SettingsContainer settingsContainer = SettingsContainer.GetInstance();
         }
     }
 }

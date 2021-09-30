@@ -4,6 +4,7 @@ using System.Text.RegularExpressions;
 using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 using JetBrains.Annotations;
 using VeelPlezier.objects;
 
@@ -123,6 +124,8 @@ namespace VeelPlezier.xaml.controls
             }
 
             TotalPriceRequired.Content = $"{_totalPriceRequired:c2}";
+            
+            CalculateTotalMoneyReturning();
         }
       
         private int ParseAmountOfItem()
@@ -228,23 +231,135 @@ namespace VeelPlezier.xaml.controls
         private void CalculateTotalMoneyGiven()
         {
             double totalMoneyGiven = 0;
+            
+            foreach (WrapPanel panel in Grid.Children.OfType<WrapPanel>()
+                .Where(panel => panel.Name.Contains("Euro")))
+            {
+                double toMultiplyBy;
+                
+                switch (panel.Name.ToLower())
+                {
+                    case "eurocent5":
+                        toMultiplyBy = 0.05;
+                        break;
+                
+                    case "eurocent10":
+                        toMultiplyBy = 0.10;
+                        break;
+                
+                    case "eurocent20":
+                        toMultiplyBy = 0.20;
+                        break;
+                
+                    case "eurocent50":
+                        toMultiplyBy = 0.50;
+                        break;
+                
+                    case "euro1":
+                        toMultiplyBy = 1.00;
+                        break;
+                                
+                    case "euro2":
+                        toMultiplyBy = 2.00;
+                        break;
+                                
+                    case "euro5":
+                        toMultiplyBy = 5.00;
+                        break;
+                                
+                    case "euro10":
+                        toMultiplyBy = 10.00;
+                        break;
+                                
+                    case "euro20":
+                        toMultiplyBy = 20.00;
+                        break;
+                                
+                    case "euro50":
+                        toMultiplyBy = 50.00;
+                        break;
+                
+                    case "euro100":
+                        toMultiplyBy = 100.00;
+                        break;
+                                
+                    case "euro200":
+                        toMultiplyBy = 200.00;
+                        break;
+                
+                    default:
+                        throw new ApplicationException("*Confused noises*");
+                }
 
-            totalMoneyGiven += Util.ParseToDouble(Times5EuroCentLabel.Content.ToString()) * 0.05;
-            totalMoneyGiven += Util.ParseToDouble(Times10EuroCentLabel.Content.ToString()) * 0.10;
-            totalMoneyGiven += Util.ParseToDouble(Times20EuroCentLabel.Content.ToString()) * 0.20;
-            totalMoneyGiven += Util.ParseToDouble(Times50EuroCentLabel.Content.ToString()) * 0.50;
-            totalMoneyGiven += Util.ParseToDouble(Times1EuroLabel.Content.ToString()) * 1.00;
-            totalMoneyGiven += Util.ParseToDouble(Times2EuroLabel.Content.ToString()) * 2.00;
-            totalMoneyGiven += Util.ParseToDouble(Times5EuroLabel.Content.ToString()) * 5.00;
-            totalMoneyGiven += Util.ParseToDouble(Times10EuroLabel.Content.ToString()) * 10.00;
-            totalMoneyGiven += Util.ParseToDouble(Times20EuroLabel.Content.ToString()) * 20.00;
-            totalMoneyGiven += Util.ParseToDouble(Times50EuroLabel.Content.ToString()) * 50.00;
-            totalMoneyGiven += Util.ParseToDouble(Times100EuroLabel.Content.ToString()) * 100.00;
-            totalMoneyGiven += Util.ParseToDouble(Times200EuroLabel.Content.ToString()) * 200.00;
+                TextBox count = panel.Children.OfType<TextBox>().First();
+
+                double amountOfTimesGiven = Util.ParseToDouble(count.Text, exception =>
+                {
+                    MessageBox.Show("Fake number?");
+                });
+
+                totalMoneyGiven += amountOfTimesGiven * toMultiplyBy;
+            }
 
             _totalMoneyGiven = totalMoneyGiven;
             
             TotalMoneyGiving.Content = $"{_totalMoneyGiven:c2}";
+
+            CalculateTotalMoneyReturning();
+        }
+
+        private void CalculateTotalMoneyReturning()
+        {
+            double totalMoneyReturning = _totalMoneyGiven - _totalPriceRequired;
+
+            if (totalMoneyReturning < 0)
+            {
+                TotalMoneyReturning.Content = $"{totalMoneyReturning:c2}";
+                TotalMoneyReturning.Foreground = Brushes.Red;
+            }
+            else
+            {
+                TotalMoneyReturning.Content = $"{totalMoneyReturning:c2}";
+                TotalMoneyReturning.Foreground = Brushes.Green;  
+            }
+            
+            totalMoneyReturning = SetAmountReturning(totalMoneyReturning, 200.00, Times200EuroLabel);
+            totalMoneyReturning = SetAmountReturning(totalMoneyReturning, 100.00, Times100EuroLabel);
+            totalMoneyReturning = SetAmountReturning(totalMoneyReturning, 50.00, Times50EuroLabel);
+            totalMoneyReturning = SetAmountReturning(totalMoneyReturning, 20.00, Times20EuroLabel);
+            totalMoneyReturning = SetAmountReturning(totalMoneyReturning, 10.00, Times10EuroLabel);
+            totalMoneyReturning = SetAmountReturning(totalMoneyReturning, 5.00, Times5EuroLabel);
+            totalMoneyReturning = SetAmountReturning(totalMoneyReturning, 2.00, Times2EuroLabel);
+            totalMoneyReturning = SetAmountReturning(totalMoneyReturning, 1.00, Times1EuroLabel);
+            totalMoneyReturning = SetAmountReturning(totalMoneyReturning, 0.50, Times50EuroCentLabel);
+            totalMoneyReturning = SetAmountReturning(totalMoneyReturning, 0.20, Times20EuroCentLabel);
+            totalMoneyReturning = SetAmountReturning(totalMoneyReturning, 0.10, Times10EuroCentLabel);   
+            totalMoneyReturning = SetAmountReturning(totalMoneyReturning, 0.05, Times5EuroCentLabel); 
+        }
+
+        private static double SetAmountReturning(double totalMoneyReturning, double moneyToCheck, [NotNull] ContentControl moneyToCheckLabel)
+        {
+            double returnValue = totalMoneyReturning % moneyToCheck;
+
+            if (moneyToCheckLabel.Parent is UIElement uiElement)
+            {
+                if (Math.Abs(returnValue - totalMoneyReturning) < 1)
+                {
+                    uiElement.Visibility = Visibility.Collapsed;
+                    return returnValue;
+                }   
+
+                int amountOfMoney = (int) Math.Floor(totalMoneyReturning / moneyToCheck);
+
+                moneyToCheckLabel.Content = amountOfMoney;
+                uiElement.Visibility = Visibility.Visible;
+            
+                return returnValue; 
+            }
+            else
+            {
+                throw new ApplicationException("Wha?");
+            }
         }
 
         private void SubmitButton_OnClick(object sender, RoutedEventArgs e)

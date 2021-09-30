@@ -4,16 +4,22 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:controls="clr-namespace:VeelPlezier.xaml.controls"
+        xmlns:controls1="clr-namespace:VeelPlezier.scr.controls"
         mc:Ignorable="d"
+        Height="600" Width="1200"
         Title="MainWindow" x:ClassModifier="internal">
 
     <Grid>
         <Grid>
-           <controls:MainScreen x:Name="MainScreen" />
+            <controls1:StartScreen x:Name="StartScreen" />
         </Grid>
-        
+
         <Grid>
-            <controls:SettingsScreen x:Name="SettingsScreen" Visibility="Collapsed"/>
+            <controls:MainScreen x:Name="MainScreen" Visibility="Collapsed" />
+        </Grid>
+
+        <Grid>
+            <controls:SettingsScreen x:Name="SettingsScreen" Visibility="Collapsed" />
         </Grid>
     </Grid>
 </Window>
