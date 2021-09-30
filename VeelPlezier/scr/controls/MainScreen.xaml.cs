@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading;
@@ -7,6 +8,7 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using JetBrains.Annotations;
 using VeelPlezier.objects;
+using VeelPlezier.scr.settings;
 
 namespace VeelPlezier.xaml.controls
 {
@@ -43,11 +45,43 @@ namespace VeelPlezier.xaml.controls
             Label selectedLabel = selectedStackPanel.Children.OfType<Label>().First();
             Item item = _itemHandler.GetItemByName(selectedLabel.Content.ToString());
 
+            if (item == null) throw new ApplicationException("AAAAAAAAv2");
+            string itemName = item.GetTranslationByKey(currentLang);
+            
+            if (SettingsContainer.GetInstance().MergeItemsOfSameTypeInCheckout)
+            {
+                foreach (StackPanel panel in ItemsPurchased.Items.OfType<StackPanel>())
+                {
+                    string currentPanelName = GetLabelByNameFromPanel(panel, "name").Content.ToString();
+                    
+                    if (currentPanelName.Equals(itemName))
+                    {
+                        Label amountPurchasedLabel = GetLabelByNameFromPanel(panel, "amountPurchased");
+
+                        int amountPurchased = Util.ParseToInt(amountPurchasedLabel.Content.ToString());
+                        int amountToAdd = ParseAmountOfItem();
+
+                        amountPurchasedLabel.Content = amountPurchased + amountToAdd;
+
+                        ReloadTotalPrice();
+
+                        return;
+                    }
+                }
+            }
+
+            ItemsPurchased.Items.Add(PanelFromItem(item, ParseAmountOfItem(), currentLang));
+
+            ReloadTotalPrice();
+        }
+
+        public StackPanel PanelFromItem([NotNull] Item item, int amount, string currentLang)
+        {
             Label nameLabel = new Label
             {
                 Name = "name",
                 FontSize = 10,
-                Content = item.GetTranslationByKey(currentLang) + "  "
+                Content = item.GetTranslationByKey(currentLang)
             };
                 
             Label amountLabel = new Label
@@ -60,7 +94,7 @@ namespace VeelPlezier.xaml.controls
             {
                 Name = "amountPurchased",
                 FontSize = 10,
-                Content = " " + ParseAmountOfItem() + " "
+                Content = amount
             };
 
             Label unitPrice = new Label
@@ -72,7 +106,7 @@ namespace VeelPlezier.xaml.controls
             Label euroIcon = new Label
             {
                 FontSize = 10,
-                Content = " €"
+                Content = "€"
             };
             
             Label price = new Label
@@ -95,10 +129,8 @@ namespace VeelPlezier.xaml.controls
             purchasedItemCollection.Add(unitPrice);
             purchasedItemCollection.Add(euroIcon);
             purchasedItemCollection.Add(price);
-                
-            ItemsPurchased.Items.Add(purchasedItem);
 
-            ReloadTotalPrice();
+            return purchasedItem;
         }
 
         private void ReloadTotalPrice()
@@ -399,6 +431,54 @@ namespace VeelPlezier.xaml.controls
             {
                 panel.Children.OfType<TextBox>().First().Text = "0";
             }
+        }
+
+        internal void BecomesVisible()
+        {
+            SettingsContainer settingsContainer = SettingsContainer.GetInstance();
+
+            if (settingsContainer.MergeItemsOfSameTypeInCheckout)
+            {
+                ItemCollection itemsPurchasedItems = ItemsPurchased.Items;
+                
+                IEnumerable<StackPanel> itemCollection = itemsPurchasedItems.OfType<StackPanel>().ToList();
+                
+                Dictionary<string, StackPanel> stackPanels = new Dictionary<string, StackPanel>(itemCollection.Count());
+
+                foreach (StackPanel panel in itemCollection)
+                {
+                    if (stackPanels.ContainsKey(GetLabelByNameFromPanel(panel, "name").Content.ToString()))
+                    {
+                        Panel addedPanel = stackPanels[GetLabelByNameFromPanel(panel, "name").Content.ToString()];
+
+                        Label addedPanelAmountPurchased = GetLabelByNameFromPanel(addedPanel, "amountPurchased");
+                        Label panelAmountPurchased = GetLabelByNameFromPanel(panel, "amountPurchased");
+
+                        int amount = Util.ParseToInt(addedPanelAmountPurchased.Content.ToString());
+
+                        amount += Util.ParseToInt(panelAmountPurchased.Content.ToString());
+
+                        addedPanelAmountPurchased.Content = amount + "";
+                    }
+                    else
+                    {
+                        stackPanels.Add(GetLabelByNameFromPanel(panel, "name").Content.ToString(), panel);
+                    }
+                }
+                
+                itemsPurchasedItems.Clear();
+                
+                foreach (var keyValuePair in stackPanels)
+                {
+                    itemsPurchasedItems.Add(keyValuePair.Value);
+                }
+            }
+        }
+
+        [NotNull]
+        private static Label GetLabelByNameFromPanel([NotNull] Panel panel, string name)
+        {
+            return panel.Children.OfType<Label>().First(label => label.Name.Equals(name));
         }
     }
 }

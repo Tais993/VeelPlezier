@@ -20,10 +20,10 @@ namespace VeelPlezier
             MainWindowInstance = this;
             InitializeComponent();
 
-            SetLanguageDictionary(enums.Language.English);
+            SetLanguageDictionary(TranslationLanguage.English);
         }
 
-        internal void SetLanguageDictionary([NotNull] Language currentLang)
+        internal void SetLanguageDictionary([NotNull] TranslationLanguage currentLang)
         {
             ResourceDictionary dict = new ResourceDictionary
             {
@@ -37,6 +37,11 @@ namespace VeelPlezier
         {
             ChangeScreenVisibility(_currentScreenType, Visibility.Collapsed);
             ChangeScreenVisibility(screenType, Visibility.Visible);
+
+            if (screenType == ScreenType.MainScreen)
+            {
+                MainScreen.BecomesVisible();
+            }
 
             _currentScreenType = screenType;
         }

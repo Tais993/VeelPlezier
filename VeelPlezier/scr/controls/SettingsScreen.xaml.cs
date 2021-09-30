@@ -22,9 +22,9 @@ namespace VeelPlezier.xaml.controls
                 if (comboBox.SelectedItem is ComboBoxItem comboBoxItem)
                 {
                     string languageCode = comboBoxItem.Name.Split('_')[1];
-                    Language language = Util.LanguageValueOf(languageCode);
+                    TranslationLanguage translationLanguage = Util.LanguageValueOf(languageCode);
 
-                    MainWindow.MainWindowInstance.SetLanguageDictionary(language);
+                    MainWindow.MainWindowInstance.SetLanguageDictionary(translationLanguage ?? TranslationLanguage.English);
                     
                     return;
                 }

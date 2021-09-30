@@ -19,7 +19,7 @@ namespace VeelPlezier.scr.settings
         /// <summary>
         /// Returns the default language to be used for receipts
         /// </summary>
-        public Language ReceiptLanguage = Language.English;
+        public TranslationLanguage ReceiptTranslationLanguage = TranslationLanguage.English;
         
         static SettingsContainer()
         {

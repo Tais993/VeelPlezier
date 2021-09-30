@@ -12,8 +12,8 @@ namespace VeelPlezier.objects
         
         public Name(string key, string value)
         {
-            this.Key = key;
-            this.Value = value;
+            Key = key;
+            Value = value;
         }
 
         public Name()

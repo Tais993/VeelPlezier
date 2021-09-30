@@ -87,7 +87,7 @@
     <Compile Include="scr\controls\StartScreen.xaml.cs">
       <DependentUpon>StartScreen.xaml</DependentUpon>
     </Compile>
-    <Compile Include="scr\enums\Language.cs" />
+    <Compile Include="scr\enums\TranslationLanguage.cs" />
     <Compile Include="scr\enums\ScreenType.cs" />
     <Compile Include="scr\items\ItemHandler.cs" />
     <Compile Include="scr\items\objects\Item.cs" />

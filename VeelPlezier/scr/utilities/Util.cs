@@ -7,21 +7,21 @@ namespace VeelPlezier
     internal static class Util
     {
         /// <summary>
-        /// Returns the <see cref="Language"/> based on it's name
+        /// Returns the <see cref="TranslationLanguage"/> based on it's name
         /// </summary>
-        /// <param name="name">The <see cref="Language">Language's</see> name as a <see cref="string">String</see></param>
-        /// <returns>The (nullable) relating <see cref="Language"/></returns>
+        /// <param name="name">The <see cref="TranslationLanguage">Language's</see> name as a <see cref="string">String</see></param>
+        /// <returns>The (nullable) relating <see cref="TranslationLanguage"/></returns>
         [CanBeNull]
-        internal static Language LanguageValueOf([NotNull] string name)
+        internal static TranslationLanguage LanguageValueOf([NotNull] string name)
         {
             switch (name.ToLower())
             {
                 case "nl":
                 case "dutch":
-                    return Language.Dutch;
+                    return TranslationLanguage.Dutch;
                 case "en":
                 case "english":
-                    return Language.English;
+                    return TranslationLanguage.English;
                 
                 default:
                     throw new ArgumentOutOfRangeException("Doesn't exist");
@@ -40,6 +40,40 @@ namespace VeelPlezier
         }
         
         /// <summary>
+        /// Parses the given String to a int
+        /// Supports usage of both . and ,
+        /// </summary>
+        /// <param name="s">The <see cref="string"/> you want to be parsed</param>
+        /// <returns>The string parsed to a <see cref="int"/></returns>
+        internal static int ParseToInt(string s)
+        {
+            return ParseToInt(s, exception => { });
+        }
+
+        /// <summary>
+        /// Parses the given String to a int
+        /// Supports usage of both . and ,
+        /// </summary>
+        /// <param name="s">The <see cref="string"/> you want to be parsed</param>
+        /// <param name="onError">The <see cref="Action"/> that will run when something goes wrong</param>
+        /// <returns>The string parsed to a <see cref="int"/></returns>
+        internal static int ParseToInt(string s, [NotNull] Action<Exception> onError)
+        {
+            try
+            {
+                return int.Parse(
+                    s.Replace('.', ',')
+                );
+            }
+            catch (Exception e)
+            {
+                onError.Invoke(e);
+            }
+
+            return 0;
+        }
+        
+        /// <summary>
         /// Parses the given String to a double
         /// Supports usage of both . and ,
         /// </summary>
@@ -50,7 +84,14 @@ namespace VeelPlezier
             return ParseToDouble(s, exception => { });
         }
         
-        internal static double ParseToDouble(string s, [NotNull] Action<Exception> action)
+        /// <summary>
+        /// Parses the given String to a double
+        /// Supports usage of both . and ,
+        /// </summary>
+        /// <param name="s">The <see cref="string"/> you want to be parsed</param>
+        /// <param name="onError">The <see cref="Action"/> that will run when something goes wrong</param>
+        /// <returns>The string parsed to a <see cref="double"/></returns>
+        internal static double ParseToDouble(string s, [NotNull] Action<Exception> onError)
         {
             try
             {
@@ -60,7 +101,7 @@ namespace VeelPlezier
             }
             catch (Exception e)
             {
-                action.Invoke(e);
+                onError.Invoke(e);
             }
 
             return 0;

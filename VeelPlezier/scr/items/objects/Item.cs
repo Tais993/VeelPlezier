@@ -23,7 +23,6 @@ namespace VeelPlezier.objects
         }
         
         [CanBeNull]
-        [ContractAnnotation("key:null => null")]
         public string GetTranslationByKey(string key)
         {
             if (string.IsNullOrEmpty(key))
@@ -31,7 +30,7 @@ namespace VeelPlezier.objects
             
             return (from name in Names 
                 where name.Key.Equals(key) 
-                select name.Value).FirstOrDefault();
+                select name.Value).First();
         }
     }
 }
