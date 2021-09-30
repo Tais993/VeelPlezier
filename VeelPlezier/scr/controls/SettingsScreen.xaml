@@ -61,7 +61,7 @@
                         <RowDefinition Height="30" />
                         <RowDefinition Height="30" />
                         <RowDefinition Height="30" />
-                        <RowDefinition Height="30" />
+                        <RowDefinition Height="50" />
                         <RowDefinition Height="30" />
                         <RowDefinition Height="30" />
                         <RowDefinition Height="30" />
@@ -85,7 +85,7 @@
                     <Label Grid.Row="2" Grid.Column="1" Content="{DynamicResource Language}" />
                     <ComboBox Grid.Row="2" Grid.Column="2" Width="300"
                               SelectionChanged="Selector_OnSelectionChanged">
-                        <ComboBoxItem x:Name="Language_En">English</ComboBoxItem>
+                        <ComboBoxItem x:Name="Language_En" IsSelected="True">English</ComboBoxItem>
                         <ComboBoxItem x:Name="Language_Nl">Dutch</ComboBoxItem>
                     </ComboBox>
                     
@@ -94,10 +94,21 @@
 
                     <Label Grid.Row="5" Grid.Column="1"
                            Style="{StaticResource TitleCategoryLabelStyle}"
+                           Content="{DynamicResource CheckoutCategory}" />
+                    
+                    <Label Grid.Row="6" Grid.Column="1" Content="{DynamicResource MergeItemsOfSameTypeInTheCheckout}" />
+                    <CheckBox x:Name="MergeItemsSameTypeCheckout" Grid.Row="6" Grid.Column="2" VerticalAlignment="Center" Checked="MergeItemsSameTypeCheckout_OnChange" />
+
+                    
+                    <Border Grid.Row="9" Grid.Column="0" Grid.RowSpan="3"
+                            Style="{StaticResource CategoryLine}"/>
+
+                    <Label Grid.Row="9" Grid.Column="1"
+                           Style="{StaticResource TitleCategoryLabelStyle}"
                            Content="{DynamicResource ReceiptCategory}" />
                     
-                    <Label Grid.Row="6" Grid.Column="1" Content="Merge items of the same type in the receipt" />
-                    <CheckBox x:Name="MergeItemsSameType" Grid.Row="6" Grid.Column="2" VerticalAlignment="Center" Checked="MergeItemsSameType_OnChange" />
+                    <Label Grid.Row="10" Grid.Column="1" Content="{DynamicResource MergeItemsOfSameTypeOnTheReceipt}" />
+                    <CheckBox x:Name="MergeItemsSameTypeReceipt" Grid.Row="10" Grid.Column="2" VerticalAlignment="Center" Checked="MergeItemsSameTypeReceipt_OnChange" />
 
                 </Grid>
             </ScrollViewer>

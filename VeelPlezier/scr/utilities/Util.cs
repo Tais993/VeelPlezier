@@ -14,7 +14,18 @@ namespace VeelPlezier
         [CanBeNull]
         internal static Language LanguageValueOf([NotNull] string name)
         {
-            return (Language) Enum.Parse(typeof(Language), name);
+            switch (name.ToLower())
+            {
+                case "nl":
+                case "dutch":
+                    return Language.Dutch;
+                case "en":
+                case "english":
+                    return Language.English;
+                
+                default:
+                    throw new ArgumentOutOfRangeException("Doesn't exist");
+            }
         }
 
         

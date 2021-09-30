@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Controls;
+using VeelPlezier.enums;
 using VeelPlezier.scr.settings;
 
 namespace VeelPlezier.xaml.controls
@@ -20,7 +21,8 @@ namespace VeelPlezier.xaml.controls
             {
                 if (comboBox.SelectedItem is ComboBoxItem comboBoxItem)
                 {
-                    string language = comboBoxItem.Name.Split('_')[1];
+                    string languageCode = comboBoxItem.Name.Split('_')[1];
+                    Language language = Util.LanguageValueOf(languageCode);
 
                     MainWindow.MainWindowInstance.SetLanguageDictionary(language);
                     
@@ -36,9 +38,28 @@ namespace VeelPlezier.xaml.controls
             throw new ApplicationException("?");
         }
 
-        private void MergeItemsSameType_OnChange(object sender, RoutedEventArgs e)
+        private void MergeItemsSameTypeCheckout_OnChange(object sender, RoutedEventArgs e)
         {
-            SettingsContainer settingsContainer = SettingsContainer.GetInstance();
+            if (sender is CheckBox checkBox)
+            {
+                SettingsContainer settingsContainer = SettingsContainer.GetInstance();
+
+                bool isChecked = checkBox.IsChecked ?? false;
+                
+                settingsContainer.MergeItemsOfSameTypeInCheckout = isChecked;
+            }
+        }
+        
+        private void MergeItemsSameTypeReceipt_OnChange(object sender, RoutedEventArgs e)
+        {
+            if (sender is CheckBox checkBox)
+            {
+                SettingsContainer settingsContainer = SettingsContainer.GetInstance();
+
+                bool isChecked = checkBox.IsChecked ?? false;
+                
+                settingsContainer.MergeItemsOfSameTypeInReceipt = isChecked;
+            }
         }
     }
 }

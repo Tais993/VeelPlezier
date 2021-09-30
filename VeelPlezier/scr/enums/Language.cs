@@ -1,15 +1,19 @@
-﻿namespace VeelPlezier.enums
+﻿using System;
+
+namespace VeelPlezier.enums
 {
-    public class Language
+    internal sealed class Language
     {
-        public static readonly Language English = new Language("en");
-        public static readonly Language Dutch = new Language("nl");
+        internal static readonly Language English = new Language("en", new Uri("..\\Resources\\StringResources.xaml", UriKind.Relative));
+        internal static readonly Language Dutch = new Language("nl", new Uri("..\\Resources\\StringResources.nl-NL.xaml", UriKind.Relative));
         
-        private string LanguageShortCode { get; }
+        internal string LanguageShortCode { get; }
+        internal Uri UriToResource { get; }
         
-        private Language(string languageShortCode)
+        private Language(string languageShortCode, Uri uriToResource)
         {
             this.LanguageShortCode = languageShortCode;
+            this.UriToResource = uriToResource;
         }
     }
 }

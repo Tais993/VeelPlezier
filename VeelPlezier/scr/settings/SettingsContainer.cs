@@ -7,9 +7,14 @@ namespace VeelPlezier.scr.settings
         private static readonly SettingsContainer Instance = new SettingsContainer();
 
         /// <summary>
-        /// Whenever items should be merged when they're the same type
+        /// Whenever items should be merged when they're the same type within the Checkout
         /// </summary>
-        public bool MergeItemsOfSameType = false;
+        public bool MergeItemsOfSameTypeInCheckout = false;
+        
+        /// <summary>
+        /// Whenever items should be merged when they're the same type within the receipt
+        /// </summary>
+        public bool MergeItemsOfSameTypeInReceipt = false;
 
         /// <summary>
         /// Returns the default language to be used for receipts

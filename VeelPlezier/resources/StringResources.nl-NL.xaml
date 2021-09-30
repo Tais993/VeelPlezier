@@ -47,15 +47,18 @@
     <system:String x:Key="UnitPrice">stukprijs</system:String>
     
     
-    
     <system:String x:Key="MainScreen">Hoofd-scherm</system:String>
     <system:String x:Key="SettingsScreen">Settings-scherm</system:String>
 
+    
     <system:String x:Key="GeneralCategory">Algemeen</system:String>
     <system:String x:Key="Language">Taal</system:String>
     
+    <system:String x:Key="CheckoutCategory">Kassa</system:String>
+    <system:String x:Key="MergeItemsOfSameTypeInTheCheckout">Voeg producten van hetzelfde type samen in de kassa</system:String>
+    
     <system:String x:Key="ReceiptCategory">Bonnetje</system:String>
-        
+    <system:String x:Key="MergeItemsOfSameTypeOnTheReceipt">Voeg producten van hetzelfde type samen op het bonnetje</system:String>
     
     
     <system:String x:Key="MadeBy">Gemaakt door</system:String>

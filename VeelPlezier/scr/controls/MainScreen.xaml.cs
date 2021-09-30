@@ -130,13 +130,12 @@ namespace VeelPlezier.xaml.controls
       
         private int ParseAmountOfItem()
         {
-            double amountOfItem = Util.ParseToDouble(AmountOfItem.Text);
-            if (amountOfItem == 0)
+            double amountOfItem = Util.ParseToDouble(AmountOfItem.Text, exception =>
             {
-                // TODO: add error handling
-            }
+                // TODO: add error handling        
+            });
 
-            return (int) amountOfItem;
+            return (int) Math.Floor(amountOfItem);
         }
         
         private void moneyChanged_OnHandler(object sender, RoutedEventArgs e)

@@ -20,24 +20,16 @@ namespace VeelPlezier
             MainWindowInstance = this;
             InitializeComponent();
 
-            SetLanguageDictionary("en");
+            SetLanguageDictionary(enums.Language.English);
         }
 
-        internal void SetLanguageDictionary([NotNull] string currentLang)
+        internal void SetLanguageDictionary([NotNull] Language currentLang)
         {
-            ResourceDictionary dict = new ResourceDictionary();
-            switch (currentLang.ToLower())
+            ResourceDictionary dict = new ResourceDictionary
             {
-                case "nl":
-                    dict.Source = new Uri("..\\Resources\\StringResources.nl-NL.xaml",  
-                        UriKind.Relative);
-                    break;
-                default:
-                    dict.Source = new Uri("..\\resources\\StringResources.xaml", 
-                        UriKind.Relative);
-                    break;
-            }
-            
+                Source = currentLang.UriToResource
+            };
+
             Resources.MergedDictionaries.Add(dict);
         }
 

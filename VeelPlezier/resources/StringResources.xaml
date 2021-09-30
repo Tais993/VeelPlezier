@@ -47,7 +47,6 @@
     <system:String x:Key="UnitPrice">unit price</system:String>
     
     
-    
     <system:String x:Key="MainScreen">Main-screen</system:String>
     <system:String x:Key="SettingsScreen">Settings-screen</system:String>
     
@@ -55,8 +54,11 @@
     <system:String x:Key="GeneralCategory">General</system:String>
     <system:String x:Key="Language">Language</system:String>
     
-    <system:String x:Key="ReceiptCategory">Receipt</system:String>
+    <system:String x:Key="CheckoutCategory">Checkout</system:String>
+    <system:String x:Key="MergeItemsOfSameTypeInTheCheckout">Merge items of the same type in the checkout</system:String>
     
+    <system:String x:Key="ReceiptCategory">Receipt</system:String>
+    <system:String x:Key="MergeItemsOfSameTypeOnTheReceipt">Merge items of the same type on the receipt</system:String>
     
     
     <system:String x:Key="MadeBy">Made by</system:String>
