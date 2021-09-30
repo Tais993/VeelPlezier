@@ -3,9 +3,11 @@ using System.Windows.Controls;
 
 namespace VeelPlezier.xaml.controls
 {
-    internal sealed partial class SettingsScreen : UserControl
+    // ReSharper disable once MemberCanBeInternal
+    public sealed partial class SettingsScreen
     {
-        internal SettingsScreen()
+        // ReSharper disable once MemberCanBeInternal
+        public SettingsScreen()
         {
             InitializeComponent();
         }

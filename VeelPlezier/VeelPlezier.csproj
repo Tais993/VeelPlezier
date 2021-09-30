@@ -81,15 +81,21 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="enums\ScreenType.cs" />
+    <Compile Include="scr\controls\AboutMeSection.xaml.cs">
+      <DependentUpon>AboutMeSection.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="scr\enums\ScreenType.cs" />
+    <Compile Include="scr\objects\Item.cs" />
+    <Compile Include="scr\objects\Items.cs" />
+    <Compile Include="scr\objects\Name.cs" />
     <Compile Include="Util.cs" />
-    <Compile Include="xaml\controls\MainScreen.xaml.cs">
+    <Compile Include="scr\controls\MainScreen.xaml.cs">
       <DependentUpon>MainScreen.xaml</DependentUpon>
     </Compile>
-    <Compile Include="xaml\controls\NavigationBar.xaml.cs">
+    <Compile Include="scr\controls\NavigationBar.xaml.cs">
       <DependentUpon>NavigationBar.xaml</DependentUpon>
     </Compile>
-    <Compile Include="xaml\controls\SettingsScreen.xaml.cs">
+    <Compile Include="scr\controls\SettingsScreen.xaml.cs">
       <DependentUpon>SettingsScreen.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
@@ -107,17 +113,16 @@
     </Compile>
     <Page Include="resources\StringResources.nl-NL.xaml" />
     <Page Include="resources\StringResources.xaml" />
-    <Page Include="xaml\controls\MainScreen.xaml" />
-    <Page Include="xaml\controls\NavigationBar.xaml" />
-    <Page Include="xaml\controls\SettingsScreen.xaml" />
-    <Page Include="xaml\styles\MainScreenStyles.xaml" />
-    <Page Include="xaml\styles\NavigationBarStyles.xaml" />
-    <Page Include="xaml\styles\SettingsScreenStyles.xaml" />
+    <Page Include="scr\controls\AboutMeSection.xaml" />
+    <Page Include="scr\controls\MainScreen.xaml" />
+    <Page Include="scr\controls\NavigationBar.xaml" />
+    <Page Include="scr\controls\SettingsScreen.xaml" />
+    <Page Include="scr\styles\AboutMeSectionStyles.xaml" />
+    <Page Include="scr\styles\MainScreenStyles.xaml" />
+    <Page Include="scr\styles\NavigationBarStyles.xaml" />
+    <Page Include="scr\styles\SettingsScreenStyles.xaml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="objects\Item.cs" />
-    <Compile Include="objects\Items.cs" />
-    <Compile Include="objects\Name.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

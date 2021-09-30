@@ -55,4 +55,21 @@
     <system:String x:Key="Language">Taal</system:String>
     
     <system:String x:Key="ReceiptCategory">Bonnetje</system:String>
+        
+    
+    
+    <system:String x:Key="MadeBy">Gemaakt door</system:String>
+    
+    <system:String x:Key="ForContact">Voor contact,</system:String>
+    <system:String x:Key="Email">Email:</system:String>
+    <system:String x:Key="Phone">Telefoon:</system:String>
+    
+    
+    <system:String x:Key="SourceCanBeFoundAt">Broncode kan gevonden worden op</system:String>
+    <system:String x:Key="TheGithub">de Github</system:String>
+    
+    <system:String x:Key="ToCheckWhatsCurrentlyBeingWorkedOn">Om te zien waar er nu gewerkt aan word:</system:String>
+    <system:String x:Key="TheGithubProject">het Github project</system:String>
+    <system:String x:Key="TheProjectIsCurrentlyInTheMakings">Dit project wordt nog steeds aan gewerkt</system:String>
+    <system:String x:Key="ItShouldBeFinishedAt">Het moet ongeveer 8/10/2021 af zijn</system:String>
 </ResourceDictionary>

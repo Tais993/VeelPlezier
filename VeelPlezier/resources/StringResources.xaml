@@ -56,4 +56,20 @@
     <system:String x:Key="Language">Language</system:String>
     
     <system:String x:Key="ReceiptCategory">Receipt</system:String>
+    
+    
+    
+    <system:String x:Key="MadeBy">Made by</system:String>
+    
+    <system:String x:Key="ForContact">For contact,</system:String>
+    <system:String x:Key="Email">Email:</system:String>
+    <system:String x:Key="Phone">Phone:</system:String>
+    
+    <system:String x:Key="SourceCanBeFoundAt">Source can be found at</system:String>
+    <system:String x:Key="TheGithub">the Github</system:String>
+    
+    <system:String x:Key="ToCheckWhatsCurrentlyBeingWorkedOn">To check what's currently being worked on:</system:String>
+    <system:String x:Key="TheGithubProject">the Github Project</system:String>
+    <system:String x:Key="TheProjectIsCurrentlyInTheMakings">This project is currently in the makings.</system:String>
+    <system:String x:Key="ItShouldBeFinishedAt">It should be finished 8/10/2021</system:String>
 </ResourceDictionary>

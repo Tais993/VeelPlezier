@@ -4,8 +4,9 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:VeelPlezier.xaml.controls"
+             xmlns:controls="clr-namespace:VeelPlezier.scr.controls"
              mc:Ignorable="d"
-             d:DesignHeight="600" d:DesignWidth="1200" x:ClassModifier="internal">
+             d:DesignHeight="600" d:DesignWidth="1200">
 
     <UserControl.Resources>
         <ResourceDictionary>
@@ -103,16 +104,7 @@
         
         <Border Grid.Row="2" Grid.Column="3" Grid.RowSpan="2"
             Style="{StaticResource RoundedCornersBorderStyle}">
-            
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="1*" />
-                </Grid.RowDefinitions>
-                
-                <Grid.ColumnDefinitions>
-                    
-                </Grid.ColumnDefinitions>
-            </Grid>
+            <controls:AboutMeSection/>
         </Border>
     </Grid>
 </UserControl>
