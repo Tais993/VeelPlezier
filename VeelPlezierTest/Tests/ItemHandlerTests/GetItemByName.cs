@@ -2,6 +2,8 @@
 using System.Windows.Controls;
 using Xunit;
 
+// ReSharper disable All
+
 namespace VeelPlezierTest.Tests.ItemHandlerTests
 {
     public sealed class GetItemByName
@@ -20,7 +22,7 @@ namespace VeelPlezierTest.Tests.ItemHandlerTests
                 Assert.NotNull(itemHandlerExt.GetItemByName(itemToGet));
             });
         }
-        
+
         [Theory]
         [InlineData(ItemHandlerExt.Json, "aaa")]
         [InlineData(ItemHandlerExt.Json, "12412E")]
@@ -31,7 +33,7 @@ namespace VeelPlezierTest.Tests.ItemHandlerTests
                 ComboBox comboBox = new ComboBox();
                 ItemHandlerExt itemHandlerExt = new ItemHandlerExt(comboBox);
                 itemHandlerExt.SetupItemHandler(json);
-                
+
                 Assert.Null(itemHandlerExt.GetItemByName(itemToGet));
             });
         }
@@ -45,11 +47,8 @@ namespace VeelPlezierTest.Tests.ItemHandlerTests
                 ComboBox comboBox = new ComboBox();
                 ItemHandlerExt itemHandlerExt = new ItemHandlerExt(comboBox);
                 itemHandlerExt.SetupItemHandler(json);
-                
-                Assert.Throws<NullReferenceException>(() =>
-                {
-                    itemHandlerExt.GetItemByName(itemToGet);
-                });
+
+                Assert.Throws<NullReferenceException>(() => { itemHandlerExt.GetItemByName(itemToGet); });
             });
         }
     }

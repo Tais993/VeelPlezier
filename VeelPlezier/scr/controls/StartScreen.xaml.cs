@@ -1,8 +1,6 @@
-﻿using System.Windows.Controls;
-
-namespace VeelPlezier.scr.controls
+﻿namespace VeelPlezier.scr.controls
 {
-    public partial class StartScreen : UserControl
+    internal sealed partial class StartScreen
     {
         public StartScreen()
         {

@@ -1,35 +1,49 @@
 ﻿using System;
 using System.Windows;
 using JetBrains.Annotations;
-using VeelPlezier.enums;
+using VeelPlezier.scr.enums;
 
 namespace VeelPlezier
 {
+    /// <inheritdoc cref="System.Windows.Window" />
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     // ReSharper disable once MemberCanBeInternal
     internal sealed partial class MainWindow
     {
+        private static MainWindow _instance;
         private ScreenType _currentScreenType = ScreenType.StartScreen;
-
-        public static MainWindow MainWindowInstance { get; private set; }
 
         public MainWindow()
         {
-            MainWindowInstance = this;
+            _instance = this;
             InitializeComponent();
 
             SetLanguageDictionary(TranslationLanguage.English);
         }
 
-        internal void SetLanguageDictionary([NotNull] TranslationLanguage currentLang)
+        public TranslationLanguage CurrentTranslationLanguage { get; private set; }
+
+        public static MainWindow GetInstance()
         {
+            return _instance;
+        }
+
+        internal void SetLanguageDictionary([NotNull] TranslationLanguage language)
+        {
+            CurrentTranslationLanguage = language;
+
+
+            MainScreen.ReceiptPrinter?.SetLanguageDictionary(language);
+
+
             ResourceDictionary dict = new ResourceDictionary
             {
-                Source = currentLang.UriToResource
+                Source = CurrentTranslationLanguage.UriToResource
             };
 
+            Resources.MergedDictionaries.Clear();
             Resources.MergedDictionaries.Add(dict);
         }
 
@@ -53,15 +67,15 @@ namespace VeelPlezier
                 case ScreenType.StartScreen:
                     StartScreen.Visibility = visibility;
                     break;
-                
+
                 case ScreenType.MainScreen:
                     MainScreen.Visibility = visibility;
                     break;
-                
+
                 case ScreenType.SettingsScreen:
                     SettingsScreen.Visibility = visibility;
                     break;
-                
+
                 default:
                     throw new ArgumentOutOfRangeException(nameof(screenType), screenType, null);
             }

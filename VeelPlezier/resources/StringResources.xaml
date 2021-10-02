@@ -3,6 +3,8 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:system="clr-namespace:System;assembly=mscorlib"
 >
+    <!-- Start main screen -->
+    
     <system:String x:Key="Euro Cent">euro cent</system:String>
     <system:String x:Key="5 Euro Cent">5 euro cent</system:String>
     <system:String x:Key="10 Euro Cent">10 euro cent</system:String>
@@ -46,10 +48,14 @@
 
     <system:String x:Key="UnitPrice">unit price</system:String>
     
+    <!-- End main screen -->
+    <!-- Start navigation bar -->
     
     <system:String x:Key="MainScreen">Main-screen</system:String>
     <system:String x:Key="SettingsScreen">Settings-screen</system:String>
     
+    <!-- End navigation bar -->
+    <!-- Start settings screen -->
     
     <system:String x:Key="GeneralCategory">General</system:String>
     <system:String x:Key="Language">Language</system:String>
@@ -58,8 +64,9 @@
     <system:String x:Key="MergeItemsOfSameTypeInTheCheckout">Merge items of the same type in the checkout</system:String>
     
     <system:String x:Key="ReceiptCategory">Receipt</system:String>
-    <system:String x:Key="MergeItemsOfSameTypeOnTheReceipt">Merge items of the same type on the receipt</system:String>
     
+    <!-- End settings screen -->
+    <!-- Start about me section -->
     
     <system:String x:Key="MadeBy">Made by</system:String>
     
@@ -74,4 +81,16 @@
     <system:String x:Key="TheGithubProject">the Github Project</system:String>
     <system:String x:Key="TheProjectIsCurrentlyInTheMakings">This project is currently in the makings.</system:String>
     <system:String x:Key="ItShouldBeFinishedAt">It should be finished 8/10/2021</system:String>
+    
+    <!-- End about me section -->
+    <!-- Start receipt printer window -->
+    
+    <!-- Receipt itself can be found in ReceiptResources -->
+    
+    <system:String x:Key="ChangeLanguageReceipt">Change language receipt</system:String>
+    
+    <system:String x:Key="DontPrint">Don't print</system:String>
+    <system:String x:Key="Print">Print</system:String>
+    
+    <!-- End of receipt window -->
 </ResourceDictionary>

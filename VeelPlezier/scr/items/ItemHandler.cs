@@ -6,21 +6,21 @@ using System.Reflection;
 using System.Windows.Controls;
 using JetBrains.Annotations;
 using Newtonsoft.Json;
-using VeelPlezier.objects;
+using VeelPlezier.scr.items.objects;
 
-namespace VeelPlezier
+namespace VeelPlezier.scr.items
 {
     public class ItemHandler
     {
-        protected readonly ComboBox ItemsInStore;
-        protected Items Items;
+        private readonly ComboBox _itemsInStore;
+        internal Items Items;
 
         protected internal ItemHandler(ComboBox itemsInStore)
         {
-            ItemsInStore = itemsInStore;
+            _itemsInStore = itemsInStore;
         }
 
-        public void LoadItemsAsync([NotNull] CultureInfo cultureInfo)
+        internal void LoadItemsAsync([NotNull] CultureInfo cultureInfo)
         {
             string path =
                 Path.Combine(
@@ -34,8 +34,8 @@ namespace VeelPlezier
 
         public bool ReloadItemsInDisplay(string currentLang)
         {
-            int size = ItemsInStore.Items.Count;
-            ItemsInStore.Items.Clear();
+            int size = _itemsInStore.Items.Count;
+            _itemsInStore.Items.Clear();
 
             foreach (Item item in Items.ItemsArray)
             {
@@ -59,20 +59,20 @@ namespace VeelPlezier
                 stackPanelChildren.Add(titleLabel);
                 stackPanelChildren.Add(priceLabel);
 
-                ItemsInStore.Items.Add(stackPanel);
+                _itemsInStore.Items.Add(stackPanel);
             }
 
-            return size == ItemsInStore.Items.Count;
+            return size == _itemsInStore.Items.Count;
         }
 
         [CanBeNull]
-        public Item GetItemByName([NotNull] string name)
+        internal Item GetItemByName([NotNull] string name)
         {
             name = name.ToLower().Trim();
-            
-            return (from item in Items.ItemsArray 
-                from itemName in item.Names 
-                where itemName.Value.ToLower().Equals(name.ToLower()) 
+
+            return (from item in Items.ItemsArray
+                from itemName in item.Names
+                where itemName.Value.ToLower().Equals(name.ToLower())
                 select item).FirstOrDefault();
         }
 

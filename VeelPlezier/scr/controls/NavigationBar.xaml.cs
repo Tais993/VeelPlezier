@@ -1,9 +1,10 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
+using VeelPlezier.scr.utilities;
 
-namespace VeelPlezier.xaml.controls
+namespace VeelPlezier.scr.controls
 {
-    internal sealed partial class NavigationBar : UserControl
+    internal sealed partial class NavigationBar
     {
         public NavigationBar()
         {
@@ -12,7 +13,7 @@ namespace VeelPlezier.xaml.controls
 
         private void EventSetter_OnHandler(object sender, RoutedEventArgs e)
         {
-            MainWindow.MainWindowInstance.SwitchScreen(Util.ScreenTypeValueOf(((Button) sender).Name));
+            MainWindow.GetInstance().SwitchScreen(Util.ScreenTypeValueOf(((Button) sender).Name));
         }
     }
 }

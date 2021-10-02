@@ -1,9 +1,9 @@
-﻿<UserControl x:Class="VeelPlezier.xaml.controls.MainScreen"
+﻿<UserControl x:Class="VeelPlezier.scr.controls.MainScreen"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:controls="clr-namespace:VeelPlezier.xaml.controls"
+             xmlns:controls="clr-namespace:VeelPlezier.scr.controls"
              mc:Ignorable="d"
              d:DesignHeight="600" d:DesignWidth="1200" x:ClassModifier="internal">
 
@@ -180,7 +180,7 @@
                     <Label VerticalAlignment="Center" Content="{DynamicResource Amount}" />
                     <TextBox x:Name="AmountOfItem" VerticalAlignment="Center">0</TextBox>
                 </StackPanel>
-                <Button x:Name="SubmitItem" Grid.Column="1" Grid.Row="3" Background="DarkBlue"
+                <Button Grid.Column="1" Grid.Row="3" Background="DarkBlue"
                         Click="SubmitItem_OnClick"
                         Content="{DynamicResource PurchaseItem}" />
 
@@ -266,7 +266,7 @@
                 <Border Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="3" HorizontalAlignment="Center"
                         BorderBrush="White"
                         BorderThickness="1" Width="226">
-                    <StackPanel x:Name="MoneyGivenStackPanel" HorizontalAlignment="Center">
+                    <StackPanel HorizontalAlignment="Center">
                         <StackPanel Orientation="Horizontal" Visibility="Collapsed">
                             <Label x:Name="Times5EuroCentLabel" Content="0" />
                             <Label Content="{DynamicResource Times 5 Euro Cent}" />

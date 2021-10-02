@@ -7,75 +7,104 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using JetBrains.Annotations;
-using VeelPlezier.objects;
+using VeelPlezier.scr.items;
+using VeelPlezier.scr.items.objects;
 using VeelPlezier.scr.settings;
+using VeelPlezier.scr.utilities;
 
-namespace VeelPlezier.xaml.controls
+namespace VeelPlezier.scr.controls
 {
     internal sealed partial class MainScreen
     {
         private readonly ItemHandler _itemHandler;
 
-        private double _totalPriceRequired;
+        public readonly List<PurchasedItem> PurchasedItems = new();
+        public readonly Dictionary<string, PurchasedItem> PurchasedItemsDictionary = new();
         private double _totalMoneyGiven;
-        
+
+        private double _totalPriceRequired;
+
         public MainScreen()
         {
             InitializeComponent();
-            
+
             _itemHandler = new ItemHandler(ItemsInStore);
             _itemHandler.LoadItemsAsync(Thread.CurrentThread.CurrentUICulture);
         }
 
+        public ReceiptPrinter ReceiptPrinter { get; private set; }
+
         private void SubmitItem_OnClick(object sender, RoutedEventArgs e)
         {
-            if (ItemsInStore.SelectedItem == null || ParseAmountOfItem() == 0)
+            if (ItemsInStore.SelectedItem is null || ParseAmountOfItem() == 0)
             {
                 // TODO: error handling
                 return;
             }
-            
-            // TODO: possibility merge duplicates of items
 
             string currentLang = Thread.CurrentThread.CurrentUICulture.Name.Split('-')[0];
-            
-            StackPanel selectedStackPanel = ItemsInStore.SelectedItem as StackPanel 
-                                            ?? throw new ApplicationException("Something went wrong, " + nameof(ItemsInStore) + " was null");
-            
+
+            StackPanel selectedStackPanel = ItemsInStore.SelectedItem as StackPanel
+                                            ?? throw new ApplicationException("Something went wrong, " +
+                                                                              nameof(ItemsInStore) + " was null");
+
             Label selectedLabel = selectedStackPanel.Children.OfType<Label>().First();
-            Item item = _itemHandler.GetItemByName(selectedLabel.Content.ToString());
 
-            if (item == null) throw new ApplicationException("AAAAAAAAv2");
-            string itemName = item.GetTranslationByKey(currentLang);
-            
-            if (SettingsContainer.GetInstance().MergeItemsOfSameTypeInCheckout)
+            string itemName = selectedLabel.Content.ToString();
+
+            Item item = _itemHandler.GetItemByName(itemName);
+
+            if (PurchasedItemsDictionary.ContainsKey(itemName))
             {
-                foreach (StackPanel panel in ItemsPurchased.Items.OfType<StackPanel>())
+                if (SettingsContainer.GetInstance().MergeItemsOfSameTypeInCheckout)
                 {
-                    string currentPanelName = GetLabelByNameFromPanel(panel, "name").Content.ToString();
-                    
-                    if (currentPanelName.Equals(itemName))
-                    {
-                        Label amountPurchasedLabel = GetLabelByNameFromPanel(panel, "amountPurchased");
-
-                        int amountPurchased = Util.ParseToInt(amountPurchasedLabel.Content.ToString());
-                        int amountToAdd = ParseAmountOfItem();
-
-                        amountPurchasedLabel.Content = amountPurchased + amountToAdd;
-
-                        ReloadTotalPrice();
-
-                        return;
-                    }
+                    FindAndMergePurchasedItem(itemName);
+                    return;
                 }
             }
+            else
+            {
+                PurchasedItemsDictionary.Add(item.GetTranslationByKey(currentLang),
+                    new PurchasedItem(item, ParseAmountOfItem()));
+            }
+
 
             ItemsPurchased.Items.Add(PanelFromItem(item, ParseAmountOfItem(), currentLang));
+            PurchasedItems.Add(new PurchasedItem(item, ParseAmountOfItem()));
+            ReloadTotalPrice();
+        }
+
+
+        private void FindAndMergePurchasedItem([NotNull] string itemName)
+        {
+            PurchasedItem purchasedItem = PurchasedItemsDictionary[itemName];
+
+            foreach (StackPanel panel in from panel
+                    in ItemsPurchased.Items.OfType<StackPanel>()
+                let currentPanelName = Util.GetLabelByNameFromPanel(panel, "name").Content.ToString()
+                where currentPanelName.Equals(itemName)
+                select panel)
+            {
+                MergePurchasedItem(purchasedItem, panel);
+            }
+        }
+
+        private void MergePurchasedItem([NotNull] PurchasedItem purchasedItem, [NotNull] Panel panel)
+        {
+            Label amountPurchasedLabel = Util.GetLabelByNameFromPanel(panel, "amountPurchased");
+
+            int amountPurchased = Util.ParseToInt(amountPurchasedLabel.Content.ToString());
+            int amountToAdd = ParseAmountOfItem();
+
+            amountPurchasedLabel.Content = amountPurchased + amountToAdd;
+
+            purchasedItem.Amount = amountPurchased + amountToAdd;
 
             ReloadTotalPrice();
         }
 
-        public StackPanel PanelFromItem([NotNull] Item item, int amount, string currentLang)
+        [NotNull]
+        private static StackPanel PanelFromItem([NotNull] Item item, int amount, string currentLang)
         {
             Label nameLabel = new Label
             {
@@ -83,13 +112,13 @@ namespace VeelPlezier.xaml.controls
                 FontSize = 10,
                 Content = item.GetTranslationByKey(currentLang)
             };
-                
+
             Label amountLabel = new Label
             {
                 FontSize = 10
             };
             amountLabel.SetResourceReference(ContentProperty, "Amount");
-                
+
             Label amountNumberLabel = new Label
             {
                 Name = "amountPurchased",
@@ -108,7 +137,7 @@ namespace VeelPlezier.xaml.controls
                 FontSize = 10,
                 Content = "€"
             };
-            
+
             Label price = new Label
             {
                 Name = "price",
@@ -120,7 +149,7 @@ namespace VeelPlezier.xaml.controls
             {
                 Orientation = Orientation.Horizontal
             };
-            
+
             UIElementCollection purchasedItemCollection = purchasedItem.Children;
 
             purchasedItemCollection.Add(nameLabel);
@@ -136,7 +165,7 @@ namespace VeelPlezier.xaml.controls
         private void ReloadTotalPrice()
         {
             double totalPrice = 0;
-            
+
             foreach (StackPanel itemsPurchasedItem in ItemsPurchased.Items)
             {
                 string priceString = (from Label label in itemsPurchasedItem.Children
@@ -146,8 +175,8 @@ namespace VeelPlezier.xaml.controls
                 string amountString = (from Label label in itemsPurchasedItem.Children
                     where label.Name.Equals("amountPurchased")
                     select label.Content).First().ToString();
-               
-                
+
+
                 double price = Util.ParseToDouble(priceString);
                 int amount = (int) Util.ParseToDouble(amountString);
 
@@ -156,96 +185,59 @@ namespace VeelPlezier.xaml.controls
             }
 
             TotalPriceRequired.Content = $"{_totalPriceRequired:c2}";
-            
+
             CalculateTotalMoneyReturning();
         }
-      
+
         private int ParseAmountOfItem()
         {
-            double amountOfItem = Util.ParseToDouble(AmountOfItem.Text, exception =>
+            double amountOfItem = Util.ParseToDouble(AmountOfItem.Text, static _ =>
             {
                 // TODO: add error handling        
             });
 
             return (int) Math.Floor(amountOfItem);
         }
-        
+
         private void moneyChanged_OnHandler(object sender, RoutedEventArgs e)
         {
-            if (SubmitButton == null) 
+            if (SubmitButton is null)
                 return;
 
-            TextBox textBox = sender as TextBox;
-            if (textBox == null)
+            if (sender is not TextBox textBox)
+            {
                 throw new ApplicationException("Something triggered that wasn't supposed to be triggered");
-            
-            WrapPanel parent = textBox.Parent as WrapPanel;
-            if (parent == null)
-                throw new ApplicationException("Something triggered that wasn't supposed to be triggered");
+            }
 
+            if (textBox.Parent is not WrapPanel parent)
+            {
+                throw new ApplicationException("Something triggered that wasn't supposed to be triggered");
+            }
 
             textBox.Text = Regex.Replace(textBox.Text, "[^0-9,]", "");
 
             double amountOfMoney = Util.ParseToDouble(textBox.Text);
 
-            Label timesMoneyLabel;
-
-            switch (parent.Name.ToLower())
+            Label timesMoneyLabel = parent.Name.ToLower() switch
             {
-                case "eurocent5":
-                    timesMoneyLabel = Times5EuroCentLabel;
-                    break;
-                
-                case "eurocent10":
-                    timesMoneyLabel = Times10EuroCentLabel;
-                    break;
-                
-                case "eurocent20":
-                    timesMoneyLabel = Times20EuroCentLabel;
-                    break;
-                
-                case "eurocent50":
-                    timesMoneyLabel = Times50EuroCentLabel;
-                    break;
-                
-                case "euro1":
-                    timesMoneyLabel = Times1EuroLabel;
-                    break;
-                                
-                case "euro2":
-                    timesMoneyLabel = Times2EuroLabel;
-                    break;
-                                
-                case "euro5":
-                    timesMoneyLabel = Times5EuroLabel;
-                    break;
-                                
-                case "euro10":
-                    timesMoneyLabel = Times10EuroLabel;
-                    break;
-                                
-                case "euro20":
-                    timesMoneyLabel = Times20EuroLabel;
-                    break;
-                                
-                case "euro50":
-                    timesMoneyLabel = Times50EuroLabel;
-                    break;
-                
-                case "euro100":
-                    timesMoneyLabel = Times100EuroLabel;
-                    break;
-                                
-                case "euro200":
-                    timesMoneyLabel = Times200EuroLabel;
-                    break;
-                
-                default:
-                    throw new ApplicationException("Button that shouldn't exist triggered something that shouldn't be triggered.");
-            }
-            
+                "eurocent5" => Times5EuroCentLabel,
+                "eurocent10" => Times10EuroCentLabel,
+                "eurocent20" => Times20EuroCentLabel,
+                "eurocent50" => Times50EuroCentLabel,
+                "euro1" => Times1EuroLabel,
+                "euro2" => Times2EuroLabel,
+                "euro5" => Times5EuroLabel,
+                "euro10" => Times10EuroLabel,
+                "euro20" => Times20EuroLabel,
+                "euro50" => Times50EuroLabel,
+                "euro100" => Times100EuroLabel,
+                "euro200" => Times200EuroLabel,
+                _ => throw new ApplicationException(
+                    "Button that shouldn't exist triggered something that shouldn't be triggered.")
+            };
+
             timesMoneyLabel.Content = amountOfMoney;
-            
+
             if (timesMoneyLabel.Content.ToString().Equals("0"))
             {
                 ((StackPanel) timesMoneyLabel.Parent).Visibility = Visibility.Collapsed;
@@ -262,78 +254,36 @@ namespace VeelPlezier.xaml.controls
         private void CalculateTotalMoneyGiven()
         {
             double totalMoneyGiven = 0;
-            
+
             foreach (WrapPanel panel in Grid.Children.OfType<WrapPanel>()
-                .Where(panel => panel.Name.Contains("Euro")))
+                .Where(static panel => panel.Name.Contains("Euro")))
             {
-                double toMultiplyBy;
-                
-                switch (panel.Name.ToLower())
+                double toMultiplyBy = panel.Name.ToLower() switch
                 {
-                    case "eurocent5":
-                        toMultiplyBy = 0.05;
-                        break;
-                
-                    case "eurocent10":
-                        toMultiplyBy = 0.10;
-                        break;
-                
-                    case "eurocent20":
-                        toMultiplyBy = 0.20;
-                        break;
-                
-                    case "eurocent50":
-                        toMultiplyBy = 0.50;
-                        break;
-                
-                    case "euro1":
-                        toMultiplyBy = 1.00;
-                        break;
-                                
-                    case "euro2":
-                        toMultiplyBy = 2.00;
-                        break;
-                                
-                    case "euro5":
-                        toMultiplyBy = 5.00;
-                        break;
-                                
-                    case "euro10":
-                        toMultiplyBy = 10.00;
-                        break;
-                                
-                    case "euro20":
-                        toMultiplyBy = 20.00;
-                        break;
-                                
-                    case "euro50":
-                        toMultiplyBy = 50.00;
-                        break;
-                
-                    case "euro100":
-                        toMultiplyBy = 100.00;
-                        break;
-                                
-                    case "euro200":
-                        toMultiplyBy = 200.00;
-                        break;
-                
-                    default:
-                        throw new ApplicationException("*Confused noises*");
-                }
+                    "eurocent5" => 0.05,
+                    "eurocent10" => 0.10,
+                    "eurocent20" => 0.20,
+                    "eurocent50" => 0.50,
+                    "euro1" => 1.00,
+                    "euro2" => 2.00,
+                    "euro5" => 5.00,
+                    "euro10" => 10.00,
+                    "euro20" => 20.00,
+                    "euro50" => 50.00,
+                    "euro100" => 100.00,
+                    "euro200" => 200.00,
+                    _ => throw new ApplicationException("*Confused noises*")
+                };
 
                 TextBox count = panel.Children.OfType<TextBox>().First();
 
-                double amountOfTimesGiven = Util.ParseToDouble(count.Text, exception =>
-                {
-                    MessageBox.Show("Fake number?");
-                });
+                double amountOfTimesGiven = Util.ParseToDouble(count.Text, static _ => { });
 
                 totalMoneyGiven += amountOfTimesGiven * toMultiplyBy;
             }
 
             _totalMoneyGiven = totalMoneyGiven;
-            
+
             TotalMoneyGiving.Content = $"{_totalMoneyGiven:c2}";
 
             CalculateTotalMoneyReturning();
@@ -351,9 +301,9 @@ namespace VeelPlezier.xaml.controls
             else
             {
                 TotalMoneyReturning.Content = $"{totalMoneyReturning:c2}";
-                TotalMoneyReturning.Foreground = Brushes.Green;  
+                TotalMoneyReturning.Foreground = Brushes.Green;
             }
-            
+
             totalMoneyReturning = SetAmountReturning(totalMoneyReturning, 200.00, Times200EuroLabel);
             totalMoneyReturning = SetAmountReturning(totalMoneyReturning, 100.00, Times100EuroLabel);
             totalMoneyReturning = SetAmountReturning(totalMoneyReturning, 50.00, Times50EuroLabel);
@@ -364,53 +314,58 @@ namespace VeelPlezier.xaml.controls
             totalMoneyReturning = SetAmountReturning(totalMoneyReturning, 1.00, Times1EuroLabel);
             totalMoneyReturning = SetAmountReturning(totalMoneyReturning, 0.50, Times50EuroCentLabel);
             totalMoneyReturning = SetAmountReturning(totalMoneyReturning, 0.20, Times20EuroCentLabel);
-            totalMoneyReturning = SetAmountReturning(totalMoneyReturning, 0.10, Times10EuroCentLabel);   
-            totalMoneyReturning = SetAmountReturning(totalMoneyReturning, 0.05, Times5EuroCentLabel); 
+            totalMoneyReturning = SetAmountReturning(totalMoneyReturning, 0.10, Times10EuroCentLabel);
+            totalMoneyReturning = SetAmountReturning(totalMoneyReturning, 0.05, Times5EuroCentLabel);
         }
 
-        private static double SetAmountReturning(double totalMoneyReturning, double moneyToCheck, [NotNull] ContentControl moneyToCheckLabel)
+        private static double SetAmountReturning(double totalMoneyReturning, double moneyToCheck,
+            [NotNull] ContentControl moneyToCheckLabel)
         {
             double returnValue = totalMoneyReturning % moneyToCheck;
 
-            if (moneyToCheckLabel.Parent is UIElement uiElement)
-            {
-                if (Math.Abs(returnValue - totalMoneyReturning) < 1)
-                {
-                    uiElement.Visibility = Visibility.Collapsed;
-                    return returnValue;
-                }   
-
-                int amountOfMoney = (int) Math.Floor(totalMoneyReturning / moneyToCheck);
-
-                moneyToCheckLabel.Content = amountOfMoney;
-                uiElement.Visibility = Visibility.Visible;
-            
-                return returnValue; 
-            }
-            else
+            if (moneyToCheckLabel.Parent is not UIElement uiElement)
             {
                 throw new ApplicationException("Wha?");
             }
+
+            if (Math.Abs(returnValue - totalMoneyReturning) < 1)
+            {
+                uiElement.Visibility = Visibility.Collapsed;
+                return returnValue;
+            }
+
+            int amountOfMoney = (int) Math.Floor(totalMoneyReturning / moneyToCheck);
+
+            moneyToCheckLabel.Content = amountOfMoney;
+            uiElement.Visibility = Visibility.Visible;
+
+            return returnValue;
         }
 
         private void SubmitButton_OnClick(object sender, RoutedEventArgs e)
         {
+            ReceiptPrinter?.Close();
+
+            ReceiptPrinter = new ReceiptPrinter(MainWindow.GetInstance().CurrentTranslationLanguage);
+
+            ReceiptPrinter.Show();
+
             ItemsPurchased.Items.Clear();
+            PurchasedItems.Clear();
+            PurchasedItemsDictionary.Clear();
             ResetGivenMoneyCounters();
 
             _totalMoneyGiven = 0;
             _totalPriceRequired = 0;
-            
+
             TotalMoneyGiving.Content = $"{_totalMoneyGiven:c2}";
             TotalPriceRequired.Content = $"{_totalPriceRequired:c2}";
-            
-            // TODO: create "print receipt" screen
         }
 
         private void ResetGivenMoneyCounters()
         {
             ResetMoneyGivenWrapPanel(
-                EuroCent5, 
+                EuroCent5,
                 EuroCent10,
                 EuroCent20,
                 EuroCent50,
@@ -439,46 +394,49 @@ namespace VeelPlezier.xaml.controls
 
             if (settingsContainer.MergeItemsOfSameTypeInCheckout)
             {
-                ItemCollection itemsPurchasedItems = ItemsPurchased.Items;
-                
-                IEnumerable<StackPanel> itemCollection = itemsPurchasedItems.OfType<StackPanel>().ToList();
-                
-                Dictionary<string, StackPanel> stackPanels = new Dictionary<string, StackPanel>(itemCollection.Count());
+                var temporaryPurchasedItems = new Dictionary<Item, PurchasedItem>(PurchasedItems.Count);
 
-                foreach (StackPanel panel in itemCollection)
+                foreach (PurchasedItem purchasedItem in PurchasedItems)
                 {
-                    if (stackPanels.ContainsKey(GetLabelByNameFromPanel(panel, "name").Content.ToString()))
+                    Item currentItem = purchasedItem.Item;
+
+                    if (temporaryPurchasedItems.ContainsKey(currentItem))
                     {
-                        Panel addedPanel = stackPanels[GetLabelByNameFromPanel(panel, "name").Content.ToString()];
+                        PurchasedItem oldPurchasedItem = temporaryPurchasedItems[purchasedItem.Item];
 
-                        Label addedPanelAmountPurchased = GetLabelByNameFromPanel(addedPanel, "amountPurchased");
-                        Label panelAmountPurchased = GetLabelByNameFromPanel(panel, "amountPurchased");
+                        int amount = oldPurchasedItem.Amount + purchasedItem.Amount;
 
-                        int amount = Util.ParseToInt(addedPanelAmountPurchased.Content.ToString());
+                        temporaryPurchasedItems.Remove(currentItem);
 
-                        amount += Util.ParseToInt(panelAmountPurchased.Content.ToString());
-
-                        addedPanelAmountPurchased.Content = amount + "";
+                        temporaryPurchasedItems.Add(purchasedItem.Item, new PurchasedItem(purchasedItem.Item, amount));
                     }
                     else
                     {
-                        stackPanels.Add(GetLabelByNameFromPanel(panel, "name").Content.ToString(), panel);
+                        temporaryPurchasedItems.Add(purchasedItem.Item, purchasedItem);
                     }
                 }
-                
+
+                ItemCollection itemsPurchasedItems = ItemsPurchased.Items;
+
                 itemsPurchasedItems.Clear();
-                
-                foreach (var keyValuePair in stackPanels)
+                PurchasedItems.Clear();
+                PurchasedItemsDictionary.Clear();
+
+                foreach (var pair in temporaryPurchasedItems)
                 {
-                    itemsPurchasedItems.Add(keyValuePair.Value);
+                    PurchasedItem purchasedItem = pair.Value;
+
+                    PurchasedItems.Add(purchasedItem);
+                    PurchasedItemsDictionary.Add(
+                        pair.Key.GetTranslationByTranslationLanguage(
+                            MainWindow.GetInstance().CurrentTranslationLanguage)!, purchasedItem);
+
+                    Panel panel = PanelFromItem(purchasedItem.Item, purchasedItem.Amount,
+                        MainWindow.GetInstance().CurrentTranslationLanguage.LanguageShortCode);
+
+                    itemsPurchasedItems.Add(panel);
                 }
             }
-        }
-
-        [NotNull]
-        private static Label GetLabelByNameFromPanel([NotNull] Panel panel, string name)
-        {
-            return panel.Children.OfType<Label>().First(label => label.Name.Equals(name));
         }
     }
 }

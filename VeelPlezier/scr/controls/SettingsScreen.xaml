@@ -1,12 +1,11 @@
-﻿<UserControl x:Class="VeelPlezier.xaml.controls.SettingsScreen"
+﻿<UserControl x:Class="VeelPlezier.scr.controls.SettingsScreen"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:local="clr-namespace:VeelPlezier.xaml.controls"
              xmlns:controls="clr-namespace:VeelPlezier.scr.controls"
              mc:Ignorable="d"
-             d:DesignHeight="600" d:DesignWidth="1200">
+             d:DesignHeight="600" d:DesignWidth="1200" x:ClassModifier="internal">
 
     <UserControl.Resources>
         <ResourceDictionary>
@@ -41,7 +40,7 @@
         </Grid.ColumnDefinitions>
 
 
-        <local:NavigationBar Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" />
+        <controls:NavigationBar Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" />
 
         <Border Grid.Row="2" Grid.Column="1" Grid.RowSpan="2"
                 Style="{StaticResource RoundedCornersBorderStyle}">
@@ -78,45 +77,51 @@
                     <Border Grid.Row="1" Grid.Column="0" Grid.RowSpan="3"
                             Style="{StaticResource CategoryLine}" />
 
-                    <Label Grid.Row="1" Grid.Column="1" 
+                    <Label Grid.Row="1" Grid.Column="1"
                            Style="{StaticResource TitleCategoryLabelStyle}"
                            Content="{DynamicResource GeneralCategory}" />
 
                     <Label Grid.Row="2" Grid.Column="1" Content="{DynamicResource Language}" />
-                    <ComboBox Grid.Row="2" Grid.Column="2" Width="300"
-                              SelectionChanged="Selector_OnSelectionChanged">
+                    <ComboBox x:Name="Language"
+                              Grid.Row="2" Grid.Column="2" Width="300"
+                              SelectionChanged="Language_OnSelectionChanged">
                         <ComboBoxItem x:Name="Language_En" IsSelected="True">English</ComboBoxItem>
                         <ComboBoxItem x:Name="Language_Nl">Dutch</ComboBoxItem>
                     </ComboBox>
-                    
+
                     <Border Grid.Row="5" Grid.Column="0" Grid.RowSpan="3"
-                            Style="{StaticResource CategoryLine}"/>
+                            Style="{StaticResource CategoryLine}" />
 
                     <Label Grid.Row="5" Grid.Column="1"
                            Style="{StaticResource TitleCategoryLabelStyle}"
                            Content="{DynamicResource CheckoutCategory}" />
-                    
-                    <Label Grid.Row="6" Grid.Column="1" Content="{DynamicResource MergeItemsOfSameTypeInTheCheckout}" />
-                    <CheckBox x:Name="MergeItemsSameTypeCheckout" Grid.Row="6" Grid.Column="2" VerticalAlignment="Center" Checked="MergeItemsSameTypeCheckout_OnChange" />
 
-                    
+                    <Label Grid.Row="6" Grid.Column="1" Content="{DynamicResource MergeItemsOfSameTypeInTheCheckout}" />
+                    <CheckBox x:Name="MergeItemsSameTypeCheckout" Grid.Row="6" Grid.Column="2"
+                              VerticalAlignment="Center" Checked="MergeItemsSameTypeCheckout_OnChange" />
+
+
                     <Border Grid.Row="9" Grid.Column="0" Grid.RowSpan="3"
-                            Style="{StaticResource CategoryLine}"/>
+                            Style="{StaticResource CategoryLine}" />
 
                     <Label Grid.Row="9" Grid.Column="1"
                            Style="{StaticResource TitleCategoryLabelStyle}"
                            Content="{DynamicResource ReceiptCategory}" />
-                    
-                    <Label Grid.Row="10" Grid.Column="1" Content="{DynamicResource MergeItemsOfSameTypeOnTheReceipt}" />
-                    <CheckBox x:Name="MergeItemsSameTypeReceipt" Grid.Row="10" Grid.Column="2" VerticalAlignment="Center" Checked="MergeItemsSameTypeReceipt_OnChange" />
 
+                    <Label Grid.Row="2" Grid.Column="1" Content="{DynamicResource ReceiptLanguage}" />
+                    <ComboBox x:Name="ReceiptLanguage"
+                              Grid.Row="10" Grid.Column="2" Width="300"
+                              SelectionChanged="ReceiptLanguage_OnSelectionChanged">
+                        <ComboBoxItem x:Name="Language_Receipt_En" IsSelected="True">English</ComboBoxItem>
+                        <ComboBoxItem x:Name="Language_Receipt_Nl">Dutch</ComboBoxItem>
+                    </ComboBox>
                 </Grid>
             </ScrollViewer>
         </Border>
-        
+
         <Border Grid.Row="2" Grid.Column="3" Grid.RowSpan="2"
-            Style="{StaticResource RoundedCornersBorderStyle}">
-            <controls:AboutMeSection/>
+                Style="{StaticResource RoundedCornersBorderStyle}">
+            <controls:AboutMeSection />
         </Border>
     </Grid>
 </UserControl>
