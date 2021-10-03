@@ -215,10 +215,8 @@ namespace VeelPlezier.scr.controls
             {
                 throw new ApplicationException("Something triggered that wasn't supposed to be triggered");
             }
-
-            textBox.Text = Regex.Replace(textBox.Text, "[^0-9,]", "");
-
-            double amountOfMoney = Util.ParseToDouble(textBox.Text);
+            
+            double amountOfMoney = ValidateTextToNumber(sender);
 
             Label timesMoneyLabel = parent.Name.ToLower() switch
             {
@@ -304,6 +302,7 @@ namespace VeelPlezier.scr.controls
             }
             else
             {
+                // TotalChange.Content = "124i012421j4oi21j4";
                 TotalChange.Content = $"{totalMoneyReturning:c2}";
                 TotalChange.Foreground = Brushes.Green;
             }
@@ -319,7 +318,7 @@ namespace VeelPlezier.scr.controls
             totalMoneyReturning = SetAmountReturning(totalMoneyReturning, 0.50, Times50EuroCentLabel);
             totalMoneyReturning = SetAmountReturning(totalMoneyReturning, 0.20, Times20EuroCentLabel);
             totalMoneyReturning = SetAmountReturning(totalMoneyReturning, 0.10, Times10EuroCentLabel);
-            totalMoneyReturning = SetAmountReturning(totalMoneyReturning, 0.05, Times5EuroCentLabel);
+            SetAmountReturning(totalMoneyReturning, 0.05, Times5EuroCentLabel);
         }
 
         private static double SetAmountReturning(double totalMoneyReturning, double moneyToCheck,
@@ -350,7 +349,7 @@ namespace VeelPlezier.scr.controls
         {
             if (TotalChange.Content.ToString().Contains("-"))
             {
-                MessageBox.Show("User has to pay enough!");
+                MessageBox.Show("Customer has to pay enough!");
                 return;
             }
             
@@ -490,6 +489,28 @@ namespace VeelPlezier.scr.controls
             {
                 CalculatorWindow.Focus();
             }
+        }
+
+
+        private static double ValidateTextToNumber([NotNull] object sender)
+        {
+            TextBox textBox = sender as TextBox ?? throw new ArgumentException(nameof(sender) + " has to be a " + nameof(TextBox));
+            textBox.Text = Regex.Replace(textBox.Text, "[^0-9,]", "");
+            return Util.ParseToDouble(textBox.Text);
+        }
+        
+        private void ValidateTextToNumber_Event([NotNull] object sender, TextChangedEventArgs e)
+        {
+            ValidateTextToNumber(sender);
+        }
+
+        private void ManualMoneyGiving_OnTextChanged([NotNull] object sender, TextChangedEventArgs e)
+        {
+            _totalMoneyGiven = ValidateTextToNumber(sender);
+
+            TotalMoneyGiving.Content = $"{_totalMoneyGiven:c2}";
+
+            CalculateTotalMoneyReturning();
         }
     }
 }

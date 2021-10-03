@@ -33,7 +33,7 @@
     <system:String x:Key="GiveTotalAmount">Geef totaalbedrag</system:String>
     <system:String x:Key="TotalGivenAmount">Totaal gegeven bedrag:</system:String>
     
-    <system:String x:Key="PayOff">Afrekenen:</system:String>
+    <system:String x:Key="PayOffExclusiveTax">Afrekenen (exl belasting):</system:String>
     
     <system:String x:Key="Times 5 Euro Cent">keer 5 euro cent</system:String>
     <system:String x:Key="Times 10 Euro Cent">keer 10 euro cent</system:String>

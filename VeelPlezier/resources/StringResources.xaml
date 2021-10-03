@@ -32,7 +32,7 @@
     <system:String x:Key="GiveTotalAmount">Give total amount:</system:String>
     <system:String x:Key="TotalGivenAmount">Total given amount:</system:String>
     
-    <system:String x:Key="PayOff">Pay off:</system:String>
+    <system:String x:Key="PayOffExclusiveTax">Pay off (exl tax):</system:String>
     
     <system:String x:Key="Times 5 Euro Cent">times 5 euro cent</system:String>
     <system:String x:Key="Times 10 Euro Cent">times 10 euro cent</system:String>

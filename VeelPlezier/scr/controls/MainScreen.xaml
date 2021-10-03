@@ -179,7 +179,9 @@
                 <ComboBox x:Name="ItemsInStore" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="3" />
                 <StackPanel Grid.Column="1" Grid.Row="2" Orientation="Horizontal">
                     <Label VerticalAlignment="Center" Content="{DynamicResource Amount}" />
-                    <TextBox x:Name="AmountOfItem" VerticalAlignment="Center">0</TextBox>
+                    <TextBox x:Name="AmountOfItem" VerticalAlignment="Center"
+                             TextChanged="ValidateTextToNumber_Event"
+                             Text="0"/>
                 </StackPanel>
                 <Button Grid.Column="1" Grid.Row="3" Background="DarkBlue"
                         Click="SubmitItem_OnClick"
@@ -226,7 +228,9 @@
                        Content="{DynamicResource ManuallyInsertAmount}" />
                 
                 <TextBox Grid.Row="2" Grid.Column="0" 
+                         MinWidth="100"
                          HorizontalAlignment="Center" Background="DarkBlue"
+                         TextChanged="ManualMoneyGiving_OnTextChanged"
                          Text="{DynamicResource GiveTotalAmount}" />
                 
                 <Label Grid.Row="3" Grid.Column="0" 
@@ -263,7 +267,7 @@
                 </Grid.RowDefinitions>
 
                 <Label Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="3" HorizontalAlignment="Center" FontWeight="Bold"
-                       FontSize="15" Content="{DynamicResource PayOff}" />
+                       FontSize="15" Content="{DynamicResource PayOffExclusiveTax}" />
 
                 <StackPanel Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="3" HorizontalAlignment="Center"
                             VerticalAlignment="Center" Orientation="Horizontal">
