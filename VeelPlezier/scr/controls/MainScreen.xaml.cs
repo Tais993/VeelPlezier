@@ -297,15 +297,15 @@ namespace VeelPlezier.scr.controls
 
             if (totalMoneyReturning < 0)
             {
-                TotalMoneyReturning.Content = $"{totalMoneyReturning:c2}";
-                TotalMoneyReturning.Foreground = Brushes.Red;
+                TotalChange.Content = $"{totalMoneyReturning:c2}";
+                TotalChange.Foreground = Brushes.Red;
 
                 totalMoneyReturning = 0;
             }
             else
             {
-                TotalMoneyReturning.Content = $"{totalMoneyReturning:c2}";
-                TotalMoneyReturning.Foreground = Brushes.Green;
+                TotalChange.Content = $"{totalMoneyReturning:c2}";
+                TotalChange.Foreground = Brushes.Green;
             }
 
             totalMoneyReturning = SetAmountReturning(totalMoneyReturning, 200.00, Times200EuroLabel);
@@ -348,6 +348,12 @@ namespace VeelPlezier.scr.controls
 
         private void SubmitButton_OnClick(object sender, RoutedEventArgs e)
         {
+            if (TotalChange.Content.ToString().Contains("-"))
+            {
+                MessageBox.Show("User has to pay enough!");
+                return;
+            }
+            
             ReceiptPrinter?.Close();
 
             ReceiptPrinter = new ReceiptPrinter(MainWindow.GetInstance().CurrentTranslationLanguage);
@@ -359,12 +365,15 @@ namespace VeelPlezier.scr.controls
             _purchasedItemsDictionary.Clear();
             ResetGivenMoneyCounters();
             ResetMoneyChangeLabels();
-
+            
             _totalMoneyGiven = 0;
             _totalPriceRequired = 0;
 
             TotalMoneyGiving.Content = $"{_totalMoneyGiven:c2}";
             TotalPriceRequired.Content = $"{_totalPriceRequired:c2}";
+            TotalChange.Content = "€ 0,00";
+            
+            TotalChange.Foreground = Brushes.Green;
         }
 
         
@@ -414,7 +423,7 @@ namespace VeelPlezier.scr.controls
         private static void ResetChangeLabel([NotNull] ContentControl moneyToCheckLabel)
         {
             moneyToCheckLabel.Content = "€ 0";
-            moneyToCheckLabel.Visibility = Visibility.Collapsed;
+            ((StackPanel) moneyToCheckLabel.Parent).Visibility = Visibility.Collapsed;
         }
         
         
