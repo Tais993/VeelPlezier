@@ -48,6 +48,11 @@
 
     <system:String x:Key="UnitPrice">unit price</system:String>
     
+    
+    <system:String x:Key="Calculator">Calculator</system:String>
+    <system:String x:Key="CurrencyConverter">Currency converter</system:String>
+    
+    
     <!-- End main screen -->
     <!-- Start navigation bar -->
     

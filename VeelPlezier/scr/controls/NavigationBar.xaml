@@ -9,11 +9,10 @@
         <UserControl.Resources>
             <ResourceDictionary>
                 <ResourceDictionary.MergedDictionaries>
-                    <ResourceDictionary Source="../styles/NavigationBarStyles.xaml" />
+                    <ResourceDictionary Source="../styles/RoundButtonsStyle.xaml" />
                     
                     <ResourceDictionary>
                         <Style x:Key="MenuItem" TargetType="{x:Type Button}" BasedOn="{StaticResource RoundButtons}">
-                            <Setter Property="Background" Value="#000" />
                             <EventSetter Event="Click" Handler="EventSetter_OnHandler" />
                         </Style>
                 

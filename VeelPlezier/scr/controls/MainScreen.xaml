@@ -12,6 +12,7 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="../styles/MainScreenStyles.xaml" />
+                <ResourceDictionary Source="../styles/RoundButtonsStyle.xaml" />
 
                 <ResourceDictionary>
                     <Style TargetType="{x:Type TextBox}" x:Key="CashRegistryEventStyle"
@@ -322,11 +323,35 @@
                         Click="SubmitButton_OnClick" Content="{DynamicResource NextCustomer}" />
             </Grid>
         </Border>
-
-
-        <!-- TODO: calculator button -->
-        <!-- TODO: currency switcher -->
-
+        
+        <Grid Grid.Row="15" Grid.RowSpan="4" Grid.Column="4">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.2*" />
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="0.2*" />
+            </Grid.ColumnDefinitions>
+        
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.2*" />
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="0.2*" />
+            </Grid.RowDefinitions>
+            
+            <Button x:Name="Calculator" 
+                    Grid.Row="1" Grid.Column="1"
+                    Click="Calculator_OnClick"
+                    Style="{StaticResource RoundButtons}"
+                    Content="{DynamicResource Calculator}" 
+            />
+            
+            <!-- TODO: currency converter -->
+            <Button x:Name="CurrencyConverter"
+                    Grid.Row="1" Grid.Column="2"
+                    Style="{StaticResource RoundButtons}"
+                    Content="{DynamicResource CurrencyConverter}" />
+        </Grid>
+        
         <controls:NavigationBar Grid.Row="19" Grid.RowSpan="4" Grid.Column="4" />
     </Grid>
 </UserControl>

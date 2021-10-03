@@ -85,8 +85,11 @@
         <Compile Include="scr\controls\AboutMeSection.xaml.cs">
             <DependentUpon>AboutMeSection.xaml</DependentUpon>
         </Compile>
-        <Compile Include="scr\controls\ReceiptPrinter.xaml.cs">
-            <DependentUpon>ReceiptPrinter.xaml</DependentUpon>
+        <Compile Include="scr\controls\CalculatorWindow.xaml.cs">
+            <DependentUpon>CalculatorWindow.xaml</DependentUpon>
+        </Compile>
+        <Compile Include="scr\controls\ReceiptWindow.xaml.cs">
+            <DependentUpon>ReceiptWindow.xaml</DependentUpon>
         </Compile>
         <Compile Include="scr\controls\StartScreen.xaml.cs">
             <DependentUpon>StartScreen.xaml</DependentUpon>
@@ -109,7 +112,7 @@
         <Compile Include="scr\controls\SettingsScreen.xaml.cs">
             <DependentUpon>SettingsScreen.xaml</DependentUpon>
         </Compile>
-    <Compile Include="scr\utilities\Util.cs" />
+        <Compile Include="scr\utilities\Util.cs"/>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
         <SubType>Designer</SubType>
@@ -122,23 +125,26 @@
             <DependentUpon>MainWindow.xaml</DependentUpon>
             <SubType>Code</SubType>
         </Compile>
+        <Page Include="resources\CalculatorResources.nl-NL.xaml"/>
+        <Page Include="resources\CalculatorResources.xaml"/>
         <Page Include="resources\ReceiptResources.nl-NL.xaml"/>
         <Page Include="resources\ReceiptResources.xaml"/>
         <Page Include="resources\StringResources.nl-NL.xaml"/>
         <Page Include="resources\StringResources.xaml"/>
         <Page Include="scr\controls\AboutMeSection.xaml"/>
         <Page Include="scr\controls\MainScreen.xaml"/>
+        <Page Include="scr\controls\CalculatorWindow.xaml"/>
         <Page Include="scr\controls\NavigationBar.xaml"/>
-        <Page Include="scr\controls\ReceiptPrinter.xaml"/>
+        <Page Include="scr\controls\ReceiptWindow.xaml"/>
         <Page Include="scr\controls\SettingsScreen.xaml"/>
         <Page Include="scr\controls\StartScreen.xaml"/>
         <Page Include="scr\styles\AboutMeSectionStyles.xaml"/>
         <Page Include="scr\styles\MainScreenStyles.xaml"/>
-    <Page Include="scr\styles\NavigationBarStyles.xaml" />
         <Page Include="scr\styles\ReceiptPrinterStyle.xaml"/>
-    <Page Include="scr\styles\SettingsScreenStyles.xaml" />
-    <Page Include="scr\styles\StartScreenStyles.xaml" />
-  </ItemGroup>
+        <Page Include="scr\styles\RoundButtonsStyle.xaml"/>
+        <Page Include="scr\styles\SettingsScreenStyles.xaml"/>
+        <Page Include="scr\styles\StartScreenStyles.xaml"/>
+    </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
