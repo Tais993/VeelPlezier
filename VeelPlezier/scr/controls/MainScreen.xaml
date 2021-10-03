@@ -71,84 +71,84 @@
             <Label Content="{DynamicResource 5 Euro Cent}" />
             <Image Source="../../resources/images/coin-cent-5.bmp" />
             <TextBox Style="{DynamicResource CashRegistryEventStyle}">0</TextBox>
-            <Label>Keer</Label>
+            <Label Content="{DynamicResource Times}" />
         </WrapPanel>
 
         <WrapPanel Grid.Row="3" Grid.Column="0" HorizontalAlignment="Right" Name="EuroCent10">
             <Label Content="{DynamicResource 10 Euro Cent}" />
             <Image Source="../../resources/images/coin-cent-10.bmp" />
             <TextBox Style="{DynamicResource CashRegistryEventStyle}">0</TextBox>
-            <Label>Keer</Label>
+            <Label Content="{DynamicResource Times}" />
         </WrapPanel>
 
         <WrapPanel Grid.Row="5" Grid.Column="0" HorizontalAlignment="Right" Name="EuroCent20">
             <Label Content="{DynamicResource 20 Euro Cent}" />
             <Image Source="../../resources/images/coin-cent-20.bmp" />
             <TextBox Style="{DynamicResource CashRegistryEventStyle}">0</TextBox>
-            <Label>Keer</Label>
+            <Label Content="{DynamicResource Times}" />        
         </WrapPanel>
 
         <WrapPanel Grid.Row="7" Grid.Column="0" HorizontalAlignment="Right" Name="EuroCent50">
             <Label Content="{DynamicResource 50 Euro Cent}" />
             <Image Source="../../resources/images/coin-cent-50.bmp" />
             <TextBox Style="{DynamicResource CashRegistryEventStyle}">0</TextBox>
-            <Label>Keer</Label>
+            <Label Content="{DynamicResource Times}" />
         </WrapPanel>
 
         <WrapPanel Grid.Row="9" Grid.Column="0" HorizontalAlignment="Right" Name="Euro1">
             <Label Content="{DynamicResource 1 Euro}" />
             <Image Source="../../resources/images/coin-euro-1.bmp" />
             <TextBox Style="{DynamicResource CashRegistryEventStyle}">0</TextBox>
-            <Label>Keer</Label>
+            <Label Content="{DynamicResource Times}" />
         </WrapPanel>
 
         <WrapPanel Grid.Row="11" Grid.Column="0" HorizontalAlignment="Right" Name="Euro2">
             <Label Content="{DynamicResource 2 Euro}" />
             <Image Source="../../resources/images/coin-euro-2.bmp" />
             <TextBox Style="{DynamicResource CashRegistryEventStyle}">0</TextBox>
-            <Label>Keer</Label>
+            <Label Content="{DynamicResource Times}" />
         </WrapPanel>
 
         <WrapPanel Grid.Row="11" Grid.Column="0" HorizontalAlignment="Right" Name="Euro5">
             <Label Content="{DynamicResource 5 Euro}" />
             <Image Source="../../resources/images/note-euro-5.bmp" />
             <TextBox Style="{DynamicResource CashRegistryEventStyle}">0</TextBox>
-            <Label>Keer</Label>
+            <Label Content="{DynamicResource Times}" />
         </WrapPanel>
 
         <WrapPanel Grid.Row="13" Grid.Column="0" HorizontalAlignment="Right" Name="Euro10">
             <Label Content="{DynamicResource 10 Euro}" />
             <Image Source="../../resources/images/note-euro-10.bmp" />
             <TextBox Style="{DynamicResource CashRegistryEventStyle}">0</TextBox>
-            <Label>Keer</Label>
+            <Label Content="{DynamicResource Times}" />
         </WrapPanel>
 
         <WrapPanel Grid.Row="15" Grid.Column="0" HorizontalAlignment="Right" Name="Euro20">
             <Label Content="{DynamicResource 20 Euro}" />
             <Image Source="../../resources/images/note-euro-20.bmp" />
             <TextBox Style="{DynamicResource CashRegistryEventStyle}">0</TextBox>
-            <Label>Keer</Label>
+            <Label Content="{DynamicResource Times}" />
         </WrapPanel>
 
         <WrapPanel Grid.Row="17" Grid.Column="0" HorizontalAlignment="Right" Name="Euro50">
             <Label Content="{DynamicResource 50 Euro}" />
             <Image Source="../../resources/images/note-euro-50.bmp" />
             <TextBox Style="{DynamicResource CashRegistryEventStyle}">0</TextBox>
-            <Label>Keer</Label>
+            <Label Content="{DynamicResource Times}" />
         </WrapPanel>
 
         <WrapPanel Grid.Row="19" Grid.Column="0" HorizontalAlignment="Right" Name="Euro100">
             <Label Content="{DynamicResource 100 Euro}" />
             <Image Source="../../resources/images/note-euro-100.bmp" />
             <TextBox Style="{DynamicResource CashRegistryEventStyle}">0</TextBox>
-            <Label>Keer</Label>
+            <Label Content="{DynamicResource Times}" />
         </WrapPanel>
 
         <WrapPanel Grid.Row="21" Grid.Column="0" HorizontalAlignment="Right" Name="Euro200">
             <Label Content="{DynamicResource 200 Euro}" />
             <Image Source="../../resources/images/note-euro-200.bmp" />
             <TextBox Style="{DynamicResource CashRegistryEventStyle}">0</TextBox>
-            <Label>Keer</Label>
+            <Label Content="{DynamicResource Times}" />
         </WrapPanel>
 
 

@@ -6,6 +6,9 @@
     
     <!-- Start main screen -->
     
+    <system:String x:Key="Times">keer</system:String>
+    
+    
     <system:String x:Key="Euro Cent">eurocent</system:String>
     <system:String x:Key="5 Euro Cent">5 eurocent</system:String>
     <system:String x:Key="10 Euro Cent">10 eurocent</system:String>
