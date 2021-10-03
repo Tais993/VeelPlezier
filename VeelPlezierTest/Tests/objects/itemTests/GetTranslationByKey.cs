@@ -1,4 +1,5 @@
 ﻿using System;
+using VeelPlezier.scr.items.objects;
 using Xunit;
 
 namespace VeelPlezierTest.Tests.objects.itemTests

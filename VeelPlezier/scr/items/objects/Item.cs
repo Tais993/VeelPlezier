@@ -8,13 +8,13 @@ namespace VeelPlezier.scr.items.objects
     [SuppressMessage("ReSharper", "MemberCanBeInternal")]
     [SuppressMessage("ReSharper", "UnusedAutoPropertyAccessor.Global")]
     [SuppressMessage("ReSharper", "ClassNeverInstantiated.Global")]
-    internal sealed record Item(Name[] Names, string Price)
+    public sealed record Item(Name[] Names, string Price)
     {
         internal Name[] Names { get; } = Names;
         internal string Price { get; } = Price;
 
         [CanBeNull]
-        internal string GetTranslationByKey(string key)
+        public string GetTranslationByKey(string key)
         {
             if (string.IsNullOrEmpty(key))
                 key = "en";

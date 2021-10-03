@@ -13,7 +13,7 @@ namespace VeelPlezier.scr.items
     public class ItemHandler
     {
         private readonly ComboBox _itemsInStore;
-        internal Items Items;
+        public Items Items;
 
         protected internal ItemHandler(ComboBox itemsInStore)
         {
@@ -66,7 +66,7 @@ namespace VeelPlezier.scr.items
         }
 
         [CanBeNull]
-        internal Item GetItemByName([NotNull] string name)
+        public Item GetItemByName([NotNull] string name)
         {
             name = name.ToLower().Trim();
 
