@@ -299,6 +299,8 @@ namespace VeelPlezier.scr.controls
             {
                 TotalMoneyReturning.Content = $"{totalMoneyReturning:c2}";
                 TotalMoneyReturning.Foreground = Brushes.Red;
+
+                totalMoneyReturning = 0;
             }
             else
             {
@@ -330,13 +332,13 @@ namespace VeelPlezier.scr.controls
                 throw new ApplicationException("Wha?");
             }
 
-            if (Math.Abs(returnValue - totalMoneyReturning) < 1)
+            if (Math.Abs(returnValue - totalMoneyReturning) < 0.05)
             {
                 uiElement.Visibility = Visibility.Collapsed;
                 return returnValue;
             }
 
-            int amountOfMoney = (int) Math.Floor(totalMoneyReturning / moneyToCheck);
+            double amountOfMoney = Math.Floor(totalMoneyReturning / moneyToCheck);
 
             moneyToCheckLabel.Content = amountOfMoney;
             uiElement.Visibility = Visibility.Visible;
@@ -356,6 +358,7 @@ namespace VeelPlezier.scr.controls
             PurchasedItems.Clear();
             _purchasedItemsDictionary.Clear();
             ResetGivenMoneyCounters();
+            ResetMoneyChangeLabels();
 
             _totalMoneyGiven = 0;
             _totalPriceRequired = 0;
@@ -364,6 +367,7 @@ namespace VeelPlezier.scr.controls
             TotalPriceRequired.Content = $"{_totalPriceRequired:c2}";
         }
 
+        
         private void ResetGivenMoneyCounters()
         {
             ResetMoneyGivenWrapPanel(
@@ -390,6 +394,32 @@ namespace VeelPlezier.scr.controls
             }
         }
 
+
+        private void ResetMoneyChangeLabels()
+        {
+            ResetChangeLabel(Times5EuroCentLabel);
+            ResetChangeLabel(Times10EuroCentLabel);
+            ResetChangeLabel(Times20EuroCentLabel);
+            ResetChangeLabel(Times50EuroCentLabel);
+            ResetChangeLabel(Times1EuroLabel);
+            ResetChangeLabel(Times2EuroLabel);
+            ResetChangeLabel(Times5EuroLabel);
+            ResetChangeLabel(Times10EuroLabel);
+            ResetChangeLabel(Times20EuroLabel);
+            ResetChangeLabel(Times50EuroLabel);
+            ResetChangeLabel(Times100EuroLabel);
+            ResetChangeLabel(Times200EuroLabel);
+        }
+        
+        private static void ResetChangeLabel([NotNull] ContentControl moneyToCheckLabel)
+        {
+            moneyToCheckLabel.Content = "€ 0";
+            moneyToCheckLabel.Visibility = Visibility.Collapsed;
+        }
+        
+        
+        
+        
         internal void BecomesVisible()
         {
             SettingsContainer settingsContainer = SettingsContainer.GetInstance();

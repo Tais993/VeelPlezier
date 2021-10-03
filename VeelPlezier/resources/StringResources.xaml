@@ -4,7 +4,10 @@
     xmlns:system="clr-namespace:System;assembly=mscorlib"
 >
     <!-- Start main screen -->
-    
+        
+    <system:String x:Key="Times">times</system:String>
+
+
     <system:String x:Key="Euro Cent">euro cent</system:String>
     <system:String x:Key="5 Euro Cent">5 euro cent</system:String>
     <system:String x:Key="10 Euro Cent">10 euro cent</system:String>
