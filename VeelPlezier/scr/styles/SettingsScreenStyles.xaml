@@ -26,27 +26,6 @@
         <Setter Property="CornerRadius" Value="10" />
     </Style>
     
-    <Style x:Key="RoundedCornersControlStyle" TargetType="{x:Type Control}">
-        <Setter Property="OverridesDefaultStyle" Value="True"/>
-        <Setter Property="Margin" Value="3"/>
-        <Setter Property="Foreground" Value="#FFF" />
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type Control}">
-                    <Border Name="border" 
-                            BorderThickness="1"
-                            Padding="4,2" 
-                            CornerRadius="10"
-                            BorderBrush="White"
-                            Background="{TemplateBinding Background}"
-                    >
-                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
-                    </Border>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
-    
     
     
     <Style TargetType="{x:Type Label}" BasedOn="{StaticResource ControlBaseStyle}" />

@@ -1,4 +1,4 @@
-﻿namespace VeelPlezier.enums
+﻿namespace VeelPlezier.scr.enums
 {
     internal enum ScreenType
     {

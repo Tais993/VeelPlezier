@@ -1,11 +1,11 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 
-namespace VeelPlezier.objects
+namespace VeelPlezier.scr.items.objects
 {
     [SuppressMessage("ReSharper", "MemberCanBeInternal")]
     [SuppressMessage("ReSharper", "UnusedAutoPropertyAccessor.Global")]
-    public sealed class Items
+    public sealed record Items(Item[] ItemsArray)
     {
-        public Item[] ItemsArray { get; set; }
+        internal Item[] ItemsArray { get; } = ItemsArray;
     }
 }

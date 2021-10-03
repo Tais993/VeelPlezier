@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              mc:Ignorable="d"
-             d:DesignHeight="400" d:DesignWidth="350">
+             d:DesignHeight="400" d:DesignWidth="350" x:ClassModifier="internal">
 
     <UserControl.Resources>
         <ResourceDictionary>
@@ -40,9 +40,8 @@
                 Style="{DynamicResource TitleStyle}"
                 Content="{DynamicResource MadeBy}" />
 
-            <Label
-                Style="{DynamicResource TitleStyle}"
-                Content="Tijs Beek" />
+            <Label x:Name="CreatorLabel"
+                Style="{DynamicResource TitleStyle}" />
         </WrapPanel>
 
         <TextBlock Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" 
@@ -56,19 +55,13 @@
             <Span>
                 <Run Text="{DynamicResource Email}" />
             </Span>
-            <Hyperlink NavigateUri="mailto:tijs@familiebeek.eu?"
-                       RequestNavigate="Hyperlink_OnRequestNavigate">
-                tijs@familiebeek.eu
-            </Hyperlink>
+            <Hyperlink x:Name="EmailLink" RequestNavigate="Hyperlink_OnRequestNavigate" />
             <LineBreak />
 
             <Span>
                 <Run Text="{DynamicResource Phone}" />
             </Span>
-            <Hyperlink NavigateUri="tel:+31622458154"
-                       RequestNavigate="Hyperlink_OnRequestNavigate">
-                +31 6 22458154
-            </Hyperlink>
+            <Hyperlink x:Name="PhoneLink" RequestNavigate="Hyperlink_OnRequestNavigate" />
         </TextBlock>
 
 
@@ -78,10 +71,7 @@
                 <Run Text="{DynamicResource SourceCanBeFoundAt}" />
             </Span>
 
-            <Hyperlink
-                NavigateUri="https://github.com/Tais993/VeelPlezier">
-                <Run Text="{DynamicResource TheGithub}" />
-            </Hyperlink>
+            <Hyperlink x:Name="GithubLink" />
 
             <LineBreak />
             
@@ -90,10 +80,7 @@
             </Span>
             <LineBreak />
 
-            <Hyperlink
-                NavigateUri="https://github.com/Tais993/VeelPlezier/projects/2">
-                <Run Text="{DynamicResource TheGithubProject}" />
-            </Hyperlink>
+            <Hyperlink x:Name="GithubProjectLink" />
         </TextBlock>
         
         <TextBlock Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="3"

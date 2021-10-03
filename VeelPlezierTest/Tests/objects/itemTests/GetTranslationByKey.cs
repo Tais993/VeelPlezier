@@ -1,5 +1,5 @@
 ﻿using System;
-using VeelPlezier.objects;
+using VeelPlezier.scr.items.objects;
 using Xunit;
 
 namespace VeelPlezierTest.Tests.objects.itemTests
@@ -15,10 +15,10 @@ namespace VeelPlezierTest.Tests.objects.itemTests
         public void GetItemByNameSuccessTest(int itemNumber, string lang)
         {
             Item item = ItemExt.GetItemByInt(itemNumber);
-            
-            Assert.Equal(ItemExt.GetExpectedTranslation(itemNumber, lang), item.GetTranslationByKey(lang)); 
+
+            Assert.Equal(ItemExt.GetExpectedTranslation(itemNumber, lang), (string) item.GetTranslationByKey(lang));
         }
-        
+
         [Theory]
         [InlineData(1, "en", "nl")]
         [InlineData(1, "nl", "fake")]
@@ -27,21 +27,22 @@ namespace VeelPlezierTest.Tests.objects.itemTests
         public void GetItemByNameFailTest(int itemNumber, string lang, string fakeLang)
         {
             Item item = ItemExt.GetItemByInt(itemNumber);
-            
-            Assert.NotEqual(ItemExt.GetExpectedTranslation(itemNumber, lang), item.GetTranslationByKey(fakeLang)); 
+
+            Assert.NotEqual<string>(ItemExt.GetExpectedTranslation(itemNumber, lang),
+                item.GetTranslationByKey(fakeLang));
         }
-        
+
         [Theory]
         [InlineData(1, null)]
         [InlineData(-10, null)]
         [InlineData(-5, "14212")]
         public void GetItemByNameThrowTest(int itemNumber, string lang)
         {
-            Assert.Throws<ArgumentException>((() =>
+            Assert.Throws<ArgumentException>(() =>
             {
                 Item item = ItemExt.GetItemByInt(itemNumber);
-                Assert.Equal(ItemExt.GetExpectedTranslation(itemNumber, lang), item.GetTranslationByKey(lang));
-            })); 
+                Assert.Equal(ItemExt.GetExpectedTranslation(itemNumber, lang), (string) item.GetTranslationByKey(lang));
+            });
         }
     }
 }

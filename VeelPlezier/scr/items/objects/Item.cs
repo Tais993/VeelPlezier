@@ -1,36 +1,33 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using JetBrains.Annotations;
+using VeelPlezier.scr.enums;
 
-namespace VeelPlezier.objects
+namespace VeelPlezier.scr.items.objects
 {
     [SuppressMessage("ReSharper", "MemberCanBeInternal")]
     [SuppressMessage("ReSharper", "UnusedAutoPropertyAccessor.Global")]
     [SuppressMessage("ReSharper", "ClassNeverInstantiated.Global")]
-    public sealed class Item
+    public sealed record Item(Name[] Names, string Price)
     {
-        public Name[] Names { get; set; }
-        public string Price { get; set; }
+        internal Name[] Names { get; } = Names;
+        internal string Price { get; } = Price;
 
-        public Item(Name[] names, string price)
-        {
-            Names = names;
-            Price = price;
-        }
-        
-        public Item()
-        {
-        }
-        
         [CanBeNull]
         public string GetTranslationByKey(string key)
         {
             if (string.IsNullOrEmpty(key))
                 key = "en";
-            
-            return (from name in Names 
-                where name.Key.Equals(key) 
+
+            return (from name in Names
+                where name.Key.Equals(key)
                 select name.Value).First();
+        }
+
+        [CanBeNull]
+        internal string GetTranslationByTranslationLanguage([NotNull] TranslationLanguage language)
+        {
+            return GetTranslationByKey(language.LanguageShortCode);
         }
     }
 }

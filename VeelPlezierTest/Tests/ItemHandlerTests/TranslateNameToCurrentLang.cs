@@ -2,6 +2,8 @@
 using System.Windows.Controls;
 using Xunit;
 
+// ReSharper disable All
+
 namespace VeelPlezierTest.Tests.ItemHandlerTests
 {
     public sealed class TranslateNameToCurrentLang
@@ -20,7 +22,7 @@ namespace VeelPlezierTest.Tests.ItemHandlerTests
                 Assert.NotNull(itemHandlerExt.TranslateNameToCurrentLang(itemToTranslate, currentLang));
             });
         }
-        
+
         [Theory]
         [InlineData(ItemHandlerExt.Json, "aaaa", "nl")]
         [InlineData(ItemHandlerExt.Json, "q4r1af", "fake")]
@@ -35,7 +37,7 @@ namespace VeelPlezierTest.Tests.ItemHandlerTests
                 Assert.Null(itemHandlerExt.TranslateNameToCurrentLang(itemToTranslate, currentLang));
             });
         }
-        
+
         [Theory]
         [InlineData(ItemHandlerExt.Json, null, null)]
         public async void TranslateNameToCurrentLangThrowTest(string json, string itemToTranslate, string currentLang)

@@ -1,7 +1,7 @@
 ﻿using System.Windows.Controls;
 using Newtonsoft.Json;
-using VeelPlezier;
-using VeelPlezier.objects;
+using VeelPlezier.scr.items;
+using VeelPlezier.scr.items.objects;
 
 namespace VeelPlezierTest.Tests.ItemHandlerTests
 {
@@ -20,14 +20,14 @@ namespace VeelPlezierTest.Tests.ItemHandlerTests
         }
         ]
     }";
-        
+
         public ItemHandlerExt(ComboBox itemsInStore) : base(itemsInStore)
         {
         }
 
         public void SetupItemHandler(string json)
         {
-            Items = JsonConvert.DeserializeObject<Items>(json);
+            base.Items = JsonConvert.DeserializeObject<Items>(json);
         }
     }
 }

@@ -4,9 +4,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:VeelPlezier.scr.controls"
-             xmlns:controls="clr-namespace:VeelPlezier.xaml.controls"
              mc:Ignorable="d"
-             d:DesignHeight="600" d:DesignWidth="1200">
+             d:DesignHeight="600" d:DesignWidth="1200" x:ClassModifier="internal">
     
     <UserControl.Resources>
         <ResourceDictionary>
@@ -48,6 +47,6 @@
                Style="{StaticResource Title}"
                Content="My checkout!" />
 
-        <controls:NavigationBar Grid.Row="4" Grid.RowSpan="2" Grid.Column="4" Grid.ColumnSpan="2" />
+        <local:NavigationBar Grid.Row="4" Grid.RowSpan="2" Grid.Column="4" Grid.ColumnSpan="2" />
     </Grid>
 </UserControl>

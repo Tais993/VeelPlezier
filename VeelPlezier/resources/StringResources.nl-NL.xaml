@@ -3,6 +3,9 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:system="clr-namespace:System;assembly=mscorlib"
     >
+    
+    <!-- Start main screen -->
+    
     <system:String x:Key="Euro Cent">eurocent</system:String>
     <system:String x:Key="5 Euro Cent">5 eurocent</system:String>
     <system:String x:Key="10 Euro Cent">10 eurocent</system:String>
@@ -46,10 +49,15 @@
     
     <system:String x:Key="UnitPrice">stukprijs</system:String>
     
+    <!-- End main screen -->
+    <!-- Start navigation bar -->
     
     <system:String x:Key="MainScreen">Hoofd-scherm</system:String>
     <system:String x:Key="SettingsScreen">Settings-scherm</system:String>
 
+        
+    <!-- End navigation bar -->
+    <!-- Start settings screen -->
     
     <system:String x:Key="GeneralCategory">Algemeen</system:String>
     <system:String x:Key="Language">Taal</system:String>
@@ -58,9 +66,11 @@
     <system:String x:Key="MergeItemsOfSameTypeInTheCheckout">Voeg producten van hetzelfde type samen in de kassa</system:String>
     
     <system:String x:Key="ReceiptCategory">Bonnetje</system:String>
-    <system:String x:Key="MergeItemsOfSameTypeOnTheReceipt">Voeg producten van hetzelfde type samen op het bonnetje</system:String>
-    
-    
+    <system:String x:Key="MergeItemsOfSameTypeInTheReceipt">Voeg producten van hetzelfde type samen in het bonnetje</system:String>
+    <system:String x:Key="ReceiptLanguage">Standaard taal voor bonnetjes</system:String>
+    <!-- End settings screen -->
+    <!-- Start about me section -->
+
     <system:String x:Key="MadeBy">Gemaakt door</system:String>
     
     <system:String x:Key="ForContact">Voor contact,</system:String>
@@ -75,4 +85,14 @@
     <system:String x:Key="TheGithubProject">het Github project</system:String>
     <system:String x:Key="TheProjectIsCurrentlyInTheMakings">Dit project wordt nog steeds aan gewerkt</system:String>
     <system:String x:Key="ItShouldBeFinishedAt">Het moet ongeveer 8/10/2021 af zijn</system:String>
+    
+    <!-- End about me section -->
+    <!-- Receipt itself can be found in ReceiptResources.nl-NL -->
+    
+    <system:String x:Key="ChangeLanguageReceipt">Verander taal bonnetje</system:String>
+    
+    <system:String x:Key="DontPrint">Niet printen</system:String>
+    <system:String x:Key="Print">Printen</system:String>
+    
+    <!-- End of receipt window -->
 </ResourceDictionary>

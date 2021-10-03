@@ -1,11 +1,25 @@
 ﻿using System;
+using System.Linq;
+using System.Windows.Controls;
 using JetBrains.Annotations;
-using VeelPlezier.enums;
+using VeelPlezier.scr.enums;
 
-namespace VeelPlezier
+namespace VeelPlezier.scr.utilities
 {
     internal static class Util
     {
+        /// <summary>
+        /// Returns the first <see cref="Label"/> with the given name
+        /// </summary>
+        /// <param name="panel">The <see cref="Panel"/> to grab the <see cref="Label"/> from</param>
+        /// <param name="name">The <see cref="Label">Label's</see> name as a <see cref="string"/></param>
+        /// <returns></returns>
+        [NotNull]
+        internal static Label GetLabelByNameFromPanel([NotNull] Panel panel, string name)
+        {
+            return panel.Children.OfType<Label>().First(label => label.Name.Equals(name));
+        }
+
         /// <summary>
         /// Returns the <see cref="TranslationLanguage"/> based on it's name
         /// </summary>
@@ -22,13 +36,13 @@ namespace VeelPlezier
                 case "en":
                 case "english":
                     return TranslationLanguage.English;
-                
+
                 default:
-                    throw new ArgumentOutOfRangeException("Doesn't exist");
+                    throw new ArgumentOutOfRangeException(nameof(name));
             }
         }
 
-        
+
         /// <summary>
         /// Returns the ScreenType based on it's name
         /// </summary>
@@ -38,7 +52,7 @@ namespace VeelPlezier
         {
             return (ScreenType) Enum.Parse(typeof(ScreenType), name);
         }
-        
+
         /// <summary>
         /// Parses the given String to a int
         /// Supports usage of both . and ,
@@ -47,7 +61,7 @@ namespace VeelPlezier
         /// <returns>The string parsed to a <see cref="int"/></returns>
         internal static int ParseToInt(string s)
         {
-            return ParseToInt(s, exception => { });
+            return ParseToInt(s, static _ => { });
         }
 
         /// <summary>
@@ -72,7 +86,7 @@ namespace VeelPlezier
 
             return 0;
         }
-        
+
         /// <summary>
         /// Parses the given String to a double
         /// Supports usage of both . and ,
@@ -81,9 +95,9 @@ namespace VeelPlezier
         /// <returns>The string parsed to a <see cref="double"/></returns>
         internal static double ParseToDouble(string s)
         {
-            return ParseToDouble(s, exception => { });
+            return ParseToDouble(s, static _ => { });
         }
-        
+
         /// <summary>
         /// Parses the given String to a double
         /// Supports usage of both . and ,
