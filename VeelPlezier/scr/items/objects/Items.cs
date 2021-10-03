@@ -1,11 +1,12 @@
-﻿using System.Diagnostics.CodeAnalysis;
+﻿using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 
 namespace VeelPlezier.scr.items.objects
 {
     [SuppressMessage("ReSharper", "MemberCanBeInternal")]
     [SuppressMessage("ReSharper", "UnusedAutoPropertyAccessor.Global")]
-    public sealed record Items(Item[] ItemsArray)
+    public sealed record Items(IEnumerable<Item> ItemsArray)
     {
-        internal Item[] ItemsArray { get; } = ItemsArray;
+        internal IEnumerable<Item> ItemsArray { get; } = ItemsArray;
     }
 }

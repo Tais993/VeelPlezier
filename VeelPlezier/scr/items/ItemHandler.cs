@@ -1,11 +1,11 @@
 ﻿using System;
-using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Windows.Controls;
 using JetBrains.Annotations;
 using Newtonsoft.Json;
+using VeelPlezier.scr.enums;
 using VeelPlezier.scr.items.objects;
 
 namespace VeelPlezier.scr.items
@@ -20,7 +20,7 @@ namespace VeelPlezier.scr.items
             _itemsInStore = itemsInStore;
         }
 
-        internal void LoadItemsAsync([NotNull] CultureInfo cultureInfo)
+        internal void LoadItemsAsync(TranslationLanguage language)
         {
             string path =
                 Path.Combine(
@@ -29,10 +29,10 @@ namespace VeelPlezier.scr.items
             string json = File.ReadAllText(path);
             Items = JsonConvert.DeserializeObject<Items>(json);
 
-            ReloadItemsInDisplay(cultureInfo.Name.Split('-')[0]);
+            ReloadItemsInDisplay(language);
         }
 
-        public bool ReloadItemsInDisplay(string currentLang)
+        internal bool ReloadItemsInDisplay(TranslationLanguage language)
         {
             int size = _itemsInStore.Items.Count;
             _itemsInStore.Items.Clear();
@@ -48,7 +48,7 @@ namespace VeelPlezier.scr.items
 
                 Label titleLabel = new Label
                 {
-                    Content = item.GetTranslationByKey(currentLang)
+                    Content = item.GetTranslationByKey(language.LanguageShortCode)
                 };
 
                 Label priceLabel = new Label

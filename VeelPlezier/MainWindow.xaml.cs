@@ -34,10 +34,7 @@ namespace VeelPlezier
         {
             CurrentTranslationLanguage = language;
 
-
-            MainScreen.ReceiptPrinter?.SetLanguageDictionary(language);
-            MainScreen.CalculatorWindow.SetLanguageDictionary(language);
-
+            MainScreen.SetLanguageDictionary(CurrentTranslationLanguage);
 
             ResourceDictionary dict = new ResourceDictionary
             {

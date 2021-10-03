@@ -17,6 +17,8 @@ namespace VeelPlezier.scr.controls
 {
     internal sealed partial class MainScreen
     {
+        private static readonly Regex NumberValidator = new("[^0-9,]", RegexOptions.Compiled);  
+        
         private readonly ItemHandler _itemHandler;
 
         public readonly List<PurchasedItem> PurchasedItems = new();
@@ -24,16 +26,20 @@ namespace VeelPlezier.scr.controls
         private double _totalMoneyGiven;
 
         private double _totalPriceRequired;
-        
-        internal ReceiptPrinter ReceiptPrinter { get; private set; }
-        internal CalculatorWindow CalculatorWindow = new(TranslationLanguage.English);
+
+        private ReceiptPrinter _receiptPrinter;
+        private CalculatorWindow _calculatorWindow;
 
         public MainScreen()
         {
             InitializeComponent();
 
+            TranslationLanguage language = Util.LanguageValueOf(Thread.CurrentThread.CurrentCulture.Name.Split('-')[0]) ?? TranslationLanguage.English;
+
+            _calculatorWindow = new CalculatorWindow(language);
+            
             _itemHandler = new ItemHandler(ItemsInStore);
-            _itemHandler.LoadItemsAsync(Thread.CurrentThread.CurrentUICulture);
+            _itemHandler.LoadItemsAsync(language);
         }
 
         private void SubmitItem_OnClick(object sender, RoutedEventArgs e)
@@ -353,11 +359,11 @@ namespace VeelPlezier.scr.controls
                 return;
             }
             
-            ReceiptPrinter?.Close();
+            _receiptPrinter?.Close();
 
-            ReceiptPrinter = new ReceiptPrinter(MainWindow.GetInstance().CurrentTranslationLanguage);
+            _receiptPrinter = new ReceiptPrinter(MainWindow.GetInstance().CurrentTranslationLanguage);
 
-            ReceiptPrinter.Show();
+            _receiptPrinter.Show();
 
             ItemsPurchased.Items.Clear();
             PurchasedItems.Clear();
@@ -480,22 +486,21 @@ namespace VeelPlezier.scr.controls
 
         private void Calculator_OnClick(object sender, RoutedEventArgs e)
         {
-            if (!CalculatorWindow.IsVisible)
+            if (!_calculatorWindow.IsVisible)
             {
-                CalculatorWindow = new CalculatorWindow(MainWindow.GetInstance().CurrentTranslationLanguage);
-                CalculatorWindow.Show();
+                _calculatorWindow = new CalculatorWindow(MainWindow.GetInstance().CurrentTranslationLanguage);
+                _calculatorWindow.Show();
             }
             else
             {
-                CalculatorWindow.Focus();
+                _calculatorWindow.Focus();
             }
         }
-
 
         private static double ValidateTextToNumber([NotNull] object sender)
         {
             TextBox textBox = sender as TextBox ?? throw new ArgumentException(nameof(sender) + " has to be a " + nameof(TextBox));
-            textBox.Text = Regex.Replace(textBox.Text, "[^0-9,]", "");
+            textBox.Text = NumberValidator.Replace(textBox.Text, "");
             return Util.ParseToDouble(textBox.Text);
         }
         
@@ -511,6 +516,36 @@ namespace VeelPlezier.scr.controls
             TotalMoneyGiving.Content = $"{_totalMoneyGiven:c2}";
 
             CalculateTotalMoneyReturning();
+        }
+
+        public void SetLanguageDictionary([NotNull] TranslationLanguage language)
+        {
+            _receiptPrinter?.SetLanguageDictionary(language);
+            _calculatorWindow.SetLanguageDictionary(language);
+            
+
+            ItemCollection itemsPurchasedItems = ItemsPurchased.Items;
+
+            itemsPurchasedItems.Clear();
+            _purchasedItemsDictionary.Clear();
+
+            foreach (PurchasedItem purchasedItem in PurchasedItems)
+            {
+                string currentItemName = purchasedItem.Item.GetTranslationByTranslationLanguage(language) ??
+                                         throw new InvalidOperationException();
+
+                if (!_purchasedItemsDictionary.ContainsKey(currentItemName))
+                {
+                    _purchasedItemsDictionary.Add(currentItemName, purchasedItem);
+                }
+
+                Panel panel = PanelFromItem(purchasedItem.Item, purchasedItem.Amount,
+                    MainWindow.GetInstance().CurrentTranslationLanguage.LanguageShortCode);
+
+                itemsPurchasedItems.Add(panel);
+            }
+
+            _itemHandler.ReloadItemsInDisplay(language);
         }
     }
 }
