@@ -64,6 +64,8 @@
     <system:String x:Key="MergeItemsOfSameTypeInTheCheckout">Merge items of the same type in the checkout</system:String>
     
     <system:String x:Key="ReceiptCategory">Receipt</system:String>
+    <system:String x:Key="MergeItemsOfSameTypeInTheReceipt">Merge items of the same type in the receipt</system:String>
+    <system:String x:Key="ReceiptLanguage">Default language for receipts</system:String>
     
     <!-- End settings screen -->
     <!-- Start about me section -->

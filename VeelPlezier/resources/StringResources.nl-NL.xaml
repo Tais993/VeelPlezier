@@ -66,7 +66,8 @@
     <system:String x:Key="MergeItemsOfSameTypeInTheCheckout">Voeg producten van hetzelfde type samen in de kassa</system:String>
     
     <system:String x:Key="ReceiptCategory">Bonnetje</system:String>
-   
+    <system:String x:Key="MergeItemsOfSameTypeInTheReceipt">Voeg producten van hetzelfde type samen in het bonnetje</system:String>
+    <system:String x:Key="ReceiptLanguage">Standaard taal voor bonnetjes</system:String>
     <!-- End settings screen -->
     <!-- Start about me section -->
 

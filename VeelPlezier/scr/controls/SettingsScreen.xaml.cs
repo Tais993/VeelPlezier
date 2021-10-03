@@ -78,5 +78,12 @@ namespace VeelPlezier.scr.controls
                     throw new ApplicationException("?");
             }
         }
+
+        private void MergeItemsSameTypeReceipt_OnChange(object sender, RoutedEventArgs e)
+        {
+            bool isChecked = (sender as CheckBox).IsChecked ?? false;
+
+            SettingsContainer.GetInstance().MergeItemsOfSameTypeInReceipt = isChecked;
+        }
     }
 }

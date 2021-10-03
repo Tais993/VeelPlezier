@@ -11,6 +11,11 @@ namespace VeelPlezier.scr.settings
         /// </summary>
         public bool MergeItemsOfSameTypeInCheckout = false;
 
+        /// <summary>
+        /// Whenever items should be merged when they're the same type within the Receipt
+        /// </summary>
+        public bool MergeItemsOfSameTypeInReceipt = false;
+
         public TranslationLanguage ReceiptLanguage = TranslationLanguage.English;
 
         /// <summary>

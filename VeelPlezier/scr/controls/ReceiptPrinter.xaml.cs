@@ -41,7 +41,10 @@ namespace VeelPlezier.scr.controls
 
             SetLanguageDictionary(language);
 
-            TranslationLanguage receiptLanguage = SettingsContainer.GetInstance().ReceiptTranslationLanguage;
+
+            SettingsContainer settingsContainer = SettingsContainer.GetInstance();
+
+            TranslationLanguage receiptLanguage = settingsContainer.ReceiptTranslationLanguage;
             if (receiptLanguage is not null)
             {
                 ChangeReceiptLanguage(receiptLanguage);
@@ -52,6 +55,45 @@ namespace VeelPlezier.scr.controls
                 _purchasedItems = new List<PurchasedItem>(mainScreen.PurchasedItems);
                 GenerateReceipt();
             }
+
+            if (settingsContainer.MergeItemsOfSameTypeInReceipt)
+            {
+                MergeItems();
+            }
+        }
+
+        private void MergeItems()
+        {
+            var temporaryPurchasedItems = new Dictionary<Item, PurchasedItem>(_purchasedItems.Count);
+
+            foreach (PurchasedItem purchasedItem in _purchasedItems)
+            {
+                Item currentItem = purchasedItem.Item;
+
+                if (temporaryPurchasedItems.ContainsKey(currentItem))
+                {
+                    PurchasedItem oldPurchasedItem = temporaryPurchasedItems[purchasedItem.Item];
+
+                    int amount = oldPurchasedItem.Amount + purchasedItem.Amount;
+
+                    temporaryPurchasedItems.Remove(currentItem);
+
+                    temporaryPurchasedItems.Add(purchasedItem.Item, new PurchasedItem(purchasedItem.Item, amount));
+                }
+                else
+                {
+                    temporaryPurchasedItems.Add(purchasedItem.Item, purchasedItem);
+                }
+            }
+
+            _purchasedItems.Clear();
+
+            foreach (var pair in temporaryPurchasedItems)
+            {
+                _purchasedItems.Add(pair.Value);
+            }
+
+            GenerateReceipt();
         }
 
         private void GenerateReceipt()

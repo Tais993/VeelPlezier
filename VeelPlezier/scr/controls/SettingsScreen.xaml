@@ -101,16 +101,20 @@
                               VerticalAlignment="Center" Checked="MergeItemsSameTypeCheckout_OnChange" />
 
 
-                    <Border Grid.Row="9" Grid.Column="0" Grid.RowSpan="3"
+                    <Border Grid.Row="9" Grid.Column="0" Grid.RowSpan="4"
                             Style="{StaticResource CategoryLine}" />
 
                     <Label Grid.Row="9" Grid.Column="1"
                            Style="{StaticResource TitleCategoryLabelStyle}"
                            Content="{DynamicResource ReceiptCategory}" />
 
-                    <Label Grid.Row="2" Grid.Column="1" Content="{DynamicResource ReceiptLanguage}" />
+                    <Label Grid.Row="10" Grid.Column="1" Content="{DynamicResource MergeItemsOfSameTypeInTheReceipt}" />
+                    <CheckBox x:Name="MergeItemsSameTypeReceipt" Grid.Row="10" Grid.Column="2"
+                              VerticalAlignment="Center" Checked="MergeItemsSameTypeReceipt_OnChange" />
+                    
+                    <Label Grid.Row="11" Grid.Column="1" Content="{DynamicResource ReceiptLanguage}" />
                     <ComboBox x:Name="ReceiptLanguage"
-                              Grid.Row="10" Grid.Column="2" Width="300"
+                              Grid.Row="11" Grid.Column="2" Width="300"
                               SelectionChanged="ReceiptLanguage_OnSelectionChanged">
                         <ComboBoxItem x:Name="Language_Receipt_En" IsSelected="True">English</ComboBoxItem>
                         <ComboBoxItem x:Name="Language_Receipt_Nl">Dutch</ComboBoxItem>
