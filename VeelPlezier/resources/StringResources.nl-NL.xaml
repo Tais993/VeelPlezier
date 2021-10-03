@@ -49,6 +49,11 @@
     
     <system:String x:Key="UnitPrice">stukprijs</system:String>
     
+    
+    <system:String x:Key="Calculator">Rekenmachine</system:String>
+    <system:String x:Key="CurrencyConverter">Valuta-omzetter</system:String>
+    
+    
     <!-- End main screen -->
     <!-- Start navigation bar -->
     

@@ -7,6 +7,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using JetBrains.Annotations;
+using VeelPlezier.scr.enums;
 using VeelPlezier.scr.items;
 using VeelPlezier.scr.items.objects;
 using VeelPlezier.scr.settings;
@@ -19,10 +20,13 @@ namespace VeelPlezier.scr.controls
         private readonly ItemHandler _itemHandler;
 
         public readonly List<PurchasedItem> PurchasedItems = new();
-        public readonly Dictionary<string, PurchasedItem> PurchasedItemsDictionary = new();
+        private readonly Dictionary<string, PurchasedItem> _purchasedItemsDictionary = new();
         private double _totalMoneyGiven;
 
         private double _totalPriceRequired;
+        
+        internal ReceiptPrinter ReceiptPrinter { get; private set; }
+        internal CalculatorWindow CalculatorWindow = new(TranslationLanguage.English);
 
         public MainScreen()
         {
@@ -31,8 +35,6 @@ namespace VeelPlezier.scr.controls
             _itemHandler = new ItemHandler(ItemsInStore);
             _itemHandler.LoadItemsAsync(Thread.CurrentThread.CurrentUICulture);
         }
-
-        public ReceiptPrinter ReceiptPrinter { get; private set; }
 
         private void SubmitItem_OnClick(object sender, RoutedEventArgs e)
         {
@@ -54,7 +56,7 @@ namespace VeelPlezier.scr.controls
 
             Item item = _itemHandler.GetItemByName(itemName);
 
-            if (PurchasedItemsDictionary.ContainsKey(itemName))
+            if (_purchasedItemsDictionary.ContainsKey(itemName))
             {
                 if (SettingsContainer.GetInstance().MergeItemsOfSameTypeInCheckout)
                 {
@@ -64,7 +66,7 @@ namespace VeelPlezier.scr.controls
             }
             else
             {
-                PurchasedItemsDictionary.Add(item.GetTranslationByKey(currentLang),
+                _purchasedItemsDictionary.Add(item.GetTranslationByKey(currentLang),
                     new PurchasedItem(item, ParseAmountOfItem()));
             }
 
@@ -77,7 +79,7 @@ namespace VeelPlezier.scr.controls
 
         private void FindAndMergePurchasedItem([NotNull] string itemName)
         {
-            PurchasedItem purchasedItem = PurchasedItemsDictionary[itemName];
+            PurchasedItem purchasedItem = _purchasedItemsDictionary[itemName];
 
             foreach (StackPanel panel in from panel
                     in ItemsPurchased.Items.OfType<StackPanel>()
@@ -352,7 +354,7 @@ namespace VeelPlezier.scr.controls
 
             ItemsPurchased.Items.Clear();
             PurchasedItems.Clear();
-            PurchasedItemsDictionary.Clear();
+            _purchasedItemsDictionary.Clear();
             ResetGivenMoneyCounters();
 
             _totalMoneyGiven = 0;
@@ -407,7 +409,6 @@ namespace VeelPlezier.scr.controls
                         int amount = oldPurchasedItem.Amount + purchasedItem.Amount;
 
                         temporaryPurchasedItems.Remove(currentItem);
-
                         temporaryPurchasedItems.Add(purchasedItem.Item, new PurchasedItem(purchasedItem.Item, amount));
                     }
                     else
@@ -420,14 +421,14 @@ namespace VeelPlezier.scr.controls
 
                 itemsPurchasedItems.Clear();
                 PurchasedItems.Clear();
-                PurchasedItemsDictionary.Clear();
+                _purchasedItemsDictionary.Clear();
 
                 foreach (var pair in temporaryPurchasedItems)
                 {
                     PurchasedItem purchasedItem = pair.Value;
 
                     PurchasedItems.Add(purchasedItem);
-                    PurchasedItemsDictionary.Add(
+                    _purchasedItemsDictionary.Add(
                         pair.Key.GetTranslationByTranslationLanguage(
                             MainWindow.GetInstance().CurrentTranslationLanguage)!, purchasedItem);
 
@@ -436,6 +437,19 @@ namespace VeelPlezier.scr.controls
 
                     itemsPurchasedItems.Add(panel);
                 }
+            }
+        }
+
+        private void Calculator_OnClick(object sender, RoutedEventArgs e)
+        {
+            if (!CalculatorWindow.IsVisible)
+            {
+                CalculatorWindow = new CalculatorWindow(MainWindow.GetInstance().CurrentTranslationLanguage);
+                CalculatorWindow.Show();
+            }
+            else
+            {
+                CalculatorWindow.Focus();
             }
         }
     }

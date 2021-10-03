@@ -5,6 +5,7 @@
         <Setter Property="OverridesDefaultStyle" Value="True"/>
         <Setter Property="Margin" Value="3"/>
         <Setter Property="Foreground" Value="#FFF" />
+        <Setter Property="Background" Value="#000" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">

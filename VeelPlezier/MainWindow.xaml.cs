@@ -36,6 +36,7 @@ namespace VeelPlezier
 
 
             MainScreen.ReceiptPrinter?.SetLanguageDictionary(language);
+            MainScreen.CalculatorWindow.SetLanguageDictionary(language);
 
 
             ResourceDictionary dict = new ResourceDictionary
