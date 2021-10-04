@@ -1,6 +1,6 @@
 ﻿namespace VeelPlezier.scr.items.objects
 {
-    internal class PurchasedItem
+    internal sealed class PurchasedItem
     {
         internal readonly Item Item;
         internal int Amount;

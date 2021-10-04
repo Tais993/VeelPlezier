@@ -7,6 +7,6 @@ namespace VeelPlezier.scr.items.objects
     [SuppressMessage("ReSharper", "UnusedAutoPropertyAccessor.Global")]
     public sealed record Items(IEnumerable<Item> ItemsArray)
     {
-        internal IEnumerable<Item> ItemsArray { get; } = ItemsArray;
+        public IEnumerable<Item> ItemsArray { get; } = ItemsArray;
     }
 }

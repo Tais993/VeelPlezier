@@ -116,7 +116,7 @@ namespace VeelPlezier.scr.controls
                     Content = item.GetTranslationByTranslationLanguage(_currentLanguage)
                 });
 
-                ItemUnitPrices.Children.Add(new Label()
+                ItemUnitPrices.Children.Add(new Label
                 {
                     Content = purchasedItem.Amount + " x " + item.Price
                 });

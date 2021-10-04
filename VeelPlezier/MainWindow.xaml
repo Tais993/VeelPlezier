@@ -6,7 +6,7 @@
         xmlns:controls1="clr-namespace:VeelPlezier.scr.controls"
         mc:Ignorable="d"
         Height="600" Width="1200"
-        Title="MainWindow" x:ClassModifier="internal">
+        Title="MainWindow">
 
     <Grid>
         <Grid>

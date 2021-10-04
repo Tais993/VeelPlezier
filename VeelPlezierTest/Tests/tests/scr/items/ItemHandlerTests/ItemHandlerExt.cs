@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 using VeelPlezier.scr.items;
 using VeelPlezier.scr.items.objects;
 
-namespace VeelPlezierTest.Tests.ItemHandlerTests
+namespace VeelPlezierTest.Tests.scr.items.ItemHandlerTests
 {
     internal sealed class ItemHandlerExt : ItemHandler
     {
@@ -27,7 +27,7 @@ namespace VeelPlezierTest.Tests.ItemHandlerTests
 
         public void SetupItemHandler(string json)
         {
-            base.Items = JsonConvert.DeserializeObject<Items>(json);
+            Items = JsonConvert.DeserializeObject<Items>(json);
         }
     }
 }

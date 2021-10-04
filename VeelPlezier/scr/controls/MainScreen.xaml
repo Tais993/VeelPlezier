@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:controls="clr-namespace:VeelPlezier.scr.controls"
              mc:Ignorable="d"
-             d:DesignHeight="600" d:DesignWidth="1200" x:ClassModifier="internal">
+             d:DesignHeight="600" d:DesignWidth="1200">
 
     <UserControl.Resources>
 

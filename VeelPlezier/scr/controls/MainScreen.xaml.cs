@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text.RegularExpressions;
 using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
@@ -15,13 +14,11 @@ using VeelPlezier.scr.utilities;
 
 namespace VeelPlezier.scr.controls
 {
-    internal sealed partial class MainScreen
+    public sealed partial class MainScreen
     {
-        private static readonly Regex NumberValidator = new("[^0-9,]", RegexOptions.Compiled);  
-        
         private readonly ItemHandler _itemHandler;
 
-        public readonly List<PurchasedItem> PurchasedItems = new();
+        internal readonly List<PurchasedItem> PurchasedItems = new();
         private readonly Dictionary<string, PurchasedItem> _purchasedItemsDictionary = new();
         private double _totalMoneyGiven;
 
@@ -34,12 +31,15 @@ namespace VeelPlezier.scr.controls
         {
             InitializeComponent();
 
-            TranslationLanguage language = Util.LanguageValueOf(Thread.CurrentThread.CurrentCulture.Name.Split('-')[0]) ?? TranslationLanguage.English;
+            TranslationLanguage language =
+                Util.LanguageValueOf(Thread.CurrentThread.CurrentCulture.Name.Split('-')[0]) ??
+                TranslationLanguage.English;
 
             _calculatorWindow = new CalculatorWindow(language);
-            
+
             _itemHandler = new ItemHandler(ItemsInStore);
-            _itemHandler.LoadItemsAsync(language);
+            _itemHandler.LoadItemsAsync();
+            _itemHandler.ReloadItemsInDisplay(language);
         }
 
         private void SubmitItem_OnClick(object sender, RoutedEventArgs e)
@@ -51,6 +51,7 @@ namespace VeelPlezier.scr.controls
             }
 
             string currentLang = Thread.CurrentThread.CurrentUICulture.Name.Split('-')[0];
+            TranslationLanguage language = Util.LanguageValueOf(currentLang) ?? TranslationLanguage.English;
 
             StackPanel selectedStackPanel = ItemsInStore.SelectedItem as StackPanel
                                             ?? throw new ApplicationException("Something went wrong, " +
@@ -60,7 +61,8 @@ namespace VeelPlezier.scr.controls
 
             string itemName = selectedLabel.Content.ToString();
 
-            Item item = _itemHandler.GetItemByName(itemName);
+            Item item = _itemHandler.GetItemByName(itemName) ??
+                        throw new ApplicationException("Invalid item, shouldn't happen");
 
             if (_purchasedItemsDictionary.ContainsKey(itemName))
             {
@@ -72,12 +74,14 @@ namespace VeelPlezier.scr.controls
             }
             else
             {
-                _purchasedItemsDictionary.Add(item.GetTranslationByKey(currentLang),
+                _purchasedItemsDictionary.Add(
+                    item.GetTranslationByTranslationLanguage(language) ??
+                    throw new ApplicationException("Item hasn't implemented said language"),
                     new PurchasedItem(item, ParseAmountOfItem()));
             }
 
 
-            ItemsPurchased.Items.Add(PanelFromItem(item, ParseAmountOfItem(), currentLang));
+            ItemsPurchased.Items.Add(Util.PanelFromItem(item, ParseAmountOfItem(), language));
             PurchasedItems.Add(new PurchasedItem(item, ParseAmountOfItem()));
             ReloadTotalPrice();
         }
@@ -109,65 +113,6 @@ namespace VeelPlezier.scr.controls
             purchasedItem.Amount = amountPurchased + amountToAdd;
 
             ReloadTotalPrice();
-        }
-
-        [NotNull]
-        private static StackPanel PanelFromItem([NotNull] Item item, int amount, string currentLang)
-        {
-            Label nameLabel = new Label
-            {
-                Name = "name",
-                FontSize = 10,
-                Content = item.GetTranslationByKey(currentLang)
-            };
-
-            Label amountLabel = new Label
-            {
-                FontSize = 10
-            };
-            amountLabel.SetResourceReference(ContentProperty, "Amount");
-
-            Label amountNumberLabel = new Label
-            {
-                Name = "amountPurchased",
-                FontSize = 10,
-                Content = amount
-            };
-
-            Label unitPrice = new Label
-            {
-                FontSize = 10
-            };
-            unitPrice.SetResourceReference(ContentProperty, "UnitPrice");
-
-            Label euroIcon = new Label
-            {
-                FontSize = 10,
-                Content = "€"
-            };
-
-            Label price = new Label
-            {
-                Name = "price",
-                FontSize = 10,
-                Content = item.Price
-            };
-
-            StackPanel purchasedItem = new StackPanel
-            {
-                Orientation = Orientation.Horizontal
-            };
-
-            UIElementCollection purchasedItemCollection = purchasedItem.Children;
-
-            purchasedItemCollection.Add(nameLabel);
-            purchasedItemCollection.Add(amountLabel);
-            purchasedItemCollection.Add(amountNumberLabel);
-            purchasedItemCollection.Add(unitPrice);
-            purchasedItemCollection.Add(euroIcon);
-            purchasedItemCollection.Add(price);
-
-            return purchasedItem;
         }
 
         private void ReloadTotalPrice()
@@ -221,8 +166,8 @@ namespace VeelPlezier.scr.controls
             {
                 throw new ApplicationException("Something triggered that wasn't supposed to be triggered");
             }
-            
-            double amountOfMoney = ValidateTextToNumber(sender);
+
+            double amountOfMoney = Util.ValidateTextToDouble(sender);
 
             Label timesMoneyLabel = parent.Name.ToLower() switch
             {
@@ -358,7 +303,7 @@ namespace VeelPlezier.scr.controls
                 MessageBox.Show("Customer has to pay enough!");
                 return;
             }
-            
+
             _receiptPrinter?.Close();
 
             _receiptPrinter = new ReceiptPrinter(MainWindow.GetInstance().CurrentTranslationLanguage);
@@ -370,18 +315,18 @@ namespace VeelPlezier.scr.controls
             _purchasedItemsDictionary.Clear();
             ResetGivenMoneyCounters();
             ResetMoneyChangeLabels();
-            
+
             _totalMoneyGiven = 0;
             _totalPriceRequired = 0;
 
             TotalMoneyGiving.Content = $"{_totalMoneyGiven:c2}";
             TotalPriceRequired.Content = $"{_totalPriceRequired:c2}";
             TotalChange.Content = "€ 0,00";
-            
+
             TotalChange.Foreground = Brushes.Green;
         }
 
-        
+
         private void ResetGivenMoneyCounters()
         {
             ResetMoneyGivenWrapPanel(
@@ -424,16 +369,14 @@ namespace VeelPlezier.scr.controls
             ResetChangeLabel(Times100EuroLabel);
             ResetChangeLabel(Times200EuroLabel);
         }
-        
+
         private static void ResetChangeLabel([NotNull] ContentControl moneyToCheckLabel)
         {
             moneyToCheckLabel.Content = "€ 0";
             ((StackPanel) moneyToCheckLabel.Parent).Visibility = Visibility.Collapsed;
         }
-        
-        
-        
-        
+
+
         internal void BecomesVisible()
         {
             SettingsContainer settingsContainer = SettingsContainer.GetInstance();
@@ -476,8 +419,8 @@ namespace VeelPlezier.scr.controls
                         pair.Key.GetTranslationByTranslationLanguage(
                             MainWindow.GetInstance().CurrentTranslationLanguage)!, purchasedItem);
 
-                    Panel panel = PanelFromItem(purchasedItem.Item, purchasedItem.Amount,
-                        MainWindow.GetInstance().CurrentTranslationLanguage.LanguageShortCode);
+                    Panel panel = Util.PanelFromItem(purchasedItem.Item, purchasedItem.Amount,
+                        MainWindow.GetInstance().CurrentTranslationLanguage);
 
                     itemsPurchasedItems.Add(panel);
                 }
@@ -497,21 +440,14 @@ namespace VeelPlezier.scr.controls
             }
         }
 
-        private static double ValidateTextToNumber([NotNull] object sender)
-        {
-            TextBox textBox = sender as TextBox ?? throw new ArgumentException(nameof(sender) + " has to be a " + nameof(TextBox));
-            textBox.Text = NumberValidator.Replace(textBox.Text, "");
-            return Util.ParseToDouble(textBox.Text);
-        }
-        
         private void ValidateTextToNumber_Event([NotNull] object sender, TextChangedEventArgs e)
         {
-            ValidateTextToNumber(sender);
+            Util.ValidateTextToDouble(sender);
         }
 
         private void ManualMoneyGiving_OnTextChanged([NotNull] object sender, TextChangedEventArgs e)
         {
-            _totalMoneyGiven = ValidateTextToNumber(sender);
+            _totalMoneyGiven = Util.ValidateTextToDouble(sender);
 
             TotalMoneyGiving.Content = $"{_totalMoneyGiven:c2}";
 
@@ -522,7 +458,7 @@ namespace VeelPlezier.scr.controls
         {
             _receiptPrinter?.SetLanguageDictionary(language);
             _calculatorWindow.SetLanguageDictionary(language);
-            
+
 
             ItemCollection itemsPurchasedItems = ItemsPurchased.Items;
 
@@ -539,8 +475,8 @@ namespace VeelPlezier.scr.controls
                     _purchasedItemsDictionary.Add(currentItemName, purchasedItem);
                 }
 
-                Panel panel = PanelFromItem(purchasedItem.Item, purchasedItem.Amount,
-                    MainWindow.GetInstance().CurrentTranslationLanguage.LanguageShortCode);
+                Panel panel = Util.PanelFromItem(purchasedItem.Item, purchasedItem.Amount,
+                    MainWindow.GetInstance().CurrentTranslationLanguage);
 
                 itemsPurchasedItems.Add(panel);
             }

@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <Import Project="..\packages\xunit.core.2.4.1\build\xunit.core.props" Condition="Exists('..\packages\xunit.core.2.4.1\build\xunit.core.props')"/>
     <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
     <PropertyGroup>
         <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -46,6 +47,7 @@
           <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
           <Private>True</Private>
         </Reference>
+        <Reference Include="PresentationCore"/>
         <Reference Include="PresentationFramework" />
         <Reference Include="System" />
         <Reference Include="System.Configuration" />
@@ -56,43 +58,78 @@
           <Private>True</Private>
         </Reference>
         <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51">
-          <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
-          <Private>True</Private>
+            <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
+            <Private>True</Private>
         </Reference>
-        <Reference Include="System.Xml" />
+        <Reference Include="System.Windows.Forms"/>
+        <Reference Include="System.Xml"/>
+        <Reference Include="WindowsBase"/>
         <Reference Include="xunit.abstractions, Version=2.0.0.0, Culture=neutral, PublicKeyToken=8d05b1bb7a6fdb6c">
-            <HintPath>..\packages\xunit.abstractions.2.0.0\lib\net35\xunit.abstractions.dll</HintPath>
+            <HintPath>..\packages\xunit.abstractions.2.0.3\lib\net35\xunit.abstractions.dll</HintPath>
+            <Private>True</Private>
         </Reference>
-        <Reference Include="xunit.assert, Version=2.1.0.3179, Culture=neutral, PublicKeyToken=8d05b1bb7a6fdb6c">
-            <HintPath>..\packages\xunit.assert.2.1.0\lib\dotnet\xunit.assert.dll</HintPath>
+        <Reference Include="xunit.assert, Version=2.4.1.0, Culture=neutral, PublicKeyToken=8d05b1bb7a6fdb6c">
+            <HintPath>..\packages\xunit.assert.2.4.1\lib\netstandard1.1\xunit.assert.dll</HintPath>
+            <Private>True</Private>
         </Reference>
-        <Reference Include="xunit.core, Version=2.1.0.3179, Culture=neutral, PublicKeyToken=8d05b1bb7a6fdb6c">
-            <HintPath>..\packages\xunit.extensibility.core.2.1.0\lib\dotnet\xunit.core.dll</HintPath>
+        <Reference Include="xunit.core, Version=2.4.1.0, Culture=neutral, PublicKeyToken=8d05b1bb7a6fdb6c">
+            <HintPath>..\packages\xunit.extensibility.core.2.4.1\lib\net452\xunit.core.dll</HintPath>
+            <Private>True</Private>
         </Reference>
-        <Reference Include="xunit.execution.desktop, Version=2.1.0.3179, Culture=neutral, PublicKeyToken=8d05b1bb7a6fdb6c">
-            <HintPath>..\packages\xunit.extensibility.execution.2.1.0\lib\net45\xunit.execution.desktop.dll</HintPath>
+        <Reference Include="xunit.execution.desktop, Version=2.4.1.0, Culture=neutral, PublicKeyToken=8d05b1bb7a6fdb6c">
+            <HintPath>..\packages\xunit.extensibility.execution.2.4.1\lib\net452\xunit.execution.desktop.dll</HintPath>
+            <Private>True</Private>
+        </Reference>
+        <Reference Include="Xunit.StaFact, Version=1.1.0.0, Culture=neutral, PublicKeyToken=593f35978b459a4b">
+            <HintPath>..\packages\Xunit.StaFact.1.1.5-alpha\lib\net472\Xunit.StaFact.dll</HintPath>
+            <Private>True</Private>
         </Reference>
     </ItemGroup>
     <ItemGroup>
-        <Compile Include="Properties\AssemblyInfo.cs" />
-        <Compile Include="Tests\ItemHandlerTests\GetItemByName.cs" />
-        <Compile Include="Tests\ItemHandlerTests\ItemHandlerExt.cs" />
-        <Compile Include="Tests\ItemHandlerTests\ReloadItemsInDisplay.cs" />
-        <Compile Include="Tests\ItemHandlerTests\TranslateNameToCurrentLang.cs" />
-        <Compile Include="Tests\Main.cs" />
-        <Compile Include="Tests\objects\itemTests\GetTranslationByKey.cs" />
-        <Compile Include="Tests\objects\itemTests\ItemExt.cs" />
+        <Compile Include="Properties\AssemblyInfo.cs"/>
+        <Compile Include="Tests\Main.cs"/>
+        <Compile Include="Tests\test-utilities\TestUtil.cs"/>
+        <Compile Include="Tests\tests\scr\enums\TranslationLanguageTests\LanguageShortCode.cs"/>
+        <Compile Include="Tests\tests\scr\enums\TranslationLanguageTests\UriToCalculatorResource.cs"/>
+        <Compile Include="Tests\tests\scr\enums\TranslationLanguageTests\UriToReceiptResource.cs"/>
+        <Compile Include="Tests\tests\scr\enums\TranslationLanguageTests\UriToResource.cs"/>
+        <Compile Include="Tests\tests\scr\items\ItemHandlerTests\GetItemByName.cs"/>
+        <Compile Include="Tests\tests\scr\items\ItemHandlerTests\ItemHandlerExt.cs"/>
+        <Compile Include="Tests\tests\scr\items\ItemHandlerTests\ReloadItemsInDisplay.cs"/>
+        <Compile Include="Tests\tests\scr\items\ItemHandlerTests\TranslateNameToCurrentLang.cs"/>
+        <Compile Include="Tests\tests\scr\items\objects\ItemTests\GetTranslationByKey.cs"/>
+        <Compile Include="Tests\tests\scr\items\objects\ItemTests\GetTranslationByTranslationLanguage.cs"/>
+        <Compile Include="Tests\tests\scr\items\objects\ItemTests\Price.cs"/>
+        <Compile Include="Tests\tests\scr\utilities\util\GetLabelByNameFromPanel.cs"/>
+        <Compile Include="Tests\tests\scr\utilities\util\LanguageValueOf.cs"/>
+        <Compile Include="Tests\tests\scr\utilities\util\NumberValidatorRegex.cs"/>
+        <Compile Include="Tests\tests\scr\utilities\util\PanelFromItem.cs"/>
+        <Compile Include="Tests\tests\scr\utilities\util\ParseToDouble.cs"/>
+        <Compile Include="Tests\tests\scr\utilities\util\ParseToInt.cs"/>
+        <Compile Include="Tests\tests\scr\utilities\util\ScreenTypeValueOf.cs"/>
+        <Compile Include="Tests\tests\scr\utilities\util\ValidateTextToNumber.cs"/>
     </ItemGroup>
     <ItemGroup>
-      <ProjectReference Include="..\VeelPlezier\VeelPlezier.csproj">
-        <Project>{025a5fb3-5716-4dd7-a0a0-d7d839b5e88e}</Project>
-        <Name>VeelPlezier</Name>
-      </ProjectReference>
+        <ProjectReference Include="..\VeelPlezier\VeelPlezier.csproj">
+            <Project>{025a5fb3-5716-4dd7-a0a0-d7d839b5e88e}</Project>
+            <Name>VeelPlezier</Name>
+        </ProjectReference>
     </ItemGroup>
     <ItemGroup>
-      <None Include="packages.config" />
+        <None Include="packages.config"/>
     </ItemGroup>
-    <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+    <ItemGroup>
+        <Analyzer Include="..\packages\xunit.analyzers.0.10.0\analyzers\dotnet\cs\xunit.analyzers.dll"/>
+    </ItemGroup>
+    <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets"/>
+    <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+        <PropertyGroup>
+            <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them. For more information, see http://go.microsoft.com/fwlink/?LinkID=322105.The missing file is {0}.</ErrorText>
+        </PropertyGroup>
+        <Error Condition="!Exists('..\packages\xunit.core.2.4.1\build\xunit.core.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\xunit.core.2.4.1\build\xunit.core.props'))"/>
+        <Error Condition="!Exists('..\packages\xunit.core.2.4.1\build\xunit.core.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\xunit.core.2.4.1\build\xunit.core.targets'))"/>
+    </Target>
+    <Import Project="..\packages\xunit.core.2.4.1\build\xunit.core.targets" Condition="Exists('..\packages\xunit.core.2.4.1\build\xunit.core.targets')"/>
     <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
          Other similar extension points exist, see Microsoft.Common.targets.
     <Target Name="BeforeBuild">

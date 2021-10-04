@@ -10,10 +10,10 @@ namespace VeelPlezier
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     // ReSharper disable once MemberCanBeInternal
-    internal sealed partial class MainWindow
+    public sealed partial class MainWindow
     {
         private static MainWindow _instance;
-        private ScreenType _currentScreenType = ScreenType.StartScreen;
+        public ScreenType CurrentScreenType = ScreenType.StartScreen;
 
         public MainWindow()
         {
@@ -47,7 +47,7 @@ namespace VeelPlezier
 
         public void SwitchScreen(ScreenType screenType)
         {
-            ChangeScreenVisibility(_currentScreenType, Visibility.Collapsed);
+            ChangeScreenVisibility(CurrentScreenType, Visibility.Collapsed);
             ChangeScreenVisibility(screenType, Visibility.Visible);
 
             if (screenType == ScreenType.MainScreen)
@@ -55,7 +55,7 @@ namespace VeelPlezier
                 MainScreen.BecomesVisible();
             }
 
-            _currentScreenType = screenType;
+            CurrentScreenType = screenType;
         }
 
         private void ChangeScreenVisibility(ScreenType screenType, Visibility visibility)

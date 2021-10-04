@@ -20,7 +20,7 @@ namespace VeelPlezier.scr.items
             _itemsInStore = itemsInStore;
         }
 
-        internal void LoadItemsAsync(TranslationLanguage language)
+        internal void LoadItemsAsync()
         {
             string path =
                 Path.Combine(
@@ -28,13 +28,10 @@ namespace VeelPlezier.scr.items
                     throw new InvalidOperationException(), @"resources/items/items.json");
             string json = File.ReadAllText(path);
             Items = JsonConvert.DeserializeObject<Items>(json);
-
-            ReloadItemsInDisplay(language);
         }
 
-        internal bool ReloadItemsInDisplay(TranslationLanguage language)
+        public void ReloadItemsInDisplay(TranslationLanguage language)
         {
-            int size = _itemsInStore.Items.Count;
             _itemsInStore.Items.Clear();
 
             foreach (Item item in Items.ItemsArray)
@@ -61,8 +58,6 @@ namespace VeelPlezier.scr.items
 
                 _itemsInStore.Items.Add(stackPanel);
             }
-
-            return size == _itemsInStore.Items.Count;
         }
 
         [CanBeNull]

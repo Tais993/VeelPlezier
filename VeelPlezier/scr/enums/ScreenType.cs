@@ -1,6 +1,6 @@
 ﻿namespace VeelPlezier.scr.enums
 {
-    internal enum ScreenType
+    public enum ScreenType
     {
         StartScreen,
         MainScreen,
