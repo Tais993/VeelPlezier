@@ -20,9 +20,9 @@ namespace VeelPlezier.scr.controls
 
         internal readonly List<PurchasedItem> PurchasedItems = new();
         private readonly Dictionary<string, PurchasedItem> _purchasedItemsDictionary = new();
-        private double _totalMoneyGiven;
+        private double _totalMoneyGiven = 0.00;
 
-        private double _totalPriceRequired;
+        private double _totalPriceRequired = 0.00;
 
         private ReceiptPrinter _receiptPrinter;
         private CalculatorWindow _calculatorWindow;
@@ -134,7 +134,7 @@ namespace VeelPlezier.scr.controls
                 int amount = (int) Util.ParseToDouble(amountString);
 
                 totalPrice += price * amount;
-                _totalPriceRequired = totalPrice;
+                _totalPriceRequired = totalPrice * 1.21;
             }
 
             TotalPriceRequired.Content = $"{_totalPriceRequired:c2}";
