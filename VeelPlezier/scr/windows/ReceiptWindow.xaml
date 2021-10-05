@@ -9,7 +9,7 @@
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="../styles/ReceiptPrinterStyle.xaml" />
+                <ResourceDictionary Source="../styles/windows/ReceiptPrinterStyle.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>

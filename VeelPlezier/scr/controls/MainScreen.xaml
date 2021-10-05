@@ -357,6 +357,7 @@
             <!-- TODO: currency converter -->
             <Button x:Name="CurrencyConverter"
                     Grid.Row="1" Grid.Column="2"
+                    Click="CurrencyConverter_OnClick"
                     Style="{StaticResource RoundButtons}"
                     Content="{DynamicResource CurrencyConverter}" />
         </Grid>

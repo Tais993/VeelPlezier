@@ -1,0 +1,70 @@
+﻿<Window x:Class="VeelPlezier.scr.controls.CurrencyConverterWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        mc:Ignorable="d"
+        Title="CurrencyConverter" Height="450" Width="600" x:ClassModifier="internal">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../styles/windows/CurrencyConverterStyle.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    
+    <Grid Background="#1E2122">
+        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.2*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="0.2*" />
+        </Grid.RowDefinitions>
+        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.2*" />
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="0.2*" />
+        </Grid.ColumnDefinitions>
+        
+        <!-- TRANSLATION! -->
+        <Label Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="5" 
+               HorizontalAlignment="Center"
+               FontSize="50" Foreground="White"
+               Content="{DynamicResource CurrencyConverter}" />
+        
+        <ComboBox x:Name="FirstComboBox" 
+            Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2"
+                  SelectionChanged="Selector_OnSelectionChanged">
+            
+            <ComboBoxItem IsSelected="True">Euro</ComboBoxItem>
+            <ComboBoxItem>Dollar</ComboBoxItem>
+        </ComboBox>
+        
+        <TextBox x:Name="FirstAmount" 
+                 Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2"
+                 SelectionChanged="TextBox_OnSelectionChanged"
+                 Text="0"/>
+
+        
+        <ComboBox x:Name="SecondComboBox" 
+            Grid.Row="2" Grid.Column="4" Grid.ColumnSpan="2"
+            SelectionChanged="Selector_OnSelectionChanged">
+            
+            <ComboBoxItem>Euro</ComboBoxItem>
+            <ComboBoxItem IsSelected="True">Dollar</ComboBoxItem>
+        </ComboBox>
+        
+        <TextBox x:Name="SecondAmount" 
+                 Grid.Row="3" Grid.Column="4" Grid.ColumnSpan="2" 
+                 SelectionChanged="TextBox_OnSelectionChanged"
+                 Text="0" />
+    </Grid>
+</Window>

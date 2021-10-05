@@ -26,6 +26,7 @@ namespace VeelPlezier.scr.controls
 
         private ReceiptPrinter _receiptPrinter;
         private CalculatorWindow _calculatorWindow;
+        private CurrencyConverterWindow _currencyConverterWindow;
 
         public MainScreen()
         {
@@ -36,6 +37,7 @@ namespace VeelPlezier.scr.controls
                 TranslationLanguage.English;
 
             _calculatorWindow = new CalculatorWindow(language);
+            _currencyConverterWindow = new CurrencyConverterWindow(language);
 
             _itemHandler = new ItemHandler(ItemsInStore);
             _itemHandler.LoadItemsAsync();
@@ -50,8 +52,7 @@ namespace VeelPlezier.scr.controls
                 return;
             }
 
-            string currentLang = Thread.CurrentThread.CurrentUICulture.Name.Split('-')[0];
-            TranslationLanguage language = Util.LanguageValueOf(currentLang) ?? TranslationLanguage.English;
+            TranslationLanguage language = MainWindow.GetInstance().CurrentTranslationLanguage;
 
             StackPanel selectedStackPanel = ItemsInStore.SelectedItem as StackPanel
                                             ?? throw new ApplicationException("Something went wrong, " +
@@ -440,6 +441,21 @@ namespace VeelPlezier.scr.controls
             }
         }
 
+        private void CurrencyConverter_OnClick(object sender, RoutedEventArgs e)
+        {
+            if (!_currencyConverterWindow.IsVisible)
+            {
+                _currencyConverterWindow =
+                    new CurrencyConverterWindow(MainWindow.GetInstance().CurrentTranslationLanguage);
+                _currencyConverterWindow.Show();
+            }
+            else
+            {
+                _currencyConverterWindow.Focus();
+            }
+        }
+
+
         private void ValidateTextToNumber_Event([NotNull] object sender, TextChangedEventArgs e)
         {
             Util.ValidateTextToDouble(sender);
@@ -454,10 +470,11 @@ namespace VeelPlezier.scr.controls
             CalculateTotalMoneyReturning();
         }
 
-        public void SetLanguageDictionary([NotNull] TranslationLanguage language)
+        internal void SetLanguageDictionary([NotNull] TranslationLanguage language)
         {
             _receiptPrinter?.SetLanguageDictionary(language);
             _calculatorWindow.SetLanguageDictionary(language);
+            _currencyConverterWindow.SetLanguageDictionary(language);
 
 
             ItemCollection itemsPurchasedItems = ItemsPurchased.Items;

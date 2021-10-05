@@ -28,6 +28,18 @@ namespace VeelPlezier.scr.utilities
         }
 
         /// <summary>
+        /// Returns the first <see cref="ComboBoxItem"/> with the given name
+        /// </summary>
+        /// <param name="comboBox">The <see cref="ComboBox"/> to grab the <see cref="ComboBoxItem"/> from</param>
+        /// <param name="name">The <see cref="ComboBoxItem">ComboBoxItem's</see> name as a <see cref="string"/></param>
+        /// <returns></returns>
+        [NotNull]
+        public static ComboBoxItem GetComboBoxItemByContentFromComboBox([NotNull] ComboBox comboBox, string name)
+        {
+            return comboBox.Items.OfType<ComboBoxItem>().First(item => item.Content.ToString().Equals(name));
+        }
+
+        /// <summary>
         /// Returns the <see cref="TranslationLanguage"/> based on it's name
         /// </summary>
         /// <param name="name">The <see cref="TranslationLanguage">Language's</see> name as a <see cref="string">String</see></param>
@@ -83,6 +95,40 @@ namespace VeelPlezier.scr.utilities
             try
             {
                 return int.Parse(
+                    s.Replace('.', ',')
+                );
+            }
+            catch (Exception e)
+            {
+                onError.Invoke(e);
+            }
+
+            return -1;
+        }
+
+        /// <summary>
+        /// Parses the given String to a double
+        /// Supports usage of both . and ,
+        /// </summary>
+        /// <param name="s">The <see cref="string"/> you want to be parsed</param>
+        /// <returns>The string parsed to a <see cref="double"/></returns>
+        public static decimal ParseToDecimal(string s)
+        {
+            return ParseToDecimal(s, static _ => { });
+        }
+
+        /// <summary>
+        /// Parses the given String to a double
+        /// Supports usage of both . and ,
+        /// </summary>
+        /// <param name="s">The <see cref="string"/> you want to be parsed</param>
+        /// <param name="onError">The <see cref="Action"/> that will run when something goes wrong</param>
+        /// <returns>The string parsed to a <see cref="double"/></returns>
+        public static decimal ParseToDecimal(string s, [NotNull] Action<Exception> onError)
+        {
+            try
+            {
+                return decimal.Parse(
                     s.Replace('.', ',')
                 );
             }
