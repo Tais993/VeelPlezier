@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Windows.Controls;
-using VeelPlezierTest.Tests.scr.items.ItemHandlerTests;
+using VeelPlezierTest.Tests.tests.scr.items.ItemHandlerTests;
 using Xunit;
 
 // ReSharper disable All

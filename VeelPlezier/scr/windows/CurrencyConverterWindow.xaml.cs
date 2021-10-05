@@ -6,14 +6,14 @@ using JetBrains.Annotations;
 using VeelPlezier.scr.enums;
 using VeelPlezier.scr.utilities;
 
-namespace VeelPlezier.scr.controls
+namespace VeelPlezier.scr.windows
 {
-    internal partial class CurrencyConverterWindow
+    internal sealed partial class CurrencyConverterWindow
     {
         private const decimal EuroDollarCourse = (decimal) 1.1630;
         private const decimal DollarEuroCourse = (decimal) 0.8599;
 
-        private bool _isChangeMadeByCalculator = false;
+        private bool _isChangeMadeByCalculator;
 
         internal CurrencyConverterWindow([NotNull] TranslationLanguage language)
         {

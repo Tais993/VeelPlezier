@@ -2,7 +2,7 @@
 using VeelPlezier.scr.utilities;
 using Xunit;
 
-namespace VeelPlezierTest.Tests.scr.utilities.util
+namespace VeelPlezierTest.Tests.tests.scr.utilities.util
 {
     public sealed class ParseToDouble
     {

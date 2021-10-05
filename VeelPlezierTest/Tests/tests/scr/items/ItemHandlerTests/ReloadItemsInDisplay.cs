@@ -4,7 +4,7 @@ using VeelPlezier.scr.enums;
 using VeelPlezierTest.Tests.test_utilities;
 using Xunit;
 
-namespace VeelPlezierTest.Tests.scr.items.ItemHandlerTests
+namespace VeelPlezierTest.Tests.tests.scr.items.ItemHandlerTests
 {
     public sealed class ReloadItemsInDisplay
     {

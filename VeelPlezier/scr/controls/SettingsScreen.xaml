@@ -15,6 +15,8 @@
         </ResourceDictionary>
     </UserControl.Resources>
 
+    <!-- ReSharper disable always UnusedMember.Global -->
+
     <Grid>
         <Grid.Background>
             <LinearGradientBrush EndPoint="1.204,0.5" StartPoint="0.056,0.5">
@@ -83,10 +85,11 @@
 
                     <Label Grid.Row="2" Grid.Column="1" Content="{DynamicResource Language}" />
                     <ComboBox x:Name="Language"
-                              Grid.Row="2" Grid.Column="2" Width="300"
+                              Width="300"
+                              Grid.Row="2" Grid.Column="2"
                               SelectionChanged="Language_OnSelectionChanged">
-                        <ComboBoxItem x:Name="Language_En" IsSelected="True">English</ComboBoxItem>
-                        <ComboBoxItem x:Name="Language_Nl">Dutch</ComboBoxItem>
+                        <ComboBoxItem x:Name="LanguageEn" IsSelected="True">English</ComboBoxItem>
+                        <ComboBoxItem x:Name="LanguageNl">Dutch</ComboBoxItem>
                     </ComboBox>
 
                     <Border Grid.Row="5" Grid.Column="0" Grid.RowSpan="3"
@@ -96,9 +99,13 @@
                            Style="{StaticResource TitleCategoryLabelStyle}"
                            Content="{DynamicResource CheckoutCategory}" />
 
-                    <Label Grid.Row="6" Grid.Column="1" Content="{DynamicResource MergeItemsOfSameTypeInTheCheckout}" />
-                    <CheckBox x:Name="MergeItemsSameTypeCheckout" Grid.Row="6" Grid.Column="2"
-                              VerticalAlignment="Center" Checked="MergeItemsSameTypeCheckout_OnChange" />
+                    <Label Grid.Row="6" Grid.Column="1"
+                           Content="{DynamicResource MergeItemsOfSameTypeInTheCheckout}" />
+
+                    <CheckBox x:Name="MergeItemsSameTypeCheckout"
+                              Grid.Row="6" Grid.Column="2"
+                              VerticalAlignment="Center"
+                              Checked="MergeItemsSameTypeCheckout_OnChange" />
 
 
                     <Border Grid.Row="9" Grid.Column="0" Grid.RowSpan="4"
@@ -108,16 +115,23 @@
                            Style="{StaticResource TitleCategoryLabelStyle}"
                            Content="{DynamicResource ReceiptCategory}" />
 
-                    <Label Grid.Row="10" Grid.Column="1" Content="{DynamicResource MergeItemsOfSameTypeInTheReceipt}" />
-                    <CheckBox x:Name="MergeItemsSameTypeReceipt" Grid.Row="10" Grid.Column="2"
-                              VerticalAlignment="Center" Checked="MergeItemsSameTypeReceipt_OnChange" />
-                    
-                    <Label Grid.Row="11" Grid.Column="1" Content="{DynamicResource ReceiptLanguage}" />
+                    <Label Grid.Row="10" Grid.Column="1"
+                           Content="{DynamicResource MergeItemsOfSameTypeInTheReceipt}" />
+
+                    <CheckBox x:Name="MergeItemsSameTypeReceipt"
+                              Grid.Row="10" Grid.Column="2"
+                              VerticalAlignment="Center"
+                              Checked="MergeItemsSameTypeReceipt_OnChange" />
+
+                    <Label Grid.Row="11" Grid.Column="1"
+                           Content="{DynamicResource ReceiptLanguage}" />
+
                     <ComboBox x:Name="ReceiptLanguage"
-                              Grid.Row="11" Grid.Column="2" Width="300"
+                              Width="300"
+                              Grid.Row="11" Grid.Column="2"
                               SelectionChanged="ReceiptLanguage_OnSelectionChanged">
-                        <ComboBoxItem x:Name="Language_Receipt_En" IsSelected="True">English</ComboBoxItem>
-                        <ComboBoxItem x:Name="Language_Receipt_Nl">Dutch</ComboBoxItem>
+                        <ComboBoxItem x:Name="LanguageReceiptEn" IsSelected="True">English</ComboBoxItem>
+                        <ComboBoxItem x:Name="LanguageReceiptNl">Dutch</ComboBoxItem>
                     </ComboBox>
                 </Grid>
             </ScrollViewer>

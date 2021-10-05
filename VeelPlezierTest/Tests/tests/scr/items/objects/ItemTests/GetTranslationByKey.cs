@@ -3,14 +3,14 @@ using VeelPlezier.scr.items.objects;
 using VeelPlezierTest.Tests.test_utilities;
 using Xunit;
 
-namespace VeelPlezierTest.Tests.scr.items.objects.ItemTests
+namespace VeelPlezierTest.Tests.tests.scr.items.objects.ItemTests
 {
     public sealed class GetTranslationByKey
     {
         [Theory]
         [InlineData("0.00", "nl", "NlName")]
         [InlineData("0.00", "en", "EnName")]
-        [InlineData("0.00", "^&^&%^#%#edsfjewirnwe", "Name")]
+        [InlineData("0.00", "^&^&%^#%#from", "Name")]
         public void GetTranslationByKeySuccessTest(string price, string nameKey, string name)
         {
             Item item = TestUtil.GenerateItem(price, nameKey, name);

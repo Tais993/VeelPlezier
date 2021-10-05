@@ -4,15 +4,15 @@ using Xunit;
 
 namespace VeelPlezierTest.Tests.tests.scr.enums.TranslationLanguageTests
 {
-    public sealed class UriToReceiptResource
+    public sealed class UriToCurrencyConverterResource
     {
         [Theory]
         [InlineData("en")]
         [InlineData("nl")]
-        public void UriToReceiptResourceCodeSuccessTest(string languageCode)
+        public void UriToCurrencyConverterResourceSuccessTest(string languageCode)
         {
             TranslationLanguage language = Util.LanguageValueOf(languageCode);
-            Assert.NotNull(language?.UriToReceiptResource);
+            Assert.NotNull(language?.UriToCurrencyConverterResource);
         }
     }
 }

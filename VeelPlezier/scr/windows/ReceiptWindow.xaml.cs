@@ -4,17 +4,18 @@ using System.Windows;
 using System.Windows.Controls;
 using Castle.Core.Internal;
 using JetBrains.Annotations;
+using VeelPlezier.scr.controls;
 using VeelPlezier.scr.enums;
 using VeelPlezier.scr.items.objects;
 using VeelPlezier.scr.settings;
 using VeelPlezier.scr.utilities;
 
-namespace VeelPlezier.scr.controls
+namespace VeelPlezier.scr.windows
 {
     internal sealed partial class ReceiptPrinter
     {
         private static readonly Random Random = new();
-        private static readonly double TaxPercentage = 0.21;
+        private const double TaxPercentage = 0.21;
 
         private static int _transactionNumber;
 
@@ -99,8 +100,6 @@ namespace VeelPlezier.scr.controls
         private void GenerateReceipt()
         {
             double subtotal = 0;
-            double tax = 0;
-            double total;
 
             ItemNames.Children.Clear();
             ItemUnitPrices.Children.Clear();
@@ -131,8 +130,8 @@ namespace VeelPlezier.scr.controls
                 });
             }
 
-            tax = subtotal * TaxPercentage;
-            total = tax + subtotal;
+            double tax = subtotal * TaxPercentage;
+            double total = tax + subtotal;
 
             SubTotalPriceLabel.Content = $"{subtotal:c2}";
             TaxLabel.Content = $"{tax:c2}";
@@ -159,11 +158,11 @@ namespace VeelPlezier.scr.controls
 
             if (language.Equals(TranslationLanguage.Dutch))
             {
-                Language_Nl.IsSelected = true;
+                LanguageNl.IsSelected = true;
             }
             else
             {
-                Language_En.IsSelected = true;
+                LanguageEn.IsSelected = true;
             }
 
             Resources.MergedDictionaries.Add(styleResource);
@@ -212,7 +211,7 @@ namespace VeelPlezier.scr.controls
             {
                 case ComboBoxItem comboBoxItem:
                 {
-                    string languageCode = comboBoxItem.Name.Split('_')[1];
+                    string languageCode = comboBoxItem.Name.Substring(comboBoxItem.Name.Length - 2);
                     TranslationLanguage language =
                         Util.LanguageValueOf(languageCode) ?? throw new ApplicationException();
 

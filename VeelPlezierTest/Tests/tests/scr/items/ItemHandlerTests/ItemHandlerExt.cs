@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 using VeelPlezier.scr.items;
 using VeelPlezier.scr.items.objects;
 
-namespace VeelPlezierTest.Tests.scr.items.ItemHandlerTests
+namespace VeelPlezierTest.Tests.tests.scr.items.ItemHandlerTests
 {
     internal sealed class ItemHandlerExt : ItemHandler
     {

@@ -16,6 +16,14 @@ namespace VeelPlezier.scr.enums
             new Uri("..\\Resources\\CurrencyConverterResources.nl-NL.xaml", UriKind.Relative),
             new Uri("..\\Resources\\ReceiptResources.nl-NL.xaml", UriKind.Relative));
 
+
+        public readonly string LanguageShortCode;
+        public readonly Uri UriToResource;
+        public readonly Uri UriToCalculatorResource;
+        public readonly Uri UriToCurrencyConverterResource;
+        public readonly Uri UriToReceiptResource;
+
+
         public TranslationLanguage(string languageShortCode, Uri uriToResource, Uri uriToCalculatorResource,
             Uri uriToCurrencyConverterResource, Uri uriToReceiptResource)
         {
@@ -25,13 +33,5 @@ namespace VeelPlezier.scr.enums
             UriToCurrencyConverterResource = uriToCurrencyConverterResource;
             UriToReceiptResource = uriToReceiptResource;
         }
-
-        // ReSharper disable once UnusedAutoPropertyAccessor.Global
-        // ReSharper disable once MemberCanBePrivate.Global
-        public readonly string LanguageShortCode;
-        public readonly Uri UriToResource;
-        public readonly Uri UriToCalculatorResource;
-        public readonly Uri UriToCurrencyConverterResource;
-        public readonly Uri UriToReceiptResource;
     }
 }

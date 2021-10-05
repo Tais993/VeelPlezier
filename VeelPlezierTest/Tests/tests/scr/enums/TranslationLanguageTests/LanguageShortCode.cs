@@ -2,7 +2,7 @@
 using VeelPlezier.scr.utilities;
 using Xunit;
 
-namespace VeelPlezierTest.Tests.scr.enums.TranslationLanguageTests
+namespace VeelPlezierTest.Tests.tests.scr.enums.TranslationLanguageTests
 {
     public sealed class LanguageShortCode
     {
@@ -12,7 +12,7 @@ namespace VeelPlezierTest.Tests.scr.enums.TranslationLanguageTests
         public void LanguageShortCodeSuccessTest(string languageCode)
         {
             TranslationLanguage language = Util.LanguageValueOf(languageCode);
-            Assert.Equal(languageCode, language.LanguageShortCode);
+            Assert.Equal(languageCode, language?.LanguageShortCode);
         }
     }
 }

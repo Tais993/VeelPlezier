@@ -55,13 +55,17 @@
             <Span>
                 <Run Text="{DynamicResource Email}" />
             </Span>
-            <Hyperlink x:Name="EmailLink" RequestNavigate="Hyperlink_OnRequestNavigate" />
+            <Hyperlink x:Name="EmailLink" 
+                       RequestNavigate="Hyperlink_OnRequestNavigate" />
+            
             <LineBreak />
 
             <Span>
                 <Run Text="{DynamicResource Phone}" />
             </Span>
-            <Hyperlink x:Name="PhoneLink" RequestNavigate="Hyperlink_OnRequestNavigate" />
+            
+            <Hyperlink x:Name="PhoneLink" 
+                       RequestNavigate="Hyperlink_OnRequestNavigate" />
         </TextBlock>
 
 

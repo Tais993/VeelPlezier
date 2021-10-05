@@ -1,43 +1,55 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-    <Style TargetType="{x:Type Control}" x:Key="ControlBaseStyle">
+    <Style x:Key="ControlBaseStyle"
+           TargetType="{x:Type Control}">
+
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="Foreground" Value="#FFF" />
     </Style>
-    
-    <Style TargetType="{x:Type Grid}" x:Key="GridBackground">
+
+    <Style x:Key="GridBackground"
+           TargetType="{x:Type Grid}">
+
         <Setter Property="Background" Value="#302e2e" />
     </Style>
-        
-    <Style TargetType="{x:Type Control}" x:Key="ControlDarkBackground">
+
+    <Style x:Key="ControlDarkBackground"
+           TargetType="{x:Type Control}">
+
         <Setter Property="Background" Value="#302e2e" />
     </Style>
-        
-    <Style TargetType="{x:Type Panel}" x:Key="PanelDarkBackground">
+
+    <Style x:Key="PanelDarkBackground"
+           TargetType="{x:Type Panel}">
+
         <Setter Property="Background" Value="#302e2e" />
     </Style>
-    
-    <Style TargetType="{x:Type Border}" x:Key="RoundedCornersBorderStyle">
+
+    <Style x:Key="RoundedCornersBorderStyle"
+           TargetType="{x:Type Border}">
+
         <Setter Property="BorderThickness" Value="1" />
         <Setter Property="BorderBrush" Value="White" />
         <Setter Property="Padding" Value="4, 2" />
         <Setter Property="CornerRadius" Value="10" />
     </Style>
 
-    <Style TargetType="{x:Type TextBox}" x:Key="CashRegistryStyle" BasedOn="{StaticResource ControlBaseStyle}">
+    <Style  x:Key="CashRegistryStyle"
+            TargetType="{x:Type TextBox}" BasedOn="{StaticResource ControlBaseStyle}">
+
         <Setter Property="Padding" Value="0,0,20,0" />
         <Setter Property="MaxLength" Value="5" />
     </Style>
-    
 
-    
+
+
     <Style TargetType="{x:Type Button}" BasedOn="{StaticResource ControlBaseStyle}" />
     <Style TargetType="{x:Type Label}" BasedOn="{StaticResource ControlBaseStyle}" />
     <Style TargetType="{x:Type TextBox}" BasedOn="{StaticResource ControlBaseStyle}" />
-        
-        
+
+
     <Style TargetType="{x:Type ListView}" BasedOn="{StaticResource ControlDarkBackground}" />
-        
+
     <Style TargetType="{x:Type WrapPanel}" BasedOn="{StaticResource PanelDarkBackground}" />
     <Style TargetType="{x:Type StackPanel}" BasedOn="{StaticResource PanelDarkBackground}" />
 </ResourceDictionary>

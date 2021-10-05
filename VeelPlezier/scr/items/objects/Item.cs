@@ -1,14 +1,10 @@
 ﻿using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using JetBrains.Annotations;
 using VeelPlezier.scr.enums;
 
 namespace VeelPlezier.scr.items.objects
 {
-    [SuppressMessage("ReSharper", "MemberCanBeInternal")]
-    [SuppressMessage("ReSharper", "UnusedAutoPropertyAccessor.Global")]
-    [SuppressMessage("ReSharper", "ClassNeverInstantiated.Global")]
     public sealed record Item(IEnumerable<Name> Names, string Price)
     {
         internal IEnumerable<Name> Names { get; } = Names;

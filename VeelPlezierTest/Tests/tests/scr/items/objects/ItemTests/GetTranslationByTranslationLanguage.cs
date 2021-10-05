@@ -4,7 +4,7 @@ using VeelPlezier.scr.items.objects;
 using VeelPlezierTest.Tests.test_utilities;
 using Xunit;
 
-namespace VeelPlezierTest.Tests.scr.items.objects.ItemTests
+namespace VeelPlezierTest.Tests.tests.scr.items.objects.ItemTests
 {
     public sealed class GetTranslationByTranslationLanguage
     {

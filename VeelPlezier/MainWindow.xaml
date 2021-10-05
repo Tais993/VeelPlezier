@@ -6,7 +6,7 @@
         xmlns:controls1="clr-namespace:VeelPlezier.scr.controls"
         mc:Ignorable="d"
         Height="600" Width="1200"
-        Title="MainWindow">
+        Title="MainWindow" x:ClassModifier="internal">
 
     <Grid>
         <Grid>
@@ -14,11 +14,13 @@
         </Grid>
 
         <Grid>
-            <controls1:MainScreen x:Name="MainScreen" Visibility="Collapsed" />
+            <controls1:MainScreen x:Name="MainScreen"
+                                  Visibility="Collapsed" />
         </Grid>
 
         <Grid>
-            <controls1:SettingsScreen x:Name="SettingsScreen" Visibility="Collapsed" />
+            <controls1:SettingsScreen x:Name="SettingsScreen"
+                                      Visibility="Collapsed" />
         </Grid>
     </Grid>
 </Window>

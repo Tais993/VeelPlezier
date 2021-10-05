@@ -1,4 +1,4 @@
-﻿<Window x:Class="VeelPlezier.scr.controls.ReceiptPrinter"
+﻿<Window x:Class="VeelPlezier.scr.windows.ReceiptPrinter"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -59,11 +59,14 @@
 
                 <Border Grid.Row="1" Grid.Column="1"
                         BorderBrush="White" BorderThickness="0, 0, 0 , 1">
-                    <Label HorizontalAlignment="Center" VerticalAlignment="Bottom" Content="{DynamicResource Receipt}" />
+
+                    <Label
+                        HorizontalAlignment="Center" VerticalAlignment="Bottom"
+                        Content="{DynamicResource Receipt}" />
                 </Border>
 
-                <Grid x:Name="ReceiptInfo"
-                      Grid.Row="2" Grid.Column="1">
+                <Grid
+                    Grid.Row="2" Grid.Column="1">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="0.1*" />
                         <RowDefinition Height="1*" />
@@ -82,30 +85,53 @@
                         <ColumnDefinition Width="0.1*" />
                     </Grid.ColumnDefinitions>
 
-                    <Label Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Content="{DynamicResource Transaction}" />
-                    <Label x:Name="TransactionIdLabel" Grid.Row="1" Grid.Column="3" Grid.ColumnSpan="2" />
+                    <Label Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2"
+                           Content="{DynamicResource Transaction}" />
 
-                    <Label Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Content="{DynamicResource Account}" />
-                    <Label x:Name="AccountIdLabel" Grid.Row="2" Grid.Column="3" Grid.ColumnSpan="2" />
-
-
-                    <Label Grid.Row="3" Grid.Column="1" Content="{DynamicResource Date}" />
-                    <Label x:Name="DateLabel" Grid.Row="3" Grid.Column="2" />
-
-                    <Label Grid.Row="3" Grid.Column="3" Content="{DynamicResource Time}" />
-                    <Label x:Name="TimeLabel" Grid.Row="3" Grid.Column="4" />
+                    <Label x:Name="TransactionIdLabel"
+                           Grid.Row="1" Grid.Column="3" Grid.ColumnSpan="2" />
 
 
-                    <Label Grid.Row="4" Grid.Column="1" Content="{DynamicResource Cashier}" />
-                    <Label x:Name="CashierIdLabel" Grid.Row="4" Grid.Column="2" />
+                    <Label Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2"
+                           Content="{DynamicResource Account}" />
 
-                    <Label Grid.Row="4" Grid.Column="3" Content="{DynamicResource Register}" />
-                    <Label Grid.Row="4" Grid.Column="4">1</Label>
+                    <Label x:Name="AccountIdLabel"
+                           Grid.Row="2" Grid.Column="3" Grid.ColumnSpan="2" />
+
+
+
+                    <Label Grid.Row="3" Grid.Column="1"
+                           Content="{DynamicResource Date}" />
+
+                    <Label x:Name="DateLabel"
+                           Grid.Row="3" Grid.Column="2" />
+
+
+                    <Label Grid.Row="3" Grid.Column="3"
+                           Content="{DynamicResource Time}" />
+
+                    <Label x:Name="TimeLabel"
+                           Grid.Row="3" Grid.Column="4" />
+
+
+
+                    <Label Grid.Row="4" Grid.Column="1"
+                           Content="{DynamicResource Cashier}" />
+
+                    <Label x:Name="CashierIdLabel"
+                           Grid.Row="4" Grid.Column="2" />
+
+
+                    <Label Grid.Row="4" Grid.Column="3"
+                           Content="{DynamicResource Register}" />
+
+                    <Label Grid.Row="4" Grid.Column="4">
+                        1
+                    </Label>
                 </Grid>
 
-                <ScrollViewer x:Name="ReceiptItems"
-                              HorizontalScrollBarVisibility="Auto"
-                              VerticalScrollBarVisibility="Auto"
+                <ScrollViewer
+                    HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto"
                               Grid.Row="4" Grid.Column="1">
                     <Grid>
 
@@ -132,36 +158,42 @@
                         <Border Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2"
                                 BorderBrush="White" BorderThickness="0, 0, 0, 1"
                                 Margin="5, 0, 5, 0">
+
                             <Label Content="{DynamicResource Name}" />
                         </Border>
 
                         <Border Grid.Row="1" Grid.Column="3"
                                 BorderBrush="White" BorderThickness="0, 0, 0, 1"
                                 Margin="5, 0, 5, 0">
+
                             <Label Content="{DynamicResource AmountTimesUnitPrice}" />
                         </Border>
 
                         <Border Grid.Row="1" Grid.Column="4"
                                 BorderBrush="White" BorderThickness="0, 0, 0, 1"
                                 Margin="5, 0, 5, 0">
+
                             <Label Content="{DynamicResource Total}" />
                         </Border>
 
 
                         <StackPanel x:Name="ItemNames"
                                     Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2">
+
                             <Label Content="{DynamicResource NoItemsHaveBeenPurchased}" />
                         </StackPanel>
 
 
                         <StackPanel x:Name="ItemUnitPrices"
                                     Grid.Row="2" Grid.Column="3">
+
                             <Label Content="0 x € 0" />
                         </StackPanel>
 
                         <Border Grid.Row="2" Grid.Column="4"
                                 BorderBrush="White" BorderThickness="0, 0, 0, 1"
                                 Margin="5, 0, 5, 0">
+
                             <StackPanel x:Name="ItemTotalPrices"
                                         HorizontalAlignment="Center">
                                 <Label>€ 0</Label>
@@ -169,13 +201,18 @@
                         </Border>
 
 
-                        <Label Grid.Row="3" Grid.Column="3" Content="{DynamicResource SubTotal}" />
+                        <Label Grid.Row="3" Grid.Column="3"
+                               Content="{DynamicResource SubTotal}" />
+
                         <Label x:Name="SubTotalPriceLabel"
                                Grid.Row="3" Grid.Column="4"
                                HorizontalAlignment="Center"
                                Content="€ 0" />
 
-                        <Label Grid.Row="4" Grid.Column="3" Content="{DynamicResource Tax}" />
+
+                        <Label Grid.Row="4" Grid.Column="3"
+                               Content="{DynamicResource Tax}" />
+
                         <Label x:Name="TaxLabel"
                                Grid.Row="4" Grid.Column="4"
                                HorizontalAlignment="Center"
@@ -207,15 +244,17 @@
                        Foreground="White" FontSize="15"
                        Content="{DynamicResource ChangeLanguageReceipt}" />
 
-                <ComboBox Grid.Column="1" SelectionChanged="Selector_OnSelectionChanged"
-                          >
-                    <ComboBoxItem x:Name="Language_En">English</ComboBoxItem>
-                    <ComboBoxItem x:Name="Language_Nl">Dutch</ComboBoxItem>
+                <ComboBox Grid.Column="1"
+                          SelectionChanged="Selector_OnSelectionChanged">
+
+                    <ComboBoxItem x:Name="LanguageEn">English</ComboBoxItem>
+                    <ComboBoxItem x:Name="LanguageNl">Dutch</ComboBoxItem>
                 </ComboBox>
             </Grid>
         </Border>
 
 
+        <!-- ReSharper disable once UnusedMember.Global -->
         <Button x:Name="DontPrintButton"
                 Grid.Row="3" Grid.Column="1"
                 FontSize="15"
@@ -223,6 +262,7 @@
                 Style="{StaticResource ButtonRoundedCornersStyle}"
                 Content="{DynamicResource DontPrint}" />
 
+        <!-- ReSharper disable once UnusedMember.Global -->
         <Button x:Name="PrintButton"
                 Grid.Row="3" Grid.Column="2"
                 FontSize="15"

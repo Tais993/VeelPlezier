@@ -10,12 +10,12 @@ namespace VeelPlezier
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     // ReSharper disable once MemberCanBeInternal
-    public sealed partial class MainWindow
+    internal sealed partial class MainWindow
     {
         private static MainWindow _instance;
-        public ScreenType CurrentScreenType = ScreenType.StartScreen;
+        private ScreenType _currentScreenType = ScreenType.StartScreen;
 
-        public MainWindow()
+        internal MainWindow()
         {
             _instance = this;
             InitializeComponent();
@@ -23,9 +23,9 @@ namespace VeelPlezier
             SetLanguageDictionary(TranslationLanguage.English);
         }
 
-        public TranslationLanguage CurrentTranslationLanguage { get; private set; }
+        internal TranslationLanguage CurrentTranslationLanguage { get; private set; }
 
-        public static MainWindow GetInstance()
+        internal static MainWindow GetInstance()
         {
             return _instance;
         }
@@ -45,9 +45,9 @@ namespace VeelPlezier
             Resources.MergedDictionaries.Add(dict);
         }
 
-        public void SwitchScreen(ScreenType screenType)
+        internal void SwitchScreen(ScreenType screenType)
         {
-            ChangeScreenVisibility(CurrentScreenType, Visibility.Collapsed);
+            ChangeScreenVisibility(_currentScreenType, Visibility.Collapsed);
             ChangeScreenVisibility(screenType, Visibility.Visible);
 
             if (screenType == ScreenType.MainScreen)
@@ -55,7 +55,7 @@ namespace VeelPlezier
                 MainScreen.BecomesVisible();
             }
 
-            CurrentScreenType = screenType;
+            _currentScreenType = screenType;
         }
 
         private void ChangeScreenVisibility(ScreenType screenType, Visibility visibility)

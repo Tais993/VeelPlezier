@@ -1,23 +1,29 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-    
-    <Style TargetType="{x:Type Control}" x:Key="BaseStyle">
+
+    <Style x:Key="BaseStyle"
+           TargetType="{x:Type Control}">
+
         <Setter Property="FontSize" Value="12" />
         <Setter Property="Foreground" Value="White" />
     </Style>
-    
+
     <Style TargetType="{x:Type Label}" BasedOn="{StaticResource BaseStyle}" />
-    
-    
-    <Style TargetType="{x:Type TextBlock}" x:Key="BaseTextBlockStyle">
+
+
+    <Style x:Key="BaseTextBlockStyle"
+           TargetType="{x:Type TextBlock}">
+
         <Setter Property="FontSize" Value="15" />
         <Setter Property="Foreground" Value="White" />
     </Style>
-    
+
     <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource BaseTextBlockStyle}" />
 
 
-    <Style TargetType="{x:Type Border}" x:Key="DefaultBorderStyle">
+    <Style x:Key="DefaultBorderStyle"
+           TargetType="{x:Type Border}">
+
         <Setter Property="BorderThickness" Value="1" />
         <Setter Property="BorderBrush" Value="White" />
         <Setter Property="Margin" Value="8" />
@@ -25,27 +31,31 @@
         <Setter Property="CornerRadius" Value="10" />
         <Setter Property="Background" Value="#383535" />
     </Style>
-    
-    <Style TargetType="{x:Type Border}" x:Key="RoundedCornersBorderStyle">
+
+    <Style x:Key="RoundedCornersBorderStyle"
+           TargetType="{x:Type Border}">
+
         <Setter Property="BorderThickness" Value="1" />
         <Setter Property="BorderBrush" Value="White" />
         <Setter Property="Margin" Value="8" />
         <Setter Property="Padding" Value="4, 2" />
         <Setter Property="CornerRadius" Value="10" />
     </Style>
-    
-    <Style x:Key="ButtonRoundedCornersStyle" TargetType="{x:Type Button}" BasedOn="{StaticResource BaseStyle}">
+
+    <Style x:Key="ButtonRoundedCornersStyle"
+           TargetType="{x:Type Button}" BasedOn="{StaticResource BaseStyle}">
+
         <Setter Property="OverridesDefaultStyle" Value="True"/>
         <Setter Property="Margin" Value="8"/>
         <Setter Property="Background" Value="#383535" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">
-                    <Border Name="border" 
+                    <Border Name="border"
                             BorderThickness="1"
                             BorderBrush="White"
-                            Padding="4,2" 
-                            CornerRadius="10" 
+                            Padding="4,2"
+                            CornerRadius="10"
                             Background="{TemplateBinding Background}">
                         <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
                     </Border>
@@ -54,19 +64,21 @@
         </Setter>
     </Style>
 
-    
-    <Style x:Key="LabelRoundedCornersStyle" TargetType="{x:Type Label}" BasedOn="{StaticResource BaseStyle}">
+
+    <Style x:Key="LabelRoundedCornersStyle"
+           TargetType="{x:Type Label}" BasedOn="{StaticResource BaseStyle}">
+
         <Setter Property="OverridesDefaultStyle" Value="True"/>
         <Setter Property="Margin" Value="3"/>
         <Setter Property="Background" Value="#383535" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Label}">
-                    <Border Name="border" 
+                    <Border Name="border"
                             BorderThickness="1"
                             BorderBrush="White"
-                            Padding="4,2" 
-                            CornerRadius="10" 
+                            Padding="4,2"
+                            CornerRadius="10"
                             Background="{TemplateBinding Background}">
                         <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
                     </Border>

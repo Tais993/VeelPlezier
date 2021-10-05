@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:controls="clr-namespace:VeelPlezier.scr.controls"
              mc:Ignorable="d"
-             d:DesignHeight="600" d:DesignWidth="1200">
+             d:DesignHeight="600" d:DesignWidth="1200" x:ClassModifier="internal">
 
     <UserControl.Resources>
 
@@ -15,8 +15,9 @@
                 <ResourceDictionary Source="../styles/RoundButtonsStyle.xaml" />
 
                 <ResourceDictionary>
-                    <Style TargetType="{x:Type TextBox}" x:Key="CashRegistryEventStyle"
-                           BasedOn="{StaticResource CashRegistryStyle}">
+                    <Style x:Key="CashRegistryEventStyle"
+                           TargetType="{x:Type TextBox}" BasedOn="{StaticResource CashRegistryStyle}">
+
                         <EventSetter Event="TextChanged" Handler="moneyChanged_OnHandler" />
                     </Style>
                 </ResourceDictionary>
@@ -67,84 +68,120 @@
             <ColumnDefinition Width="1*" />
         </Grid.ColumnDefinitions>
 
-        <WrapPanel Grid.Row="1" Grid.Column="0" HorizontalAlignment="Right" Name="EuroCent5">
+        <WrapPanel x:Name="EuroCent5"
+                   Grid.Row="1" Grid.Column="0"
+                   HorizontalAlignment="Right">
+
             <Label Content="{DynamicResource 5 Euro Cent}" />
             <Image Source="../../resources/images/coin-cent-5.bmp" />
             <TextBox Style="{DynamicResource CashRegistryEventStyle}">0</TextBox>
             <Label Content="{DynamicResource Times}" />
         </WrapPanel>
 
-        <WrapPanel Grid.Row="3" Grid.Column="0" HorizontalAlignment="Right" Name="EuroCent10">
+        <WrapPanel x:Name="EuroCent10"
+                   Grid.Row="3" Grid.Column="0"
+                   HorizontalAlignment="Right">
+
             <Label Content="{DynamicResource 10 Euro Cent}" />
             <Image Source="../../resources/images/coin-cent-10.bmp" />
             <TextBox Style="{DynamicResource CashRegistryEventStyle}">0</TextBox>
             <Label Content="{DynamicResource Times}" />
         </WrapPanel>
 
-        <WrapPanel Grid.Row="5" Grid.Column="0" HorizontalAlignment="Right" Name="EuroCent20">
+        <WrapPanel x:Name="EuroCent20"
+                   Grid.Row="5" Grid.Column="0"
+                   HorizontalAlignment="Right">
+
             <Label Content="{DynamicResource 20 Euro Cent}" />
             <Image Source="../../resources/images/coin-cent-20.bmp" />
             <TextBox Style="{DynamicResource CashRegistryEventStyle}">0</TextBox>
-            <Label Content="{DynamicResource Times}" />        
+            <Label Content="{DynamicResource Times}" />
         </WrapPanel>
 
-        <WrapPanel Grid.Row="7" Grid.Column="0" HorizontalAlignment="Right" Name="EuroCent50">
+        <WrapPanel x:Name="EuroCent50"
+                   Grid.Row="7" Grid.Column="0"
+                   HorizontalAlignment="Right">
+
             <Label Content="{DynamicResource 50 Euro Cent}" />
             <Image Source="../../resources/images/coin-cent-50.bmp" />
             <TextBox Style="{DynamicResource CashRegistryEventStyle}">0</TextBox>
             <Label Content="{DynamicResource Times}" />
         </WrapPanel>
 
-        <WrapPanel Grid.Row="9" Grid.Column="0" HorizontalAlignment="Right" Name="Euro1">
+        <WrapPanel x:Name="Euro1"
+                   Grid.Row="9" Grid.Column="0"
+                   HorizontalAlignment="Right">
+
             <Label Content="{DynamicResource 1 Euro}" />
             <Image Source="../../resources/images/coin-euro-1.bmp" />
             <TextBox Style="{DynamicResource CashRegistryEventStyle}">0</TextBox>
             <Label Content="{DynamicResource Times}" />
         </WrapPanel>
 
-        <WrapPanel Grid.Row="11" Grid.Column="0" HorizontalAlignment="Right" Name="Euro2">
+        <WrapPanel x:Name="Euro2"
+                   Grid.Row="11" Grid.Column="0"
+                   HorizontalAlignment="Right">
+
             <Label Content="{DynamicResource 2 Euro}" />
             <Image Source="../../resources/images/coin-euro-2.bmp" />
             <TextBox Style="{DynamicResource CashRegistryEventStyle}">0</TextBox>
             <Label Content="{DynamicResource Times}" />
         </WrapPanel>
 
-        <WrapPanel Grid.Row="11" Grid.Column="0" HorizontalAlignment="Right" Name="Euro5">
+        <WrapPanel x:Name="Euro5"
+                   Grid.Row="11" Grid.Column="0"
+                   HorizontalAlignment="Right">
+
             <Label Content="{DynamicResource 5 Euro}" />
             <Image Source="../../resources/images/note-euro-5.bmp" />
             <TextBox Style="{DynamicResource CashRegistryEventStyle}">0</TextBox>
             <Label Content="{DynamicResource Times}" />
         </WrapPanel>
 
-        <WrapPanel Grid.Row="13" Grid.Column="0" HorizontalAlignment="Right" Name="Euro10">
+        <WrapPanel x:Name="Euro10"
+                   Grid.Row="13" Grid.Column="0"
+                   HorizontalAlignment="Right">
+
             <Label Content="{DynamicResource 10 Euro}" />
             <Image Source="../../resources/images/note-euro-10.bmp" />
             <TextBox Style="{DynamicResource CashRegistryEventStyle}">0</TextBox>
             <Label Content="{DynamicResource Times}" />
         </WrapPanel>
 
-        <WrapPanel Grid.Row="15" Grid.Column="0" HorizontalAlignment="Right" Name="Euro20">
+        <WrapPanel x:Name="Euro20"
+                   Grid.Row="15" Grid.Column="0"
+                   HorizontalAlignment="Right">
+
             <Label Content="{DynamicResource 20 Euro}" />
             <Image Source="../../resources/images/note-euro-20.bmp" />
             <TextBox Style="{DynamicResource CashRegistryEventStyle}">0</TextBox>
             <Label Content="{DynamicResource Times}" />
         </WrapPanel>
 
-        <WrapPanel Grid.Row="17" Grid.Column="0" HorizontalAlignment="Right" Name="Euro50">
+        <WrapPanel x:Name="Euro50"
+                   Grid.Row="17" Grid.Column="0"
+                   HorizontalAlignment="Right">
+
             <Label Content="{DynamicResource 50 Euro}" />
             <Image Source="../../resources/images/note-euro-50.bmp" />
             <TextBox Style="{DynamicResource CashRegistryEventStyle}">0</TextBox>
             <Label Content="{DynamicResource Times}" />
         </WrapPanel>
 
-        <WrapPanel Grid.Row="19" Grid.Column="0" HorizontalAlignment="Right" Name="Euro100">
+        <WrapPanel x:Name="Euro100"
+                   Grid.Row="19" Grid.Column="0"
+                   HorizontalAlignment="Right">
+
             <Label Content="{DynamicResource 100 Euro}" />
             <Image Source="../../resources/images/note-euro-100.bmp" />
             <TextBox Style="{DynamicResource CashRegistryEventStyle}">0</TextBox>
             <Label Content="{DynamicResource Times}" />
         </WrapPanel>
 
-        <WrapPanel Grid.Row="21" Grid.Column="0" HorizontalAlignment="Right" Name="Euro200">
+        <WrapPanel x:Name="Euro200"
+                   Grid.Row="21" Grid.Column="0"
+                   HorizontalAlignment="Right">
+
             <Label Content="{DynamicResource 200 Euro}" />
             <Image Source="../../resources/images/note-euro-200.bmp" />
             <TextBox Style="{DynamicResource CashRegistryEventStyle}">0</TextBox>
@@ -174,33 +211,52 @@
                     <RowDefinition />
                 </Grid.RowDefinitions>
 
-                <Label Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3" HorizontalAlignment="Center"
-                       VerticalAlignment="Bottom" FontSize="15" FontWeight="Bold" Content="{DynamicResource Buy}" />
-                <ComboBox x:Name="ItemsInStore" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="3" />
-                <StackPanel Grid.Column="1" Grid.Row="2" Orientation="Horizontal">
-                    <Label VerticalAlignment="Center" Content="{DynamicResource Amount}" />
-                    <TextBox x:Name="AmountOfItem" VerticalAlignment="Center"
+                <Label Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3"
+                       HorizontalAlignment="Center" VerticalAlignment="Bottom"
+                       FontSize="15" FontWeight="Bold"
+                       Content="{DynamicResource Buy}" />
+
+                <ComboBox x:Name="ItemsInStore"
+                          Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="3" />
+
+                <StackPanel Grid.Column="1" Grid.Row="2"
+                            Orientation="Horizontal">
+
+                    <Label VerticalAlignment="Center"
+                           Content="{DynamicResource Amount}" />
+                    <TextBox x:Name="AmountOfItem"
+                             VerticalAlignment="Center"
                              TextChanged="ValidateTextToNumber_Event"
-                             Text="0"/>
+                             Text="0" />
                 </StackPanel>
-                <Button Grid.Column="1" Grid.Row="3" Background="DarkBlue"
+
+                <Button Grid.Column="1" Grid.Row="3"
+                        Background="DarkBlue"
                         Click="SubmitItem_OnClick"
                         Content="{DynamicResource PurchaseItem}" />
 
-                <Border Grid.Column="0" Grid.Row="4" Grid.ColumnSpan="3" Grid.RowSpan="3" BorderBrush="White"
-                        BorderThickness="1">
-                    <ListView x:Name="ItemsPurchased" ScrollViewer.CanContentScroll="True"
+                <Border Grid.Column="0" Grid.Row="4" Grid.ColumnSpan="3" Grid.RowSpan="3"
+                        BorderBrush="White" BorderThickness="1">
+
+                    <ListView x:Name="ItemsPurchased"
+                              ScrollViewer.CanContentScroll="True"
                               ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                               ScrollViewer.VerticalScrollBarVisibility="Auto" />
                 </Border>
 
-                <Label Grid.Column="0" Grid.Row="7" Grid.ColumnSpan="3" HorizontalAlignment="Center"
-                       VerticalAlignment="Bottom" FontSize="16" FontWeight="Bold" Content="{DynamicResource ToPay}" />
-                <Border Grid.Column="0" Grid.Row="8" Grid.ColumnSpan="3" HorizontalAlignment="Center"
-                        BorderBrush="White"
-                        BorderThickness="1">
+                <Label Grid.Column="0" Grid.Row="7" Grid.ColumnSpan="3"
+                       HorizontalAlignment="Center" VerticalAlignment="Bottom"
+                       FontSize="16" FontWeight="Bold"
+                       Content="{DynamicResource ToPay}" />
+
+                <Border Grid.Column="0" Grid.Row="8" Grid.ColumnSpan="3"
+                        HorizontalAlignment="Center"
+                        BorderBrush="White" BorderThickness="1">
                     <StackPanel Orientation="Horizontal">
-                        <Label Name="TotalPriceRequired" FontSize="18">€ 0,00</Label>
+                        <Label x:Name="TotalPriceRequired"
+                               FontSize="18">
+                            € 0,00
+                        </Label>
                     </StackPanel>
                 </Border>
             </Grid>
@@ -220,24 +276,30 @@
                     <RowDefinition Height="0.5*" />
                 </Grid.RowDefinitions>
 
-                <Label Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" FontSize="15" FontWeight="Bold"
+                <Label Grid.Row="0" Grid.Column="0"
+                       HorizontalAlignment="Center"
+                       FontSize="15" FontWeight="Bold"
                        Content="{DynamicResource Pay}" />
 
-                <Label Grid.Row="1" Grid.Column="0" 
-                       HorizontalAlignment="Center" FontWeight="Bold"
+                <Label Grid.Row="1" Grid.Column="0"
+                       HorizontalAlignment="Center"
+                       FontWeight="Bold"
                        Content="{DynamicResource ManuallyInsertAmount}" />
-                
-                <TextBox Grid.Row="2" Grid.Column="0" 
+
+                <TextBox Grid.Row="2" Grid.Column="0"
                          MinWidth="100"
-                         HorizontalAlignment="Center" Background="DarkBlue"
-                         TextChanged="ManualMoneyGiving_OnTextChanged"/>
-                
-                <Label Grid.Row="3" Grid.Column="0" 
-                       HorizontalAlignment="Center" FontSize="13" FontWeight="Bold"
+                         HorizontalAlignment="Center"
+                         Background="DarkBlue"
+                         TextChanged="ManualMoneyGiving_OnTextChanged" />
+
+                <Label Grid.Row="3" Grid.Column="0"
+                       HorizontalAlignment="Center"
+                       FontSize="13" FontWeight="Bold"
                        Content="{DynamicResource TotalGivenAmount}" />
-                
-                <Border Grid.Row="4" Grid.Column="0" HorizontalAlignment="Center" BorderBrush="White"
-                        BorderThickness="1">
+
+                <Border Grid.Row="4" Grid.Column="0"
+                        HorizontalAlignment="Center"
+                        BorderBrush="White" BorderThickness="1">
                     <Label x:Name="TotalMoneyGiving">
                         € 0
                     </Label>
@@ -265,17 +327,21 @@
                     <RowDefinition Height="1*" />
                 </Grid.RowDefinitions>
 
-                <Label Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="3" HorizontalAlignment="Center" FontWeight="Bold"
-                       FontSize="15" Content="{DynamicResource PayOff}" />
+                <Label Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="3"
+                       HorizontalAlignment="Center"
+                       FontWeight="Bold" FontSize="15"
+                       Content="{DynamicResource PayOff}" />
 
-                <StackPanel Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="3" HorizontalAlignment="Center"
-                            VerticalAlignment="Center" Orientation="Horizontal">
+                <StackPanel Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="3"
+                            HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal">
                     <Label x:Name="TotalChange" FontSize="22" Foreground="Green">€ 0</Label>
                 </StackPanel>
 
-                <Border Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="3" HorizontalAlignment="Center"
-                        BorderBrush="White"
-                        BorderThickness="1" Width="226">
+                <Border Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="3"
+                        Width="226"
+                        HorizontalAlignment="Center"
+                        BorderBrush="White" BorderThickness="1">
+
                     <StackPanel HorizontalAlignment="Center">
                         <StackPanel Orientation="Horizontal" Visibility="Collapsed">
                             <Label x:Name="Times5EuroCentLabel" Content="0" />
@@ -328,11 +394,14 @@
                     </StackPanel>
                 </Border>
 
-                <Button x:Name="SubmitButton" Grid.Row="5" Grid.Column="1" Background="DarkBlue"
-                        Click="SubmitButton_OnClick" Content="{DynamicResource NextCustomer}" />
+                <Button x:Name="SubmitButton"
+                        Grid.Row="5" Grid.Column="1"
+                        Background="DarkBlue"
+                        Click="SubmitButton_OnClick"
+                        Content="{DynamicResource NextCustomer}" />
             </Grid>
         </Border>
-        
+
         <Grid Grid.Row="15" Grid.RowSpan="4" Grid.Column="4">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="0.2*" />
@@ -340,28 +409,28 @@
                 <ColumnDefinition Width="1*" />
                 <ColumnDefinition Width="0.2*" />
             </Grid.ColumnDefinitions>
-        
+
             <Grid.RowDefinitions>
                 <RowDefinition Height="0.2*" />
                 <RowDefinition Height="1*" />
                 <RowDefinition Height="0.2*" />
             </Grid.RowDefinitions>
-            
-            <Button x:Name="Calculator" 
+
+            <!-- ReSharper disable once UnusedMember.Global -->
+            <Button x:Name="Calculator"
                     Grid.Row="1" Grid.Column="1"
                     Click="Calculator_OnClick"
                     Style="{StaticResource RoundButtons}"
-                    Content="{DynamicResource Calculator}" 
-            />
-            
-            <!-- TODO: currency converter -->
+                    Content="{DynamicResource Calculator}" />
+
+            <!-- ReSharper disable once UnusedMember.Global -->
             <Button x:Name="CurrencyConverter"
                     Grid.Row="1" Grid.Column="2"
                     Click="CurrencyConverter_OnClick"
                     Style="{StaticResource RoundButtons}"
                     Content="{DynamicResource CurrencyConverter}" />
         </Grid>
-        
+
         <controls:NavigationBar Grid.Row="19" Grid.RowSpan="4" Grid.Column="4" />
     </Grid>
 </UserControl>

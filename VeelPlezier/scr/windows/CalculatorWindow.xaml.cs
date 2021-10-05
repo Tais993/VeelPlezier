@@ -10,7 +10,7 @@ using System.Windows.Media;
 using JetBrains.Annotations;
 using VeelPlezier.scr.enums;
 
-namespace VeelPlezier.scr.controls
+namespace VeelPlezier.scr.windows
 {
     /// <inheritdoc cref="System.Windows.Window" />
     /// <summary>
@@ -25,12 +25,12 @@ namespace VeelPlezier.scr.controls
         private static readonly Color DarkerSubmitButtonColor = Color.FromRgb(6, 108, 186);
 
 
-        private static readonly Regex AnsRegex = new Regex(@"(\(ans\) )", RegexOptions.Compiled);
+        private static readonly Regex AnsRegex = new(@"(\(ans\) )", RegexOptions.Compiled);
 
-        private readonly List<string> _fullSumList = new List<string>(15);
+        private readonly List<string> _fullSumList = new(15);
 
 
-        private readonly List<string> _history = new List<string>(15);
+        private readonly List<string> _history = new(15);
         private string _currentItem = "0";
         private int _currentItemInHistory;
 
@@ -50,7 +50,7 @@ namespace VeelPlezier.scr.controls
 
         private static bool IsOperator(char toCheck)
         {
-            return toCheck == 'x' || toCheck == '/' || toCheck == '-' || toCheck == '+';
+            return toCheck is 'x' or '/' or '-' or '+';
         }
 
         [NotNull]

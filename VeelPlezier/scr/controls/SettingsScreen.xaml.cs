@@ -39,7 +39,7 @@ namespace VeelPlezier.scr.controls
             {
                 case ComboBoxItem comboBoxItem:
                 {
-                    string languageCode = comboBoxItem.Name.Split('_')[1];
+                    string languageCode = comboBoxItem.Name.Substring(comboBoxItem.Name.Length - 2);
                     TranslationLanguage translationLanguage = Util.LanguageValueOf(languageCode);
 
                     MainWindow.GetInstance().SetLanguageDictionary(translationLanguage ?? TranslationLanguage.English);
@@ -64,7 +64,7 @@ namespace VeelPlezier.scr.controls
             {
                 case ComboBoxItem comboBoxItem:
                 {
-                    string languageCode = comboBoxItem.Name.Split('_')[2];
+                    string languageCode = comboBoxItem.Name.Substring(comboBoxItem.Name.Length - 2);
                     TranslationLanguage translationLanguage = Util.LanguageValueOf(languageCode);
 
                     SettingsContainer.GetInstance().ReceiptTranslationLanguage = translationLanguage;

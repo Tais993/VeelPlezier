@@ -5,7 +5,7 @@ using VeelPlezier.scr.utilities;
 using VeelPlezierTest.Tests.test_utilities;
 using Xunit;
 
-namespace VeelPlezierTest.Tests.scr.utilities.util
+namespace VeelPlezierTest.Tests.tests.scr.utilities.util
 {
     public sealed class PanelFromItem
     {

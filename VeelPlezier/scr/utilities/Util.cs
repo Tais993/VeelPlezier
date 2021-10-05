@@ -6,6 +6,9 @@ using JetBrains.Annotations;
 using VeelPlezier.scr.enums;
 using VeelPlezier.scr.items.objects;
 
+// ReSharper disable MemberCanBePrivate.Global
+// ReSharper disable MemberCanBeInternal
+
 namespace VeelPlezier.scr.utilities
 {
     public static class Util
@@ -14,6 +17,7 @@ namespace VeelPlezier.scr.utilities
         /// This regex checks whenever it's a valid number or not
         /// </summary>
         public static readonly Regex NumberValidator = new("[^0-9,.]", RegexOptions.Compiled);
+
 
         /// <summary>
         /// Returns the first <see cref="Label"/> with the given name
@@ -27,17 +31,17 @@ namespace VeelPlezier.scr.utilities
             return panel.Children.OfType<Label>().First(label => label.Name.Equals(name));
         }
 
-        /// <summary>
-        /// Returns the first <see cref="ComboBoxItem"/> with the given name
-        /// </summary>
-        /// <param name="comboBox">The <see cref="ComboBox"/> to grab the <see cref="ComboBoxItem"/> from</param>
-        /// <param name="name">The <see cref="ComboBoxItem">ComboBoxItem's</see> name as a <see cref="string"/></param>
-        /// <returns></returns>
-        [NotNull]
-        public static ComboBoxItem GetComboBoxItemByContentFromComboBox([NotNull] ComboBox comboBox, string name)
-        {
-            return comboBox.Items.OfType<ComboBoxItem>().First(item => item.Content.ToString().Equals(name));
-        }
+        // /// <summary>
+        // /// Returns the first <see cref="ComboBoxItem"/> with the given name
+        // /// </summary>
+        // /// <param name="comboBox">The <see cref="ComboBox"/> to grab the <see cref="ComboBoxItem"/> from</param>
+        // /// <param name="name">The <see cref="ComboBoxItem">ComboBoxItem's</see> name as a <see cref="string"/></param>
+        // /// <returns></returns>
+        // [NotNull]
+        // public static ComboBoxItem GetComboBoxItemByContentFromComboBox([NotNull] ComboBox comboBox, string name)
+        // {
+        //     return comboBox.Items.OfType<ComboBoxItem>().First(item => item.Content.ToString().Equals(name));
+        // }
 
         /// <summary>
         /// Returns the <see cref="TranslationLanguage"/> based on it's name
@@ -246,7 +250,7 @@ namespace VeelPlezier.scr.utilities
             TextBox textBox = sender as TextBox ??
                               throw new ArgumentException(nameof(sender) + " has to be a " + nameof(TextBox));
             textBox.Text = NumberValidator.Replace(textBox.Text, "");
-            return Util.ParseToDouble(textBox.Text);
+            return ParseToDouble(textBox.Text);
         }
     }
 }

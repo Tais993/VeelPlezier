@@ -11,18 +11,19 @@ using VeelPlezier.scr.items;
 using VeelPlezier.scr.items.objects;
 using VeelPlezier.scr.settings;
 using VeelPlezier.scr.utilities;
+using VeelPlezier.scr.windows;
 
 namespace VeelPlezier.scr.controls
 {
-    public sealed partial class MainScreen
+    internal sealed partial class MainScreen
     {
         private readonly ItemHandler _itemHandler;
 
         internal readonly List<PurchasedItem> PurchasedItems = new();
         private readonly Dictionary<string, PurchasedItem> _purchasedItemsDictionary = new();
-        private double _totalMoneyGiven = 0.00;
+        private double _totalMoneyGiven;
 
-        private double _totalPriceRequired = 0.00;
+        private double _totalPriceRequired;
 
         private ReceiptPrinter _receiptPrinter;
         private CalculatorWindow _calculatorWindow;
@@ -48,7 +49,6 @@ namespace VeelPlezier.scr.controls
         {
             if (ItemsInStore.SelectedItem is null || ParseAmountOfItem() == 0)
             {
-                // TODO: error handling
                 return;
             }
 
@@ -145,10 +145,7 @@ namespace VeelPlezier.scr.controls
 
         private int ParseAmountOfItem()
         {
-            double amountOfItem = Util.ParseToDouble(AmountOfItem.Text, static _ =>
-            {
-                // TODO: add error handling        
-            });
+            double amountOfItem = Util.ParseToDouble(AmountOfItem.Text);
 
             return (int) Math.Floor(amountOfItem);
         }
@@ -415,10 +412,13 @@ namespace VeelPlezier.scr.controls
                 {
                     PurchasedItem purchasedItem = pair.Value;
 
+                    string itemTranslation = pair.Key.GetTranslationByTranslationLanguage(
+                                                 MainWindow.GetInstance().CurrentTranslationLanguage) ??
+                                             throw new ApplicationException(
+                                                 "Item does have an translation for the current item!");
+
                     PurchasedItems.Add(purchasedItem);
-                    _purchasedItemsDictionary.Add(
-                        pair.Key.GetTranslationByTranslationLanguage(
-                            MainWindow.GetInstance().CurrentTranslationLanguage)!, purchasedItem);
+                    _purchasedItemsDictionary.Add(itemTranslation, purchasedItem);
 
                     Panel panel = Util.PanelFromItem(purchasedItem.Item, purchasedItem.Amount,
                         MainWindow.GetInstance().CurrentTranslationLanguage);
